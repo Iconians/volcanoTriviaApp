@@ -1,0 +1,24 @@
+body {
+  height: 60vw;
+  background-color: black;
+}
+#app {
+  max-width: 1025px;
+  height: 760px;
+  margin: auto;
+}
+
+section {
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-wrapper {
+  height: 300px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
