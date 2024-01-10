@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-    const currentQuestion = ref("1st Question")
+import { supabase } from '../../supabase.js'
+    let currentQuestion = ref("1st Question")
     const wrongAnswers = ref(0)
     // const correctAnswers = ref(0)
     // const isCorrect = ref(false)
     const isWrong = () => {
       wrongAnswers.value++
     }
+
+  supabase.from('questions').select('*')
+  .then(({ data: questions, error }) => {
+      if (error) console.log(error)
+      else {
+        console.log(questions)
+        currentQuestion.value = questions[0].question
+        console.log(currentQuestion)
+      }
+    })
 </script>
 
 <template>
