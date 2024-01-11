@@ -1,7 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { supabase } from '../../supabase.js'
-    let currentQuestion = ref("1st Question")
+
+type questionArray = {
+  id: string
+  created_at: string
+  question: string
+}
+
+type answerArr = {
+  id: string
+  created_at: string
+  answers: string[]
+  correct_answer: string
+  question_foreign_key: string
+}
+// const answerArray = ref<{ id: string; created_at: string; answer: string[]; correct_answer: string; }[]>([])
+
+const questionsArray = ref<questionArray[]>([])
+const answerArray = ref<answerArr[]>([])
+
     const wrongAnswers = ref(0)
     // const correctAnswers = ref(0)
     // const isCorrect = ref(false)
@@ -13,19 +31,50 @@ import { supabase } from '../../supabase.js'
   .then(({ data: questions, error }) => {
       if (error) console.log(error)
       else {
-        console.log(questions)
-        currentQuestion.value = questions[0].question
-        console.log(currentQuestion)
+      let num = 5
+      while (num > 0) {
+        const randomQuestion = Math.floor(Math.random() * questions.length)
+        questionsArray.value = [...questionsArray.value, questions[randomQuestion]]
+        num--
+      }
       }
     })
+
+watch(questionsArray, (newVal) => {
+  if (newVal.length > 0) {
+    const questionIds = newVal.map(question => question.id)
+    supabase
+      .from('answers')
+      .select('*')
+      .in('question_foreign_key', questionIds)
+      .then(({ data, error }) => {
+        if (error) console.log(error)
+        else {
+        const answers: answerArr[] = data
+          
+          if (answers.length > 0) {
+            answerArray.value = answers;
+          }
+        }
+        answerArray.value.forEach(answer => {
+          console.log(answer.answers);
+        });
+        console.log(questionsArray.value[0]?.question);
+      })
+}
+})
+
 </script>
 
 <template>
   <section class="section bg-stHelensWithtop text-white height h-full w-full bg-cover">
     <div>
     <form class="flex flex-col justify-around text-center h-40" action="">
-      <label class="font-bold text-black" for="question">{{ currentQuestion }}</label>
-      <input type="input" id="question" name="question" />
+      <label class="font-bold text-black" for="question">{{ questionsArray.length > 0 ? questionsArray[0].question : '' }}</label>
+      <!-- <input type="radio" name="answer" v-for="(answer, index) in answerArray" :key="index" :id="'answer-' + index" :value="answer" /> -->
+      <div v-for="(answerObj, index) in answerArray.filter(a => a.question_foreign_key === questionsArray[0].id)" :key="'answerObj-' + index">
+        <input type="radio" name="answer" v-for="(answer, subIndex) in answerObj.answers" :key="'answer-' + index + '-' + subIndex" :id="'answer-' + index + '-' + subIndex" :value="answer" />
+  </div>
       <input class="bg-brown-500" type="submit" value="Submit Answer" />
     </form>
   </div>
