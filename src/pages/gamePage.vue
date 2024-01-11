@@ -15,7 +15,6 @@ type answerArr = {
   correct_answer: string
   question_foreign_key: string
 }
-// const answerArray = ref<{ id: string; created_at: string; answer: string[]; correct_answer: string; }[]>([])
 
 const questionsArray = ref<questionArray[]>([])
 const answerArray = ref<answerArr[]>([])
@@ -72,9 +71,15 @@ watch(questionsArray, (newVal) => {
     <form class="flex flex-col justify-around text-center h-40" action="">
       <label class="font-bold text-black" for="question">{{ questionsArray.length > 0 ? questionsArray[0].question : '' }}</label>
       <!-- <input type="radio" name="answer" v-for="(answer, index) in answerArray" :key="index" :id="'answer-' + index" :value="answer" /> -->
-      <div v-for="(answerObj, index) in answerArray.filter(a => a.question_foreign_key === questionsArray[0].id)" :key="'answerObj-' + index">
-        <input type="radio" name="answer" v-for="(answer, subIndex) in answerObj.answers" :key="'answer-' + index + '-' + subIndex" :id="'answer-' + index + '-' + subIndex" :value="answer" />
-  </div>
+
+      <div >
+        <div v-for="(answerObj, index) in answerArray.filter(a => a.question_foreign_key === questionsArray[0].id)" :key="'answerObj-' + index">
+          <div v-for="(answer, subIndex) in answerObj.answers" :key="'answer-' + index + '-' + subIndex">
+            <input type="radio" name="answer" :id="'answer-' + index + '-' + subIndex" :value="answer" />
+            <label class="font-bold text-black" :for="'answer-' + index + '-' + subIndex">{{ answer }}</label>
+          </div>
+        </div>
+      </div>
       <input class="bg-brown-500" type="submit" value="Submit Answer" />
     </form>
   </div>
