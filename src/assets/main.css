@@ -8,7 +8,7 @@ body {
   margin: auto;
 }
 
-section {
+.section {
   margin-top: 45px;
   display: flex;
   flex-direction: column;
