@@ -21,6 +21,7 @@ const answerArray = ref<answerArr[]>([])
 const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
 // const isCorrect = ref(false)
+// testing if I can push to git
 const checkAnswer = (e: Event) => {
   e.preventDefault()
   const answer = (e.target as HTMLFormElement).answer.value
