@@ -93,6 +93,7 @@ watch(questionsArray, (newVal) => {
 
 <template>
   <section
+    v-if="questionsArray.length > 0"
     class="mt-45 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover"
   >
     <div class="main-content">
@@ -138,6 +139,19 @@ watch(questionsArray, (newVal) => {
       <p>Correct {{ correctAnswers }}</p>
       <p>Incorrect {{ wrongAnswers }}</p>
     </div> 
+    </section>
+    <section 
+    v-else
+    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithtop text-white height h-full w-full bg-cover"
+    >
+      <div class="text-2xl text-center">
+      <p>Correct {{ correctAnswers }}</p>
+      <p>Incorrect {{ wrongAnswers }}</p>
+    </div> 
+    <div>
+      <router-link to="/totals" class="text-2xl">View Hi Scores</router-link>
+      <router-link to="/gamepage" class="text-2xl">Play Again</router-link>
+    </div>
     </section>
 </template>
 
