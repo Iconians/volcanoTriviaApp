@@ -128,8 +128,8 @@ watch(questionsArray, (newVal) => {
     <div>
       <p>Correct {{ correctAnswers }}</p>
       <p>Incorrect {{ wrongAnswers }}</p>
-    </div>
-  </section>
+    </div> 
+    </section>
 </template>
 
 <style scoped>
