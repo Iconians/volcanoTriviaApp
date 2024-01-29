@@ -20,25 +20,34 @@ const questionsArray = ref<questionArray[]>([])
 const answerArray = ref<answerArr[]>([])
 const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
-// const isCorrect = ref(false)
-// testing if I can push to git
 const checkAnswer = (e: Event) => {
   e.preventDefault()
   const answer = (e.target as HTMLFormElement).answer.value
   const correctAnswer = answerArray.value.filter(
     (a) => a.question_foreign_key === questionsArray.value[0].id
-  )[0].correct_answer
-  if (answer === correctAnswer) {
+  )
+
+  if (correctAnswer.length > 0) {
+  const getAnswer = correctAnswer[0].correct_answer
+
+  if (answer === getAnswer) {
     correctAnswers.value++
   } else {
     wrongAnswers.value++
   }
+} else {
+  console.log('no answer')
+}
+if (questionsArray.value.length > 0) {
   questionsArray.value.shift()
   answerArray.value.forEach((a) => {
-    if (a.question_foreign_key === questionsArray.value[0].id) {
+    if (questionsArray.value.length > 0 && a.question_foreign_key === questionsArray.value[0].id) {
       a.answers.sort(() => Math.random() - 0.5)
     }
   })
+} else {
+  console.log('No more questions')
+}
 }
 
 supabase
@@ -89,14 +98,14 @@ watch(questionsArray, (newVal) => {
     <div class="main-content">
       <div>
         <form class="flex flex-col justify-around text-center h-40" @submit.prevent="checkAnswer">
-          >
           <label class="font-bold text-black" for="question">{{
             questionsArray.length > 0 ? questionsArray[0].question : ''
           }}</label>
           <div>
             <div
               v-for="(answerObj, index) in answerArray.filter(
-                (a) => a.question_foreign_key === questionsArray[0].id
+                // (a) => a.question_foreign_key === questionsArray[0].id
+                (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
               )"
               :key="'answerObj-' + index"
             >
