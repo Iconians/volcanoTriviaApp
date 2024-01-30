@@ -3,18 +3,23 @@ import startComponent from '@/components/startComponent.vue'
 import signInForm from '@/components/signInForm.vue'
 import createAcctForm from '@/components/createAcctForm.vue'
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+const store = useStore()
 const isCreatingAccount = ref(false);
 const isSignedIn = ref(false);
 const handleAccountCreated = (user: any) => {
   console.log('Account created: ', user)
   isCreatingAccount.value = false
   isSignedIn.value = true
+  store.dispatch('setUser', user)
+  console.log(store.state.user)
 }
 const signIn = (user: any) => {
-  console.log('Signed in: ', user)
   isSignedIn.value = true
+  store.dispatch('setUser', user)
+  console.log(store.state)
 }
-// make a way to store users data
+
 </script>
 
 <template>

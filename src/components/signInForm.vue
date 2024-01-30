@@ -1,8 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { supabase } from '../../supabase.js'
-import { ref } from 'vue'
-const formError = ref('')
 export default defineComponent({
   name: 'signInForm',
   data() {
@@ -24,11 +22,9 @@ export default defineComponent({
         })
 
         if (error) {
-          // console.error('Error signing in: ', error)
           this.formError = error.message
         } else {
-          // console.log('Signed in: ', data)
-          this.$emit('signedIn', data)
+          this.$emit('signedIn', data.user)
         }
       } catch (error) {
         console.error('Error in signIn method: ', error)

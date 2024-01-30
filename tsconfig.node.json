@@ -12,7 +12,9 @@
     "composite": true,
     "noEmit": true,
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "node",
+    // "moduleResolution": "Bundler",
+    "esModuleInterop": true,
     "types": ["node"]
   }
 }
