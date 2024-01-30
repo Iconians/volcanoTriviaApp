@@ -8,16 +8,13 @@ const store = useStore()
 const isCreatingAccount = ref(false);
 const isSignedIn = ref(false);
 const handleAccountCreated = (user: any) => {
-  console.log('Account created: ', user)
   isCreatingAccount.value = false
   isSignedIn.value = true
   store.dispatch('setUser', user)
-  console.log(store.state.user)
 }
 const signIn = (user: any) => {
   isSignedIn.value = true
   store.dispatch('setUser', user)
-  console.log(store.state)
 }
 
 </script>

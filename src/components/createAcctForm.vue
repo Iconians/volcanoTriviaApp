@@ -10,6 +10,7 @@ export default defineComponent({
   
       const email = event.target.email.value
       const password = event.target.password.value
+      const displayName = event.target.userName.value
   
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -21,8 +22,23 @@ export default defineComponent({
         console.error('Error creating account: ', error)
       } else {
         console.log('Account created: ', data?.user)
-        emit('accountCreated', data?.user)
+      
       }
+      if (data?.user) {
+  const { error: insertError } = await supabase
+    .from('profile')
+    .insert([{ user_id: data.user.id, display_name: displayName, score: [] }])
+
+  if (insertError) {
+    console.error('Error inserting display name: ', insertError)
+  } else {
+    console.log('Display name inserted: ', displayName)
+  }
+}
+else {
+  console.error('No user found')
+}
+        emit('accountCreated', data?.user)
     }
     return { createAccount }
   }
@@ -38,7 +54,7 @@ export default defineComponent({
       <div>
         <form @submit="createAccount" class="flex flex-col ">
           <label class="text-xl" for="username">username</label>
-          <input class="rounded-sm text-black" type="text" id="username" name="username" />
+          <input class="rounded-sm text-black" type="text" id="username" name="userName" />
           <label class="text-x" for="email">email</label>
           <input class="rounded-sm text-black" type="email" id="email" name="email" />
           <label class="mt-2 text-xl" for="password">password</label>

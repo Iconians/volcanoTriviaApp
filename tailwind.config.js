@@ -5,7 +5,9 @@ export default {
     extend: {
       backgroundImage: {
         volcanoGif: "url('/src/assets/vocanicEuruption1.gif')",
-        stHelensWithtop: "url('src/assets/sthelens1-animation-eb3a7d-640.gif')"
+        stHelensWithtop: "url('src/assets/sthelens1-animation-eb3a7d-640.gif')",
+        stHelensWithPlume: "url('src/assets/st-helens.webp')",
+        lavaVolcano: "url('src/assets/lava-volcano-image.jpg')",
       },
       colors: {
         brown: {

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { supabase } from '../../supabase.js'
+import { useStore } from 'vuex'
+const store = useStore()
 
 type questionArray = {
   id: string
@@ -21,23 +23,37 @@ const answerArray = ref<answerArr[]>([])
 const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
 
-// async function postScore() {
-//   if (questionsArray.value.length === 0) { // all questions are answered
-//     const { data, error } = await supabase
-//       .from('profile.score')
-//       .insert([
-//         { correct: correctAnswers, incorrect: wrongAnswers },
-//       ])
+async function postScore() {
+  if (questionsArray.value.length === 0 || wrongAnswers.value === 3) { // all questions are answered
+    const userId = store.state.user.id // get user_id from Vuex store
 
-//     if (error) {
-//       console.error('Error posting score: ', error)
-//     } else {
-//       console.log('Score posted: ', data)
-//     }
-//   }
-// }
+    // Fetch the current score from the database
+    const { data: currentScore, error: fetchError } = await supabase
+      .from('profile')
+      .select('score')
+      .eq('user_id', userId)
 
-const checkAnswer = (e: Event) => {
+    if (fetchError) {
+      console.error('Error fetching score: ', fetchError)
+      return
+    }
+
+    const newScore = { correct: correctAnswers.value, incorrect: wrongAnswers.value }
+    // Push the new object into the current score
+    currentScore[0].score.push(newScore)
+
+// Update the database with the new score array
+const { data: updatedScore, error: updateError } = await supabase
+  .from('profile')
+  .update({ score: currentScore[0].score })
+  .match({ user_id: userId })
+    if (updateError) {
+      console.error('Error posting score: ', updateError)
+    }
+  }
+}
+
+const checkAnswer = async (e: Event) => {
   e.preventDefault()
   const answer = (e.target as HTMLFormElement).answer.value
   const correctAnswer = answerArray.value.filter(
@@ -52,9 +68,14 @@ const checkAnswer = (e: Event) => {
   } else {
     wrongAnswers.value++
   }
-} else {
-  console.log('no answer')
 }
+
+
+if (wrongAnswers.value === 3) {
+  console.log('Game Over')
+  await postScore()
+}
+
 if (questionsArray.value.length > 0) {
   questionsArray.value.shift()
   answerArray.value.forEach((a) => {
@@ -65,7 +86,7 @@ if (questionsArray.value.length > 0) {
 } else {
   console.log('No more questions')
 }
-// await postScore()
+await postScore()
 }
 
 supabase
@@ -113,7 +134,7 @@ watch(questionsArray, (newVal) => {
 
 <template>
   <section
-    v-if="questionsArray.length > 0"
+    v-if="questionsArray.length > 0 && wrongAnswers < 3"
     class="mt-45 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover"
   >
     <div class="main-content">
@@ -159,16 +180,32 @@ watch(questionsArray, (newVal) => {
       <p>Incorrect {{ wrongAnswers }}</p>
     </div> 
     </section>
+    <section v-else-if="wrongAnswers === 3" class="bg-lavaVolcano text-white height h-full w-full bg-cover flex justify-center flex-col align-middle">
+      <div class="gameOver">
+    <h1 class="text-center text-3xl mb-7">Game Over</h1>
+    <div class="text-center text-2xl mb-7">
+      <p>would you be this close to an active volcano?</p>
+    </div>
+    <div class="text-2xl text-center">
+      <p>Correct {{ correctAnswers }}</p>
+      <p>Incorrect {{ wrongAnswers }}</p>
+    </div> 
+    <div class="flex flex-col justify-center align-center">
+      <router-link to="/totals" class="text-center text-2xl">High Scores</router-link>
+      <router-link to="/" class="text-center text-2xl">Return Home</router-link>
+    </div>
+  </div>
+    </section>
     <section 
     v-else
-    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithtop text-white height h-full w-full bg-cover"
+    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithPlume text-white height h-full w-full bg-cover"
     >
       <div class="text-2xl text-center">
       <p>Correct {{ correctAnswers }}</p>
       <p>Incorrect {{ wrongAnswers }}</p>
     </div> 
     <div>
-      <router-link to="/totals" class="text-2xl">Hi Scores</router-link>
+      <router-link to="/totals" class="text-2xl">High Scores</router-link>
       <router-link to="/gamepage" class="text-2xl">Play Again</router-link>
     </div>
     </section>
