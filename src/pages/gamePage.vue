@@ -20,6 +20,23 @@ const questionsArray = ref<questionArray[]>([])
 const answerArray = ref<answerArr[]>([])
 const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
+
+// async function postScore() {
+//   if (questionsArray.value.length === 0) { // all questions are answered
+//     const { data, error } = await supabase
+//       .from('profile.score')
+//       .insert([
+//         { correct: correctAnswers, incorrect: wrongAnswers },
+//       ])
+
+//     if (error) {
+//       console.error('Error posting score: ', error)
+//     } else {
+//       console.log('Score posted: ', data)
+//     }
+//   }
+// }
+
 const checkAnswer = (e: Event) => {
   e.preventDefault()
   const answer = (e.target as HTMLFormElement).answer.value
@@ -48,6 +65,7 @@ if (questionsArray.value.length > 0) {
 } else {
   console.log('No more questions')
 }
+// await postScore()
 }
 
 supabase
@@ -89,6 +107,8 @@ watch(questionsArray, (newVal) => {
     })
   }
 })
+
+
 </script>
 
 <template>
@@ -105,7 +125,6 @@ watch(questionsArray, (newVal) => {
           <div>
             <div
               v-for="(answerObj, index) in answerArray.filter(
-                // (a) => a.question_foreign_key === questionsArray[0].id
                 (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
               )"
               :key="'answerObj-' + index"
@@ -149,7 +168,7 @@ watch(questionsArray, (newVal) => {
       <p>Incorrect {{ wrongAnswers }}</p>
     </div> 
     <div>
-      <router-link to="/totals" class="text-2xl">View Hi Scores</router-link>
+      <router-link to="/totals" class="text-2xl">Hi Scores</router-link>
       <router-link to="/gamepage" class="text-2xl">Play Again</router-link>
     </div>
     </section>

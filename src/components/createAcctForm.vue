@@ -1,8 +1,32 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent} from 'vue';
+import { supabase } from '../../supabase.js'
 export default defineComponent({
-  name: 'createAcctForm'
-});
+  name: 'createAcctForm',
+  emits: ['accountCreated'], // Add this line to define the 'accountCreated' event
+  setup(_, { emit }) { // Replace 'emit' with 'setup' and '{ emit }' to define the 'emit' function
+    const createAccount = async (event: any) => {
+      event.preventDefault()
+  
+      const email = event.target.email.value
+      const password = event.target.password.value
+  
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      
+      })
+  
+      if (error) {
+        console.error('Error creating account: ', error)
+      } else {
+        console.log('Account created: ', data?.user)
+        emit('accountCreated', data?.user)
+      }
+    }
+    return { createAccount }
+  }
+  });
 
 </script>
 
@@ -12,13 +36,13 @@ export default defineComponent({
       <h1 class="text-2xl">Volcano Quiz</h1>
       <p>Please create an account to see if you are smart enough to be a volcanologist?</p>
       <div>
-        <form action="" class="flex flex-col ">
+        <form @submit="createAccount" class="flex flex-col ">
           <label class="text-xl" for="username">username</label>
-          <input class="rounded-sm" type="text" id="username" name="username" />
-          <label class="text-xl" for="email">email</label>
-          <input class="rounded-sm" type="email" id="email" name="email" />
+          <input class="rounded-sm text-black" type="text" id="username" name="username" />
+          <label class="text-x" for="email">email</label>
+          <input class="rounded-sm text-black" type="email" id="email" name="email" />
           <label class="mt-2 text-xl" for="password">password</label>
-          <input class="rounded" type="text" id="password" name="password" />
+          <input class="rounded text-black" type="text" id="password" name="password" />
           <input class="rounded text-xl mt-3 bg-brown-500" type="submit" value="submit" />
         </form>
       </div>
