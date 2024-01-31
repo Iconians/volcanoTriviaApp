@@ -51,6 +51,42 @@ const { data: updatedScore, error: updateError } = await supabase
       console.error('Error posting score: ', updateError)
     }
   }
+  if (correctAnswers.value >= 4) {
+    const userId = store.state.user.id // get user_id from Vuex store
+
+    // Fetch the current score from the database
+    const { data: currentScore, error: fetchError } = await supabase
+      .from('profile')
+      .select('display_name')
+      .eq('user_id', userId)
+
+    if (fetchError) {
+      console.error('Error fetching score: ', fetchError)
+      return
+    }
+
+    // find display name of player
+    const displayName = currentScore[0].display_name
+    
+    // update high score table
+    const { data: highScore, error: highScoreError } = await supabase
+      .from('high_score')
+      .select('*')
+    
+    if (highScoreError) {
+      console.error('Error fetching high score: ', highScoreError)
+      return
+    }
+    console.log(highScore)
+    const { data: updatedHighScore, error: updateHighScoreError } = await supabase
+      .from('high_score')
+      .insert({ score: correctAnswers.value, user_name: displayName,  })
+    
+    if (updateHighScoreError) {
+      console.error('Error posting high score: ', updateHighScoreError)
+    }
+
+  }
 }
 
 const checkAnswer = async (e: Event) => {
@@ -204,9 +240,9 @@ watch(questionsArray, (newVal) => {
       <p>Correct {{ correctAnswers }}</p>
       <p>Incorrect {{ wrongAnswers }}</p>
     </div> 
-    <div>
-      <router-link to="/totals" class="text-2xl">High Scores</router-link>
-      <router-link to="/gamepage" class="text-2xl">Play Again</router-link>
+    <div class="flex flex-col justify-center align-center">
+      <router-link to="/totals" class="text-center text-2xl">High Scores</router-link>
+      <router-link to="/" class=" text-center text-2xl">Return Home</router-link>
     </div>
     </section>
 </template>
