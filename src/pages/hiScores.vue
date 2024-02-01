@@ -27,7 +27,7 @@ fetchScores();
     </div>
     <div>
       <router-link to="/">Back to Home</router-link>
-      <router-link to="/userPage">user page</router-link>
+      <router-link to="/userPage">Profile</router-link>
     </div>
   </section>
 

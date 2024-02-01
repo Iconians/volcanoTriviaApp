@@ -4,6 +4,8 @@ import { supabase } from '../../supabase';
 import { RouterLink } from 'vue-router'
 import router from '@/router';
 
+const newPassword = ref('');
+
 interface Score {
   correct: number;
   incorrect: number;
@@ -14,6 +16,7 @@ const Authuser = AuthUser !== null ? JSON.parse(AuthUser) : null;
 
 const userName = ref('');
 const userScore = ref<Score[]>([]);
+const formError = ref('');
 
 function safeParse(jsonString: string): any {
   try {
@@ -35,6 +38,8 @@ const findUser = async () => {
   }
 }
 
+findUser();
+
 const signOut = async () => {
   let {error} = await supabase.auth.signOut();
   if (!error) {
@@ -42,24 +47,58 @@ const signOut = async () => {
     router.push('/');
   }
 }
-findUser();
+
+const updatePassword = async (e: Event) => {
+  e.preventDefault();
+  console.log(newPassword.value)
+  const update = await supabase.auth.updateUser({ password: newPassword.value })
+  console.log(update);
+  if (update.error) {
+    formError.value = update.error.message;
+  }
+  else {
+    formError.value = 'Password updated';
+  }
+}
 
 </script>
 
 <template>
-  <section class="section height h-full w-full text-center text-white"  >
+  <section class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover"  >
     <div>{{ userName }}'s Profile</div>
-    <div>
-      <div>{{ userName }}'s Score History</div>
-      <div v-for="score in userScore" :key="score.correct" class="flex ">
-        <div>Correct: {{ score.correct }}</div>
-        <div>Incorrect: {{ score.incorrect }}</div>
+    <div class="flex m-8 justify-around w-3/4">
+    <div class="h-52 overflow-y-auto scroll">
+      <div>Score History</div>
+      <div v-for="score in userScore" :key="score.correct" class="flex">
+        <div class="m-2">Correct: {{ score.correct }}</div>
+        <div class="m-2">Incorrect: {{ score.incorrect }}</div>
       </div>
     </div>
-    <div>
-      <router-link to="/">Back to start</router-link>
-      <button @click="signOut">Sign Out</button>
+    <div class="m-8">
+      <div class="mb-5">Update Password</div>
+      <form class="flex flex-col " @submit="updatePassword">
+      <input v-model="newPassword" class="text-black rounded h-8" placeholder="Change Password" type="text"/>
+      <input class="mt-5 bg-brown-500 rounded h-10" type="submit" value="change password">
+    </form>
+    <div class="mt-5" v-if="formError.length">{{ formError }}</div>
     </div>
-   </section>
+  </div>
+
+    <div class="flex flex-col mt-5 mb-5">
+      <router-link class="flex items-center justify-center bg-brown-500 rounded h-10 mb-5 w-28" to="/">Back to start</router-link>
+      <button class="bg-brown-500 rounded h-10 mt-5 w-28" @click="signOut">Sign Out</button>
+    </div>
+  </section>
 
 </template>
+
+
+<style scoped >
+.scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: none;
+}
+</style>
