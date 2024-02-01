@@ -3,8 +3,8 @@ import { defineComponent} from 'vue';
 import { supabase } from '../../supabase.js'
 export default defineComponent({
   name: 'createAcctForm',
-  emits: ['accountCreated'], // Add this line to define the 'accountCreated' event
-  setup(_, { emit }) { // Replace 'emit' with 'setup' and '{ emit }' to define the 'emit' function
+  emits: ['accountCreated'],
+  setup(_, { emit }) { 
     const createAccount = async (event: any) => {
       event.preventDefault()
   
@@ -15,14 +15,12 @@ export default defineComponent({
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-      
       })
   
       if (error) {
         console.error('Error creating account: ', error)
       } else {
         console.log('Account created: ', data?.user)
-      
       }
       if (data?.user) {
   const { error: insertError } = await supabase

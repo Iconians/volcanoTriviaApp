@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { supabase } from '../../supabase.js'
-import { useStore } from 'vuex'
-const store = useStore()
 
 type questionArray = {
   id: string
@@ -24,10 +22,16 @@ const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
 
 async function postScore() {
-  if (questionsArray.value.length === 0 || wrongAnswers.value === 3) { // all questions are answered
-    const userId = store.state.user.id // get user_id from Vuex store
+  if (questionsArray.value.length === 0 || wrongAnswers.value === 3) {
+    const user = localStorage.getItem('user')
+    let userId;
+    if (user !== null) {
+      userId = JSON.parse(user).id
+    }
+    else {
+      console.error('No user found')
+    }
 
-    // Fetch the current score from the database
     const { data: currentScore, error: fetchError } = await supabase
       .from('profile')
       .select('score')
@@ -39,10 +43,8 @@ async function postScore() {
     }
 
     const newScore = { correct: correctAnswers.value, incorrect: wrongAnswers.value }
-    // Push the new object into the current score
     currentScore[0].score.push(newScore)
 
-// Update the database with the new score array
 const { data: updatedScore, error: updateError } = await supabase
   .from('profile')
   .update({ score: currentScore[0].score })
@@ -52,9 +54,15 @@ const { data: updatedScore, error: updateError } = await supabase
     }
   }
   if (correctAnswers.value >= 4) {
-    const userId = store.state.user.id // get user_id from Vuex store
+    const user = localStorage.getItem('user')
+    let userId;
+    if (user !== null) {
+      userId = JSON.parse(user).id
+    }
+    else {
+      console.error('No user found')
+    }
 
-    // Fetch the current score from the database
     const { data: currentScore, error: fetchError } = await supabase
       .from('profile')
       .select('display_name')

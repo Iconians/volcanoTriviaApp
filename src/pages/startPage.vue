@@ -7,15 +7,28 @@ import { useStore } from 'vuex'
 const store = useStore()
 const isCreatingAccount = ref(false);
 const isSignedIn = ref(false);
+
+const alreadySingedIn = () => {
+  const user = localStorage.getItem('user')
+  if (user) {
+    isSignedIn.value = true
+    store.dispatch('setUser', JSON.parse(user))
+  }
+}
 const handleAccountCreated = (user: any) => {
   isCreatingAccount.value = false
   isSignedIn.value = true
   store.dispatch('setUser', user)
+  const setStorage = localStorage.setItem('user', JSON.stringify(user))
+  console.log(setStorage)
 }
 const signIn = (user: any) => {
   isSignedIn.value = true
   store.dispatch('setUser', user)
+  const setStorage = localStorage.setItem('user', JSON.stringify(user))
+  console.log(setStorage)
 }
+alreadySingedIn()
 
 </script>
 
