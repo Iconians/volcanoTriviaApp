@@ -43,7 +43,7 @@ export default defineComponent({
         <label class="text-xl" for="username">Email</label>
         <input class="rounded-sm text-black" type="email" id="username" name="email" />
         <label class="mt-2 text-xl" for="password">password</label>
-        <input class="rounded text-black" type="text" id="password" name="password" />
+        <input class="rounded text-black" type="password" id="password" name="password" />
         <input class="rounded text-xl mt-3 bg-brown-500" type="submit" value="submit" />
       </form>
       <div v-if="formError.length">{{ formError }}</div>
