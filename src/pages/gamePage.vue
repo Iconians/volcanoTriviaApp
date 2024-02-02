@@ -24,11 +24,10 @@ const correctAnswers = ref(0)
 async function postScore() {
   if (questionsArray.value.length === 0 || wrongAnswers.value === 3) {
     const user = localStorage.getItem('user')
-    let userId;
+    let userId
     if (user !== null) {
       userId = JSON.parse(user).id
-    }
-    else {
+    } else {
       console.error('No user found')
     }
 
@@ -45,21 +44,20 @@ async function postScore() {
     const newScore = { correct: correctAnswers.value, incorrect: wrongAnswers.value }
     currentScore[0].score.push(newScore)
 
-const { data: updatedScore, error: updateError } = await supabase
-  .from('profile')
-  .update({ score: currentScore[0].score })
-  .match({ user_id: userId })
+    const { data: updatedScore, error: updateError } = await supabase
+      .from('profile')
+      .update({ score: currentScore[0].score })
+      .match({ user_id: userId })
     if (updateError) {
       console.error('Error posting score: ', updateError)
     }
   }
   if (correctAnswers.value >= 4) {
     const user = localStorage.getItem('user')
-    let userId;
+    let userId
     if (user !== null) {
       userId = JSON.parse(user).id
-    }
-    else {
+    } else {
       console.error('No user found')
     }
 
@@ -73,14 +71,10 @@ const { data: updatedScore, error: updateError } = await supabase
       return
     }
 
-    // find display name of player
     const displayName = currentScore[0].display_name
-    
-    // update high score table
-    const { data: highScore, error: highScoreError } = await supabase
-      .from('high_score')
-      .select('*')
-    
+
+    const { data: highScore, error: highScoreError } = await supabase.from('high_score').select('*')
+
     if (highScoreError) {
       console.error('Error fetching high score: ', highScoreError)
       return
@@ -88,12 +82,11 @@ const { data: updatedScore, error: updateError } = await supabase
     console.log(highScore)
     const { data: updatedHighScore, error: updateHighScoreError } = await supabase
       .from('high_score')
-      .insert({ score: correctAnswers.value, user_name: displayName,  })
-    
+      .insert({ score: correctAnswers.value, user_name: displayName })
+
     if (updateHighScoreError) {
       console.error('Error posting high score: ', updateHighScoreError)
     }
-
   }
 }
 
@@ -105,32 +98,34 @@ const checkAnswer = async (e: Event) => {
   )
 
   if (correctAnswer.length > 0) {
-  const getAnswer = correctAnswer[0].correct_answer
+    const getAnswer = correctAnswer[0].correct_answer
 
-  if (answer === getAnswer) {
-    correctAnswers.value++
-  } else {
-    wrongAnswers.value++
-  }
-}
-
-
-if (wrongAnswers.value === 3) {
-  console.log('Game Over')
-  await postScore()
-}
-
-if (questionsArray.value.length > 0) {
-  questionsArray.value.shift()
-  answerArray.value.forEach((a) => {
-    if (questionsArray.value.length > 0 && a.question_foreign_key === questionsArray.value[0].id) {
-      a.answers.sort(() => Math.random() - 0.5)
+    if (answer === getAnswer) {
+      correctAnswers.value++
+    } else {
+      wrongAnswers.value++
     }
-  })
-} else {
-  console.log('No more questions')
-}
-await postScore()
+  }
+
+  if (wrongAnswers.value === 3) {
+    console.log('Game Over')
+    await postScore()
+  }
+
+  if (questionsArray.value.length > 0) {
+    questionsArray.value.shift()
+    answerArray.value.forEach((a) => {
+      if (
+        questionsArray.value.length > 0 &&
+        a.question_foreign_key === questionsArray.value[0].id
+      ) {
+        a.answers.sort(() => Math.random() - 0.5)
+      }
+    })
+  } else {
+    console.log('No more questions')
+  }
+  await postScore()
 }
 
 supabase
@@ -172,8 +167,6 @@ watch(questionsArray, (newVal) => {
     })
   }
 })
-
-
 </script>
 
 <template>
@@ -222,37 +215,40 @@ watch(questionsArray, (newVal) => {
     <div>
       <p>Correct {{ correctAnswers }}</p>
       <p>Incorrect {{ wrongAnswers }}</p>
-    </div> 
-    </section>
-    <section v-else-if="wrongAnswers === 3" class="bg-lavaVolcano text-white height h-full w-full bg-cover flex justify-center flex-col align-middle">
-      <div class="gameOver">
-    <h1 class="text-center text-3xl mb-7">Game Over</h1>
-    <div class="text-center text-2xl mb-7">
-      <p>would you be this close to an active volcano?</p>
     </div>
+  </section>
+  <section
+    v-else-if="wrongAnswers === 3"
+    class="bg-lavaVolcano text-white height h-full w-full bg-cover flex justify-center flex-col align-middle"
+  >
+    <div class="gameOver">
+      <h1 class="text-center text-3xl mb-7">Game Over</h1>
+      <div class="text-center text-2xl mb-7">
+        <p>would you be this close to an active volcano?</p>
+      </div>
+      <div class="text-2xl text-center">
+        <p>Correct {{ correctAnswers }}</p>
+        <p>Incorrect {{ wrongAnswers }}</p>
+      </div>
+      <div class="flex flex-col justify-center align-center">
+        <router-link to="/totals" class="text-center text-2xl">High Scores</router-link>
+        <router-link to="/" class="text-center text-2xl">Return Home</router-link>
+      </div>
+    </div>
+  </section>
+  <section
+    v-else
+    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithPlume text-white height h-full w-full bg-cover"
+  >
     <div class="text-2xl text-center">
       <p>Correct {{ correctAnswers }}</p>
       <p>Incorrect {{ wrongAnswers }}</p>
-    </div> 
+    </div>
     <div class="flex flex-col justify-center align-center">
       <router-link to="/totals" class="text-center text-2xl">High Scores</router-link>
       <router-link to="/" class="text-center text-2xl">Return Home</router-link>
     </div>
-  </div>
-    </section>
-    <section 
-    v-else
-    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithPlume text-white height h-full w-full bg-cover"
-    >
-      <div class="text-2xl text-center">
-      <p>Correct {{ correctAnswers }}</p>
-      <p>Incorrect {{ wrongAnswers }}</p>
-    </div> 
-    <div class="flex flex-col justify-center align-center">
-      <router-link to="/totals" class="text-center text-2xl">High Scores</router-link>
-      <router-link to="/" class=" text-center text-2xl">Return Home</router-link>
-    </div>
-    </section>
+  </section>
 </template>
 
 <style scoped>

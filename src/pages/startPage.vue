@@ -3,8 +3,12 @@ import startComponent from '@/components/startComponent.vue'
 import signInForm from '@/components/signInForm.vue'
 import createAcctForm from '@/components/createAcctForm.vue'
 import { ref } from 'vue'
-import { useStore } from 'vuex'
-const store = useStore()
+
+interface User {
+  email: string
+  displayName: string
+}
+
 const isCreatingAccount = ref(false);
 const isSignedIn = ref(false);
 
@@ -12,21 +16,17 @@ const alreadySingedIn = () => {
   const user = localStorage.getItem('user')
   if (user) {
     isSignedIn.value = true
-    store.dispatch('setUser', JSON.parse(user))
   }
+  isSignedIn.value = false
 }
-const handleAccountCreated = (user: any) => {
+const handleAccountCreated = (user: User) => {
   isCreatingAccount.value = false
   isSignedIn.value = true
-  store.dispatch('setUser', user)
-  const setStorage = localStorage.setItem('user', JSON.stringify(user))
-  console.log(setStorage)
+  localStorage.setItem('user', JSON.stringify(user))
 }
 const signIn = (user: any) => {
   isSignedIn.value = true
-  store.dispatch('setUser', user)
-  const setStorage = localStorage.setItem('user', JSON.stringify(user))
-  console.log(setStorage)
+  localStorage.setItem('user', JSON.stringify(user))
 }
 alreadySingedIn()
 

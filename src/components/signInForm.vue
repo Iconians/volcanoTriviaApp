@@ -9,14 +9,15 @@ export default defineComponent({
     }
   },
   methods: {
-    async signIn(event: any) {
+    async signIn(event: Event) {
       event.preventDefault()
-
-      const email = event.target.email.value
-      const password = event.target.password.value
+      
+      const form = event.target as HTMLFormElement;
+      const email = form.email.value
+      const password = form.password.value
 
       try {
-        const { data, error } = await (supabase.auth as any).signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
         })

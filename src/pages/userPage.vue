@@ -4,12 +4,12 @@ import { supabase } from '../../supabase';
 import { RouterLink } from 'vue-router'
 import router from '@/router';
 
-const newPassword = ref('');
-
 interface Score {
   correct: number;
   incorrect: number;
 }
+
+const newPassword = ref('');
 
 const AuthUser = localStorage.getItem('user');
 const Authuser = AuthUser !== null ? JSON.parse(AuthUser) : null;
@@ -18,7 +18,7 @@ const userName = ref('');
 const userScore = ref<Score[]>([]);
 const formError = ref('');
 
-function safeParse(jsonString: string): any {
+function safeParse(jsonString: string) {
   try {
     return JSON.parse(jsonString);
   } catch (error) {

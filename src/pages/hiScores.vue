@@ -24,8 +24,7 @@ fetchScores();
     <div class="">
       <h1>High Scores</h1>
     </div>
-    <!-- finish designing this portion of the site -->
-    <div class="overflow-y-auto h-52">
+    <div class="overflow-y-auto h-52 scroll">
     <div class="flex m-5 justify-center" v-for="score in scores" :key="score.score">
       <div class="mr-3">{{score.user_name}}</div>
       <div>{{score.score}}</div>
@@ -60,4 +59,11 @@ fetchScores();
   z-index: 2;
 }
 
+.scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: none;
+}
 </style>
