@@ -14,10 +14,12 @@ const isSignedIn = ref(false);
 
 const alreadySingedIn = () => {
   const user = localStorage.getItem('user')
-  if (user) {
+  if (user !== null) {
     isSignedIn.value = true
   }
-  isSignedIn.value = false
+  else {
+    isSignedIn.value = false
+  }
 }
 const handleAccountCreated = (user: User) => {
   isCreatingAccount.value = false
