@@ -175,6 +175,7 @@ watch(questionsArray, (newVal) => {
     class="mt-45 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover"
   >
     <div class="main-content">
+      <!-- make into a component -->
       <div>
         <form class="flex flex-col justify-around text-center h-40" @submit.prevent="checkAnswer">
           <label class="font-bold text-black" for="question">{{
@@ -206,17 +207,23 @@ watch(questionsArray, (newVal) => {
           <input class="bg-brown-500" type="submit" value="Submit Answer" />
         </form>
       </div>
+      <!-- end -->
+      <!-- make into component -->
       <div class="flex">
         <div v-if="wrongAnswers === 0" class="heart"></div>
         <div v-if="wrongAnswers <= 1" class="heart"></div>
         <div v-if="wrongAnswers <= 2" class="heart"></div>
       </div>
+      <!-- end -->
     </div>
+    <!-- component?? -->
     <div>
       <p>Correct {{ correctAnswers }}</p>
       <p>Incorrect {{ wrongAnswers }}</p>
     </div>
+    <!-- end -->
   </section>
+  <!-- make into a component -->
   <section
     v-else-if="wrongAnswers === 3"
     class="bg-lavaVolcano text-white height h-full w-full bg-cover flex justify-center flex-col align-middle"
@@ -249,6 +256,7 @@ watch(questionsArray, (newVal) => {
       <router-link to="/" class="text-center text-2xl">Return Home</router-link>
     </div>
   </section>
+    <!-- end -->
 </template>
 
 <style scoped>

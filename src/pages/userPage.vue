@@ -67,6 +67,7 @@ const updatePassword = async (e: Event) => {
   <section class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover"  >
     <div>{{ userName }}'s Profile</div>
     <div class="flex m-8 justify-around w-3/4">
+      <!-- make into a component -->
     <div class="h-52 overflow-y-auto scroll">
       <div>Score History</div>
       <div v-for="score in userScore" :key="score.correct" class="flex">
@@ -74,6 +75,7 @@ const updatePassword = async (e: Event) => {
         <div class="m-2">Incorrect: {{ score.incorrect }}</div>
       </div>
     </div>
+    <!-- make into a component -->
     <div class="m-8">
       <div class="mb-5">Update Password</div>
       <form class="flex flex-col " @submit="updatePassword">

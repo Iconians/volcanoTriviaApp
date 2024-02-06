@@ -24,12 +24,14 @@ fetchScores();
     <div class="">
       <h1>High Scores</h1>
     </div>
+    <!-- make into component -->
     <div class="overflow-y-auto h-52 scroll">
     <div class="flex m-5 justify-center" v-for="score in scores" :key="score.score">
       <div class="mr-3">{{score.user_name}}</div>
       <div>{{score.score}}</div>
     </div>
     </div>
+    <!--  -->
     <div>
       <router-link class="mr-8" to="/">Back to Home</router-link>
       <router-link to="/userPage">Profile</router-link>
