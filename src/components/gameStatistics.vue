@@ -14,8 +14,6 @@ defineComponent({
     }
   }
 })
-
-console.log(props.correctAnswers, props.wrongAnswers)
 </script>
 
 <template>

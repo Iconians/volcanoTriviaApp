@@ -33,6 +33,8 @@ const checkAnswer = (event: Event) => {
   const answer = (event.target as HTMLFormElement).answer.value
   emit('submit', answer)
 }
+
+const getLetter = (index: number) => String.fromCharCode(97 + index)
 </script>
 
 <template>
@@ -58,9 +60,9 @@ const checkAnswer = (event: Event) => {
               :id="'answer-' + index + '-' + subIndex"
               :value="answer"
             />
-            <label class="font-bold text-black" :for="'answer-' + index + '-' + subIndex">{{
-              answer
-            }}</label>
+            <label class="font-bold text-black" :for="'answer-' + index + '-' + subIndex">
+              ({{ getLetter(subIndex).toUpperCase() }}) {{ answer }}
+            </label>
           </div>
         </div>
       </div>

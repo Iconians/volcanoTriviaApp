@@ -99,8 +99,7 @@ const checkAnswer = async (answer: string) => {
 
   if (correctAnswer.length > 0) {
     const getAnswer = correctAnswer[0].correct_answer
-
-    if (answer === getAnswer) {
+    if (answer.toString() === getAnswer) {
       correctAnswers.value++
     } else {
       wrongAnswers.value++
