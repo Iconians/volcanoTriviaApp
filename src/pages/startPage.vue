@@ -38,6 +38,12 @@ const signIn = (user: any) => {
   isSignedIn.value = true
   localStorage.setItem('user', JSON.stringify(user))
 }
+
+const forgotFunction = () => {
+  forgotPassword.value = false
+  isSignedIn.value = true
+  isCreatingAccount.value = false
+}
 alreadySingedIn()
 
 const clientForgotPassword = async () => {
@@ -52,7 +58,10 @@ console.log(forgotPassword.value)
     <sign-in-form v-if="!isCreatingAccount && !isSignedIn && !forgotPassword" @signedIn="signIn" />
     <create-acct-form v-if="isCreatingAccount" @accountCreated="handleAccountCreated" />
     <start-component v-if="isSignedIn" />
-    <forgot-password-form v-if="forgotPassword && !isCreatingAccount && !isSignedIn" />
+    <forgot-password-form
+      v-if="forgotPassword && !isCreatingAccount && !isSignedIn"
+      @forgotPassword="forgotFunction"
+    />
     <div>
       <button v-if="!isSignedIn" @click="isCreatingAccount = !isCreatingAccount" class="text-white">
         {{ isCreatingAccount ? 'Sign In' : 'Create Account' }}
