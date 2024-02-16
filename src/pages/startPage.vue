@@ -1,16 +1,9 @@
-<!-- Forgotten Password Email
-Sends the user a log in link via email. Once logged in you should direct the user to a new password form. And use "Update User" below to save the new password.
-
-PASSWORD RECOVERY
-let { data, error } = await supabase.auth.resetPasswordForEmail(email) -->
-
 <script setup lang="ts">
 import startComponent from '@/components/startComponent.vue'
 import signInForm from '@/components/signInForm.vue'
 import createAcctForm from '@/components/createAcctForm.vue'
-import forgotPasswordForm from '@/components/forgotPasswordForm.vue'
 import { ref } from 'vue'
-import { supabase } from 'supabase'
+import ResetPasswordForm from '@/components/resetPasswordForm.vue'
 
 interface User {
   email: string
@@ -36,6 +29,8 @@ const handleAccountCreated = (user: User) => {
 }
 const signIn = (user: any) => {
   isSignedIn.value = true
+  isCreatingAccount.value = false
+  forgotPassword.value = false
   localStorage.setItem('user', JSON.stringify(user))
 }
 
@@ -48,26 +43,42 @@ alreadySingedIn()
 
 const clientForgotPassword = async () => {
   forgotPassword.value = true
+  console.log('forgotFunction', forgotPassword.value)
 }
-console.log(forgotPassword.value)
+
+const switchForms = () => {
+  isCreatingAccount.value = !isCreatingAccount.value
+  if (forgotPassword.value) {
+    forgotPassword.value = false
+  }
+  console.log('switchForms', isCreatingAccount.value, forgotPassword.value)
+}
 </script>
-<!-- figure out how to redisplay the signInForm after the other other forms are displayed -->
+<!-- -->
 
 <template>
   <section class="section bg-volcanoGif height h-full w-full text-center">
     <sign-in-form v-if="!isCreatingAccount && !isSignedIn && !forgotPassword" @signedIn="signIn" />
     <create-acct-form v-if="isCreatingAccount" @accountCreated="handleAccountCreated" />
     <start-component v-if="isSignedIn" />
-    <forgot-password-form
+    <reset-password-form
       v-if="forgotPassword && !isCreatingAccount && !isSignedIn"
       @forgotPassword="forgotFunction"
     />
     <div>
-      <button v-if="!isSignedIn" @click="isCreatingAccount = !isCreatingAccount" class="text-white">
+      <button v-if="!isSignedIn" @click="switchForms" class="text-white">
         {{ isCreatingAccount ? 'Sign In' : 'Create Account' }}
       </button>
       <br />
-      <button @click="clientForgotPassword" class="text-white pt-5">Forgot Password</button>
+      <button v-if="forgotPassword" class="text-white pt-5" @click="switchForms">Sign In</button>
+      <br />
+      <button
+        v-if="!isSignedIn && !forgotPassword"
+        @click="clientForgotPassword"
+        class="text-white pt-5"
+      >
+        Forgot Password
+      </button>
     </div>
   </section>
 </template>
