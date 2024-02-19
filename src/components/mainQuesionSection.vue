@@ -43,7 +43,7 @@ const handleSubmit = (answer: string) => {
 
 <template>
   <section
-    class="mt-45 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover"
+    class="mt-12 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover"
   >
     <div class="main-content">
       <questionForm

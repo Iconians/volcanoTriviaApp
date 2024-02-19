@@ -26,12 +26,30 @@ const props = defineProps({
   }
 })
 
+const resetRadioBtns = () => {
+  const radioBtns = document.querySelectorAll('input[type="radio"]')
+  radioBtns.forEach(() => {
+    const radioBtns = document.querySelectorAll(
+      'input[type="radio"]'
+    ) as NodeListOf<HTMLInputElement>
+    radioBtns.forEach((btn) => {
+      btn.checked = false
+    })
+  })
+}
+
+const data = {
+  selectedInput: ''
+}
+
 const emit = defineEmits<{ (event: 'submit', answer: string): void }>()
 
 const checkAnswer = (event: Event) => {
   event.preventDefault()
-  const answer = (event.target as HTMLFormElement).answer.value
+  const answer = data.selectedInput
   emit('submit', answer)
+  resetRadioBtns()
+  data.selectedInput = ''
 }
 
 const getLetter = (index: number) => String.fromCharCode(97 + index)
@@ -39,11 +57,11 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
 
 <template>
   <div>
-    <form class="flex flex-col justify-around text-center h-40" @submit.prevent="checkAnswer">
-      <label class="font-bold text-black" for="question">{{
+    <form class="flex flex-col justify-around w-[500px]" @submit.prevent="checkAnswer">
+      <label class="font-bold text-black text-center" for="question">{{
         props.questionsArray.length > 0 ? props.questionsArray[0].question : ''
       }}</label>
-      <div>
+      <div class="m-auto">
         <div
           v-for="(answerObj, index) in props.answerArray.filter(
             (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
@@ -53,12 +71,14 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
           <div
             v-for="(answer, subIndex) in answerObj.answers"
             :key="'answer-' + index + '-' + subIndex"
+            class="m-5"
           >
             <input
               type="radio"
-              name="answer"
+              :name="'answer-' + index"
               :id="'answer-' + index + '-' + subIndex"
               :value="answer"
+              v-model="data.selectedInput"
             />
             <label class="font-bold text-black" :for="'answer-' + index + '-' + subIndex">
               ({{ getLetter(subIndex).toUpperCase() }}) {{ answer }}
@@ -66,7 +86,11 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
           </div>
         </div>
       </div>
-      <input class="bg-brown-500" type="submit" value="Submit Answer" />
+      <input
+        class="bg-brown-500 w-80 rounded-3xl m-auto h-10"
+        type="submit"
+        value="Submit Answer"
+      />
     </form>
   </div>
 </template>

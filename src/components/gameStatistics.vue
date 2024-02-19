@@ -17,7 +17,7 @@ defineComponent({
 </script>
 
 <template>
-  <div>
+  <div class="h-fit mt-5">
     <p>Correct {{ props.correctAnswers }}</p>
     <p>Incorrect {{ props.wrongAnswers }}</p>
   </div>
