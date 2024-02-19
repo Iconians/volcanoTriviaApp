@@ -11,9 +11,6 @@ interface Score {
 
 const newPassword = ref('')
 
-// const AuthUser = localStorage.getItem('user')
-// const Authuser = AuthUser !== null ? JSON.parse(AuthUser) : null
-
 const getUser = async () => {
   const { data, error } = await supabase.auth.getSession()
   if (error) {
@@ -21,10 +18,7 @@ const getUser = async () => {
   }
   if (data.session !== null) {
     const userData = data.session.user
-    if (userData !== null || userData !== undefined) {
-      console.log(userData?.id)
-      return userData
-    }
+    return userData
   }
 }
 
@@ -42,9 +36,8 @@ function safeParse(jsonString: string) {
 }
 
 const findUser = async () => {
-  const { data, error } = await supabase.auth.getSession()
+  const { data } = await supabase.auth.getSession()
   const userData = data.session?.user
-  console.log(data.session?.user, error)
   const user = await supabase
     .from('profile')
     .select('display_name, score')
@@ -117,7 +110,7 @@ const deleteUser = async () => {
             placeholder="Change Password"
             type="password"
           />
-          <input class="mt-5 bg-brown-500 rounded h-10" type="submit" value="change password" />
+          <input class="mt-5 bg-brown-500 rounded h-10" type="submit" value="Change Password" />
         </form>
         <div class="mt-5" v-if="formError.length">{{ formError }}</div>
       </div>
@@ -127,11 +120,11 @@ const deleteUser = async () => {
       <router-link
         class="flex items-center justify-center bg-brown-500 rounded h-10 mb-5 w-28"
         to="/"
-        >Back to start</router-link
+        >Back to Start</router-link
       >
       <button class="bg-brown-500 rounded h-10 mt-5 w-28" @click="signOut">Sign Out</button>
       <button class="bg-brown-500 rounded h-10 mt-5 w-28" @click="deleteUser">
-        delete Account
+        Delete Account
       </button>
     </div>
   </section>
