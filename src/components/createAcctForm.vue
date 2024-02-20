@@ -7,8 +7,8 @@ export default defineComponent({
   setup(_, { emit }) {
     const createAccount = async (event: Event) => {
       event.preventDefault()
-      
-      const form = event.target as HTMLFormElement;
+
+      const form = event.target as HTMLFormElement
       const email = form.email.value
       const password = form.password.value
       const displayName = form.userName.value
@@ -60,3 +60,12 @@ export default defineComponent({
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 600px) {
+  .text-wrapper {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+}
+</style>

@@ -43,7 +43,6 @@ alreadySingedIn()
 
 const clientForgotPassword = async () => {
   forgotPassword.value = true
-  console.log('forgotFunction', forgotPassword.value)
 }
 
 const switchForms = () => {
@@ -51,7 +50,6 @@ const switchForms = () => {
   if (forgotPassword.value) {
     forgotPassword.value = false
   }
-  console.log('switchForms', isCreatingAccount.value, forgotPassword.value)
 }
 </script>
 <!-- -->

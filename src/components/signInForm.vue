@@ -51,3 +51,12 @@ export default defineComponent({
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 600px) {
+  .text-wrapper {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+}
+</style>

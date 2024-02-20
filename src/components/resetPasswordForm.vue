@@ -16,16 +16,14 @@ export default defineComponent({
       const email = form.email.value
 
       try {
-        let { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        let { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: 'http://localhost:5173/forgotPasswordPage'
         })
-        console.log(data, error)
 
         if (error) {
           this.formError = error.message
         } else {
-          // this.$emit('signedIn', data)
-          console.log('Password reset email sent successfully')
+          this.formError = 'Password reset email sent successfully'
         }
       } catch (error) {
         console.error('Error in resetPasswordForm method: ', error)
@@ -43,11 +41,18 @@ export default defineComponent({
       <form @submit="resetPassword" class="flex flex-col">
         <label class="text-xl" for="username">Email</label>
         <input class="rounded-sm text-black" type="email" id="username" name="email" />
-        <!-- <label class="mt-2 text-xl" for="password">password</label>
-        <input class="rounded text-black" type="password" id="password" name="password" /> -->
         <input class="rounded text-xl mt-3 bg-brown-500" type="submit" value="submit" />
       </form>
       <div v-if="formError.length">{{ formError }}</div>
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 600px) {
+  .text-wrapper {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+}
+</style>
