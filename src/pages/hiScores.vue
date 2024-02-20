@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { supabase } from '../../supabase.js'
-import { ref } from 'vue';
+import { ref } from 'vue'
+import ScoresComp from '../components/scoresComp.vue'
 
-  const scores = ref<{ user_name: any; score: any; }[] | null>([])
-  const fetchScores = async () => {
+const scores = ref<{ user_name: string; score: number }[] | null>([])
+const fetchScores = async () => {
   const { data: score, error: fetchError } = await supabase
     .from('high_score')
     .select('user_name, score')
@@ -15,38 +16,32 @@ import { ref } from 'vue';
   scores.value = score
 }
 
-fetchScores();
+fetchScores()
 </script>
 
 <template>
-  <section class="highScoreSection h-full w-full text-center bg-stHelensWithPlume bg-cover text-white">
+  <section
+    class="highScoreSection h-full w-full text-center bg-stHelensWithPlume bg-cover text-white mt-12"
+  >
     <div class="pageWrapper flex flex-col justify-around h-full">
-    <div class="">
-      <h1>High Scores</h1>
+      <div class="">
+        <h1>High Scores</h1>
+      </div>
+      <scores-comp :scores="scores" />
+      <div>
+        <router-link class="mr-8" to="/">Back to Home</router-link>
+        <router-link to="/userPage">Profile</router-link>
+      </div>
     </div>
-    <!-- make into component -->
-    <div class="overflow-y-auto h-52 scroll">
-    <div class="flex m-5 justify-center" v-for="score in scores" :key="score.score">
-      <div class="mr-3">{{score.user_name}}</div>
-      <div>{{score.score}}</div>
-    </div>
-    </div>
-    <!--  -->
-    <div>
-      <router-link class="mr-8" to="/">Back to Home</router-link>
-      <router-link to="/userPage">Profile</router-link>
-    </div>
-  </div>
   </section>
-
 </template>
 
 <style scoped>
 .highScoreSection {
   position: relative;
 }
-  .highScoreSection::before {
-  content: "";
+.highScoreSection::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -62,10 +57,10 @@ fetchScores();
 }
 
 .scroll::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 .scroll::-webkit-scrollbar-track {
-    background: none;
+  background: none;
 }
 </style>

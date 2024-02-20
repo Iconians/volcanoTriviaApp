@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { supabase } from '../../supabase.js'
+import MainQuestionSection from '@/components/mainQuesionSection.vue'
+import lostScreen from '@/components/lostScreen.vue'
+import WinScreen from '@/components/WinScreen.vue'
 
 type questionArray = {
   id: string
@@ -79,7 +82,6 @@ async function postScore() {
       console.error('Error fetching high score: ', highScoreError)
       return
     }
-    console.log(highScore)
     const { data: updatedHighScore, error: updateHighScoreError } = await supabase
       .from('high_score')
       .insert({ score: correctAnswers.value, user_name: displayName })
@@ -90,17 +92,14 @@ async function postScore() {
   }
 }
 
-const checkAnswer = async (e: Event) => {
-  e.preventDefault()
-  const answer = (e.target as HTMLFormElement).answer.value
+const checkAnswer = async (answer: string) => {
   const correctAnswer = answerArray.value.filter(
     (a) => a.question_foreign_key === questionsArray.value[0].id
   )
 
   if (correctAnswer.length > 0) {
     const getAnswer = correctAnswer[0].correct_answer
-
-    if (answer === getAnswer) {
+    if (answer.toString() === getAnswer) {
       correctAnswers.value++
     } else {
       wrongAnswers.value++
@@ -108,7 +107,6 @@ const checkAnswer = async (e: Event) => {
   }
 
   if (wrongAnswers.value === 3) {
-    console.log('Game Over')
     await postScore()
   }
 
@@ -170,129 +168,18 @@ watch(questionsArray, (newVal) => {
 </script>
 
 <template>
-  <section
+  <main-question-section
     v-if="questionsArray.length > 0 && wrongAnswers < 3"
-    class="mt-45 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover"
-  >
-    <div class="main-content">
-      <!-- make into a component -->
-      <div>
-        <form class="flex flex-col justify-around text-center h-40" @submit.prevent="checkAnswer">
-          <label class="font-bold text-black" for="question">{{
-            questionsArray.length > 0 ? questionsArray[0].question : ''
-          }}</label>
-          <div>
-            <div
-              v-for="(answerObj, index) in answerArray.filter(
-                (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
-              )"
-              :key="'answerObj-' + index"
-            >
-              <div
-                v-for="(answer, subIndex) in answerObj.answers"
-                :key="'answer-' + index + '-' + subIndex"
-              >
-                <input
-                  type="radio"
-                  name="answer"
-                  :id="'answer-' + index + '-' + subIndex"
-                  :value="answer"
-                />
-                <label class="font-bold text-black" :for="'answer-' + index + '-' + subIndex">{{
-                  answer
-                }}</label>
-              </div>
-            </div>
-          </div>
-          <input class="bg-brown-500" type="submit" value="Submit Answer" />
-        </form>
-      </div>
-      <!-- end -->
-      <!-- make into component -->
-      <div class="flex">
-        <div v-if="wrongAnswers === 0" class="heart"></div>
-        <div v-if="wrongAnswers <= 1" class="heart"></div>
-        <div v-if="wrongAnswers <= 2" class="heart"></div>
-      </div>
-      <!-- end -->
-    </div>
-    <!-- component?? -->
-    <div>
-      <p>Correct {{ correctAnswers }}</p>
-      <p>Incorrect {{ wrongAnswers }}</p>
-    </div>
-    <!-- end -->
-  </section>
-  <!-- make into a component -->
-  <section
+    :questionsArray="questionsArray"
+    :answerArray="answerArray"
+    :wrongAnswers="wrongAnswers"
+    :correctAnswers="correctAnswers"
+    @submit="checkAnswer"
+  />
+  <lost-screen
     v-else-if="wrongAnswers === 3"
-    class="bg-lavaVolcano text-white height h-full w-full bg-cover flex justify-center flex-col align-middle"
-  >
-    <div class="gameOver">
-      <h1 class="text-center text-3xl mb-7">Game Over</h1>
-      <div class="text-center text-2xl mb-7">
-        <p>would you be this close to an active volcano?</p>
-      </div>
-      <div class="text-2xl text-center">
-        <p>Correct {{ correctAnswers }}</p>
-        <p>Incorrect {{ wrongAnswers }}</p>
-      </div>
-      <div class="flex flex-col justify-center align-center">
-        <router-link to="/totals" class="text-center text-2xl">High Scores</router-link>
-        <router-link to="/" class="text-center text-2xl">Return Home</router-link>
-      </div>
-    </div>
-  </section>
-  <section
-    v-else
-    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithPlume text-white height h-full w-full bg-cover"
-  >
-    <div class="text-2xl text-center">
-      <p>Correct {{ correctAnswers }}</p>
-      <p>Incorrect {{ wrongAnswers }}</p>
-    </div>
-    <div class="flex flex-col justify-center align-center">
-      <router-link to="/totals" class="text-center text-2xl">High Scores</router-link>
-      <router-link to="/" class="text-center text-2xl">Return Home</router-link>
-    </div>
-  </section>
-    <!-- end -->
+    :correctAnswer="correctAnswers"
+    :wrongAnswers="wrongAnswers"
+  />
+  <win-screen v-else :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
 </template>
-
-<style scoped>
-.main-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-}
-.heart {
-  position: relative;
-  width: 100px;
-  height: 90px;
-}
-
-.heart::before,
-.heart::after {
-  content: '';
-  position: absolute;
-  top: 40px;
-  width: 52px;
-  height: 80px;
-  border-radius: 50px 50px 0 0;
-  background: red;
-}
-
-.heart::before {
-  left: 50px;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-
-.heart::after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin: 100% 100%;
-}
-</style>
