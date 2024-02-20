@@ -57,7 +57,7 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
 
 <template>
   <div>
-    <form class="flex flex-col justify-around w-[500px]" @submit.prevent="checkAnswer">
+    <form class="flex flex-col justify-around w-[500px] questionForm" @submit.prevent="checkAnswer">
       <label class="font-bold text-black text-center" for="question">{{
         props.questionsArray.length > 0 ? props.questionsArray[0].question : ''
       }}</label>
@@ -87,10 +87,26 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
         </div>
       </div>
       <input
-        class="bg-brown-500 w-80 rounded-3xl m-auto h-10"
+        class="bg-brown-500 w-80 rounded-3xl m-auto h-10 formBtn"
         type="submit"
         value="Submit Answer"
       />
     </form>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 600px) {
+  .questionForm {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .formBtn {
+    width: 80%;
+    margin: auto;
+  }
+}
+</style>

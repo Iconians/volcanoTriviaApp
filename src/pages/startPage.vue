@@ -43,6 +43,8 @@ alreadySingedIn()
 
 const clientForgotPassword = async () => {
   forgotPassword.value = true
+  isSignedIn.value = false
+  isCreatingAccount.value = false
 }
 
 const switchForms = () => {

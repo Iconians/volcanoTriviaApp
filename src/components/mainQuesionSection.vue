@@ -43,7 +43,7 @@ const handleSubmit = (answer: string) => {
 
 <template>
   <section
-    class="mt-12 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover"
+    class="mt-12 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover section1"
   >
     <div class="main-content">
       <questionForm
@@ -54,7 +54,6 @@ const handleSubmit = (answer: string) => {
       <heartsContainer :wrongAnswers="wrongAnswers" />
     </div>
     <GameStatistics :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
-    <!-- component?? -->
   </section>
 </template>
 
@@ -65,5 +64,12 @@ const handleSubmit = (answer: string) => {
   align-items: center;
   justify-content: center;
   align-self: center;
+}
+
+@media (max-width: 600px) {
+  .section1 {
+    flex-direction: column-reverse;
+    /* margin: 25px auto; */
+  }
 }
 </style>

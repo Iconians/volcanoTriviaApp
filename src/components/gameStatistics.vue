@@ -17,8 +17,17 @@ defineComponent({
 </script>
 
 <template>
-  <div class="h-fit mt-5">
+  <div class="h-fit mt-5 statistics">
     <p>Correct {{ props.correctAnswers }}</p>
     <p>Incorrect {{ props.wrongAnswers }}</p>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 600px) {
+  .statistics {
+    margin: 25px auto;
+    color: black;
+  }
+}
+</style>
