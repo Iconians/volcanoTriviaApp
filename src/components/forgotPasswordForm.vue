@@ -38,13 +38,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white">
-    <h1 class="text-2xl">Volcano Quiz</h1>
-    <p>Please reset your Password</p>
+  <div class="text-wrapper text-white w-1/2 m-auto">
+    <h1 class="text-center text-2xl">Volcano Quiz</h1>
+    <p class="text-center">Please reset your Password</p>
     <div>
-      <form @submit="forgotPassword" class="flex flex-col">
-        <!-- <label class="text-xl" for="username">Email</label>
-        <input class="rounded-sm text-black" type="email" id="username" name="email" /> -->
+      <form @submit="forgotPassword" class="flex flex-col text-center">
         <label class="mt-2 text-xl" for="password">Update Password</label>
         <input class="rounded text-black" type="password" id="password" name="password" />
         <input class="rounded text-xl mt-3 bg-brown-500" type="submit" value="submit" />

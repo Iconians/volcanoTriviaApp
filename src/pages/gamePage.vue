@@ -47,7 +47,7 @@ async function postScore() {
     const newScore = { correct: correctAnswers.value, incorrect: wrongAnswers.value }
     currentScore[0].score.push(newScore)
 
-    const { data: updatedScore, error: updateError } = await supabase
+    const { error: updateError } = await supabase
       .from('profile')
       .update({ score: currentScore[0].score })
       .match({ user_id: userId })
@@ -76,13 +76,13 @@ async function postScore() {
 
     const displayName = currentScore[0].display_name
 
-    const { data: highScore, error: highScoreError } = await supabase.from('high_score').select('*')
+    const { error: highScoreError } = await supabase.from('high_score').select('*')
 
     if (highScoreError) {
       console.error('Error fetching high score: ', highScoreError)
       return
     }
-    const { data: updatedHighScore, error: updateHighScoreError } = await supabase
+    const { error: updateHighScoreError } = await supabase
       .from('high_score')
       .insert({ score: correctAnswers.value, user_name: displayName })
 
