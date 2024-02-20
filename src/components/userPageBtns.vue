@@ -46,7 +46,7 @@ const deleteUser = async () => {
         >Back to Start</router-link
       >
     </div>
-    <div class="flex justify-between w-96">
+    <div class="flex flex-wrap justify-between w-96 btns">
       <button class="bg-brown-500 rounded h-10 mt-5 w-28 hover:bg-red-600" @click="signOut">
         Sign Out
       </button>
@@ -56,3 +56,13 @@ const deleteUser = async () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 400px) {
+  .btns {
+    width: 320px;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>

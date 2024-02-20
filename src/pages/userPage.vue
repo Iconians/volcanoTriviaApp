@@ -33,7 +33,7 @@ const findUser = async () => {
     userName.value = user.data[0].display_name
     const parsedScores = user.data[0].score.map(safeParse).filter(Boolean)
     if (parsedScores !== null) {
-      userScore.value = parsedScores
+      userScore.value = parsedScores.slice().reverse()
     }
   }
 }
@@ -44,7 +44,7 @@ findUser()
 <template>
   <section class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover">
     <div>{{ userName }}'s Profile</div>
-    <div class="flex m-8 justify-around w-3/4">
+    <div class="flex flex-wrap m-8 justify-around w-3/4">
       <score-history :userScore="userScore" />
       <update-password-comp />
     </div>
