@@ -9,17 +9,12 @@ const props = defineProps({
 })
 
 defineComponent({
-  name: 'heartsContainer',
-  data() {
-    return {
-      // formError: ''
-    }
-  }
+  name: 'heartsContainer'
 })
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex z-10">
     <div v-if="props.wrongAnswers === 0" class="heart"></div>
     <div v-if="props.wrongAnswers <= 1" class="heart"></div>
     <div v-if="props.wrongAnswers <= 2" class="heart"></div>

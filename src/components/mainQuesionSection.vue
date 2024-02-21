@@ -66,10 +66,20 @@ const handleSubmit = (answer: string) => {
   align-self: center;
 }
 
+.main-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
 @media (max-width: 600px) {
   .section1 {
     flex-direction: column-reverse;
-    /* margin: 25px auto; */
   }
 }
 </style>

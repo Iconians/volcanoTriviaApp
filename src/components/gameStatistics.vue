@@ -7,17 +7,12 @@ const props = defineProps({
 })
 
 defineComponent({
-  name: 'gameStatistics',
-  data() {
-    return {
-      // formError: ''
-    }
-  }
+  name: 'gameStatistics'
 })
 </script>
 
 <template>
-  <div class="h-fit mt-5 statistics">
+  <div class="h-fit mt-5 statistics z-10">
     <p>Correct {{ props.correctAnswers }}</p>
     <p>Incorrect {{ props.wrongAnswers }}</p>
   </div>
@@ -27,7 +22,6 @@ defineComponent({
 @media (max-width: 600px) {
   .statistics {
     margin: 25px auto;
-    color: black;
   }
 }
 </style>
