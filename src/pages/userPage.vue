@@ -43,7 +43,7 @@ findUser()
 
 <template>
   <section class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover">
-    <div>{{ userName }}'s Profile</div>
+    <div class="text-3xl">{{ userName }}'s Profile</div>
     <div class="flex flex-wrap m-8 justify-around w-3/4">
       <score-history :userScore="userScore" />
       <update-password-comp />
@@ -51,3 +51,11 @@ findUser()
     <user-page-btns />
   </section>
 </template>
+
+<style scoped>
+@media (max-width: 400px) {
+  .section {
+    height: unset;
+  }
+}
+</style>

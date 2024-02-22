@@ -41,16 +41,19 @@ const deleteUser = async () => {
   <div class="flex flex-col mt-5 mb-5">
     <div class="flex justify-center">
       <router-link
-        class="flex items-center justify-center bg-brown-500 rounded h-10 mb-5 w-28 hover:bg-red-600"
+        class="flex items-center justify-center bg-brown-500 rounded h-10 mb-5 w-32 hover:bg-red-600 text-xl"
         to="/"
         >Back to Start</router-link
       >
     </div>
     <div class="flex flex-wrap justify-between w-96 btns">
-      <button class="bg-brown-500 rounded h-10 mt-5 w-28 hover:bg-red-600" @click="signOut">
+      <button class="bg-brown-500 rounded h-10 mt-5 w-32 hover:bg-red-600 text-xl" @click="signOut">
         Sign Out
       </button>
-      <button class="bg-brown-500 rounded h-10 mt-5 w-32 hover:bg-red-600" @click="deleteUser">
+      <button
+        class="bg-brown-500 rounded h-10 mt-5 w-40 hover:bg-red-600 text-xl"
+        @click="deleteUser"
+      >
         Delete Account
       </button>
     </div>

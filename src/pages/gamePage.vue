@@ -38,7 +38,6 @@ async function postScore() {
       .from('profile')
       .select('score')
       .eq('user_id', userId)
-
     if (fetchError) {
       console.error('Error fetching score: ', fetchError)
       return
@@ -47,10 +46,11 @@ async function postScore() {
     const newScore = { correct: correctAnswers.value, incorrect: wrongAnswers.value }
     currentScore[0].score.push(newScore)
 
-    const { error: updateError } = await supabase
+    const { data, error: updateError } = await supabase
       .from('profile')
       .update({ score: currentScore[0].score })
       .match({ user_id: userId })
+    console.log('currentScore', updateError, data)
     if (updateError) {
       console.error('Error posting score: ', updateError)
     }

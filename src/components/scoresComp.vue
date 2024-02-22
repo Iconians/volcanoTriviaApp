@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
   <div class="overflow-y-auto h-52 scroll">
-    <div class="flex m-5 justify-center" v-for="score in props.scores" :key="score.score">
+    <div class="flex m-5 justify-center text-2xl" v-for="score in props.scores" :key="score.score">
       <div class="mr-3">{{ score.user_name }}</div>
       <div>{{ score.score }}</div>
     </div>

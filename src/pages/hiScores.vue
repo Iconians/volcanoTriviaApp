@@ -25,12 +25,12 @@ fetchScores()
   >
     <div class="pageWrapper flex flex-col justify-around h-full">
       <div class="">
-        <h1>High Scores</h1>
+        <h1 class="text-3xl">High Scores</h1>
       </div>
       <scores-comp :scores="scores" />
       <div>
-        <router-link class="mr-8" to="/">Back to Home</router-link>
-        <router-link to="/userPage">Profile</router-link>
+        <router-link class="mr-8 text-2xl" to="/">Back to Home</router-link>
+        <router-link class="text-2xl" to="/userPage">Profile</router-link>
       </div>
     </div>
   </section>

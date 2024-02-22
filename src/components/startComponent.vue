@@ -10,13 +10,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white">
+  <div class="text-wrapper text-white bg-black/50">
     <div>
-      <h1 class="text-2xl">Volcano Quiz</h1>
-      <p>Are you smart enough to be a volcanologist?</p>
+      <h1 class="text-3xl">Volcano Quiz</h1>
+      <p class="text-2xl">Are you smart enough to be a volcanologist?</p>
     </div>
-    <RouterLink class="text-xl text-center" to="/gamePage">Start Game</RouterLink>
-    <RouterLink class="text-xl text-center" to="/userPage">Profile</RouterLink>
-    <RouterLink class="text-xl text-center" to="/totals">High Scores</RouterLink>
+    <RouterLink class="text-2xl text-center" to="/gamePage">Start Game</RouterLink>
+    <RouterLink class="text-2xl text-center" to="/userPage">Profile</RouterLink>
+    <RouterLink class="text-2xl text-center" to="/totals">High Scores</RouterLink>
   </div>
 </template>

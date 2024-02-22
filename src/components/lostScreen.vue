@@ -9,7 +9,7 @@ const props = defineProps({
   <section
     class="bg-lavaVolcano text-white height h-full w-full bg-cover flex justify-center flex-col align-middle"
   >
-    <div class="gameOver">
+    <div class="gameOver bg-black/25">
       <h1 class="text-center text-3xl mb-7">Game Over</h1>
       <div class="text-center text-2xl mb-7">
         <p>would you be this close to an active volcano?</p>
