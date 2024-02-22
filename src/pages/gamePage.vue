@@ -50,7 +50,6 @@ const findScore = async (userId: string | null) => {
 const addScore = async (currentScore: any | undefined, userId: any) => {
   const newScore = { correct: correctAnswers.value, incorrect: wrongAnswers.value }
   currentScore[0].score.push(newScore)
-
   const { data, error: updateError } = await supabase
     .from('profile')
     .update({ score: currentScore[0].score })
