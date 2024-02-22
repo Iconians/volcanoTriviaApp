@@ -16,11 +16,11 @@ const props = defineProps({
 
 <template>
   <div>
-    <div>Score History</div>
+    <div class="text-2xl">Score History</div>
     <div class="h-52 overflow-y-auto scroll">
       <div v-for="score in props.userScore" :key="score.correct" class="flex">
-        <div class="m-2">Correct: {{ score.correct }}</div>
-        <div class="m-2">Incorrect: {{ score.incorrect }}</div>
+        <div class="m-2 text-xl">Correct: {{ score.correct }}</div>
+        <div class="m-2 text-xl">Incorrect: {{ score.incorrect }}</div>
       </div>
     </div>
   </div>

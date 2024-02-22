@@ -20,7 +20,7 @@ const updatePassword = async (e: Event) => {
 
 <template>
   <div class="m-8">
-    <div class="mb-5">Update Password</div>
+    <div class="mb-5 text-2xl">Update Password</div>
     <form class="flex flex-col" @submit="updatePassword">
       <input
         v-model="newPassword"
@@ -29,7 +29,7 @@ const updatePassword = async (e: Event) => {
         type="password"
       />
       <input
-        class="mt-5 bg-brown-500 rounded h-10 hover:bg-red-600"
+        class="mt-5 bg-brown-500 rounded h-10 hover:bg-red-600 text-xl"
         type="submit"
         value="Change Password"
       />

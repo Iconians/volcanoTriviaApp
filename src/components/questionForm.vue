@@ -58,7 +58,7 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
 <template>
   <div>
     <form class="flex flex-col justify-around w-[500px] questionForm" @submit.prevent="checkAnswer">
-      <label class="font-bold text-white text-center" for="question">{{
+      <label class="font-bold text-white text-center text-3xl" for="question">{{
         props.questionsArray.length > 0 ? props.questionsArray[0].question : ''
       }}</label>
       <div class="m-auto">
@@ -80,14 +80,14 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
               :value="answer"
               v-model="data.selectedInput"
             />
-            <label class="text-white" :for="'answer-' + index + '-' + subIndex">
+            <label class="text-white text-2xl" :for="'answer-' + index + '-' + subIndex">
               ({{ getLetter(subIndex).toUpperCase() }}) {{ answer }}
             </label>
           </div>
         </div>
       </div>
       <input
-        class="bg-brown-500 w-80 rounded-3xl m-auto h-10 formBtn"
+        class="bg-brown-500 w-80 rounded-3xl m-auto h-10 formBtn text-2xl"
         type="submit"
         value="Submit Answer"
       />

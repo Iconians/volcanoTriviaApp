@@ -12,7 +12,7 @@ defineComponent({
 </script>
 
 <template>
-  <div class="h-fit mt-5 statistics z-10">
+  <div class="h-fit mt-5 statistics z-10 text-2xl">
     <p>Correct {{ props.correctAnswers }}</p>
     <p>Incorrect {{ props.wrongAnswers }}</p>
   </div>

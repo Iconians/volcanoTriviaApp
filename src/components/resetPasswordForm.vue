@@ -34,14 +34,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white">
-    <h1 class="text-2xl">Volcano Quiz</h1>
-    <p>Please enter your Email to reset your Password</p>
+  <div class="text-wrapper text-white bg-black/50">
+    <h1 class="text-3xl">Volcano Quiz</h1>
+    <p class="text-2xl">Please enter your Email to reset your Password</p>
     <div>
       <form @submit="resetPassword" class="flex flex-col">
-        <label class="text-xl" for="username">Email</label>
-        <input class="rounded-sm text-black" type="email" id="username" name="email" />
-        <input class="rounded text-xl mt-3 bg-brown-500" type="submit" value="submit" />
+        <label class="text-2xl" for="username">Email</label>
+        <input class="rounded text-black p-1" type="email" id="username" name="email" />
+        <input class="rounded text-2xl mt-3 bg-brown-500 p-1" type="submit" value="submit" />
       </form>
       <div v-if="formError.length">{{ formError }}</div>
     </div>

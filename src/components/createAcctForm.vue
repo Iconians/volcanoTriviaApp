@@ -44,18 +44,20 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white">
-    <h1 class="text-2xl">Volcano Quiz</h1>
-    <p>Please create an account to see if you are smart enough to be a volcanologist?</p>
+  <div class="text-wrapper text-white mb-5 bg-black/50">
+    <h1 class="text-3xl mb-10">Volcano Quiz</h1>
+    <p class="text-2xl mb-5">
+      Create an account to see if you are smart enough to be a volcanologist?
+    </p>
     <div>
-      <form @submit="createAccount" class="flex flex-col">
-        <label class="text-xl" for="username">username</label>
-        <input class="rounded-sm text-black" type="text" id="username" name="userName" />
-        <label class="text-x" for="email">email</label>
-        <input class="rounded-sm text-black" type="email" id="email" name="email" />
-        <label class="mt-2 text-xl" for="password">password</label>
-        <input class="rounded text-black" type="password" id="password" name="password" />
-        <input class="rounded text-xl mt-3 bg-brown-500" type="submit" value="submit" />
+      <form @submit="createAccount" class="flex flex-col mb-5">
+        <label class="text-2xl" for="username">Username</label>
+        <input class="rounded text-black p-1" type="text" id="username" name="userName" />
+        <label class="text-2xl" for="email">Email</label>
+        <input class="rounded text-black p-1" type="email" id="email" name="email" />
+        <label class="mt-2 text-2xl" for="password">Password</label>
+        <input class="rounded text-black p-1" type="password" id="password" name="password" />
+        <input class="rounded text-2xl mt-3 mb-10 bg-brown-500 p-1" type="submit" value="submit" />
       </form>
     </div>
   </div>

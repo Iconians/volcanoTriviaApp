@@ -50,11 +50,11 @@ const clientForgotPassword = async () => {
 const switchForms = () => {
   isCreatingAccount.value = !isCreatingAccount.value
   if (forgotPassword.value) {
+    isCreatingAccount.value = false
     forgotPassword.value = false
   }
 }
 </script>
-<!-- -->
 
 <template>
   <section class="section bg-volcanoGif height h-full w-full text-center">
@@ -66,16 +66,18 @@ const switchForms = () => {
       @forgotPassword="forgotFunction"
     />
     <div>
-      <button v-if="!isSignedIn" @click="switchForms" class="text-white">
+      <button v-if="!isSignedIn" @click="switchForms" class="text-white text-2xl">
         {{ isCreatingAccount ? 'Sign In' : 'Create Account' }}
       </button>
       <br />
-      <button v-if="forgotPassword" class="text-white pt-5" @click="switchForms">Sign In</button>
+      <button v-if="forgotPassword" class="text-white pt-5 text-2xl" @click="switchForms">
+        Sign In
+      </button>
       <br />
       <button
         v-if="!isSignedIn && !forgotPassword"
         @click="clientForgotPassword"
-        class="text-white pt-5"
+        class="text-white pt-5 text-2xl"
       >
         Forgot Password
       </button>
