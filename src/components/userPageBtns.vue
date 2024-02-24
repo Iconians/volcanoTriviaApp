@@ -29,7 +29,6 @@ const deleteUser = async () => {
     if (error) {
       console.error('Error deleting user:', error)
     } else {
-      localStorage.removeItem('user')
       console.log('User deleted:', data)
       router.push('/')
     }

@@ -3,35 +3,31 @@ import startComponent from '@/components/startComponent.vue'
 import signInForm from '@/components/signInForm.vue'
 import createAcctForm from '@/components/createAcctForm.vue'
 import { ref } from 'vue'
-import ResetPasswordForm from '@/components/resetPasswordForm.vue'
-
-interface User {
-  email: string
-  displayName: string
-}
+import resetPasswordForm from '@/components/resetPasswordForm.vue'
+import { supabase } from '../../supabase'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 
-const alreadySingedIn = () => {
-  const user = localStorage.getItem('user')
-  if (user !== null) {
+const alreadySingedIn = async () => {
+  const user = await supabase.auth.getSession()
+  if (user.data.session !== null) {
     isSignedIn.value = true
+    console.log('user', user)
   } else {
     isSignedIn.value = false
+    console.log('no user')
   }
 }
-const handleAccountCreated = (user: User) => {
+const handleAccountCreated = () => {
   isCreatingAccount.value = false
   isSignedIn.value = true
-  localStorage.setItem('user', JSON.stringify(user))
 }
-const signIn = (user: any) => {
+const signIn = () => {
   isSignedIn.value = true
   isCreatingAccount.value = false
   forgotPassword.value = false
-  localStorage.setItem('user', JSON.stringify(user))
 }
 
 const forgotFunction = () => {

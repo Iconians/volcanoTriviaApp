@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "supabase.ts", "**/*.ts", "store.js"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "supabase.ts", "**/*.ts", "store.js", "src/**/*.ts"],
   "exclude": ["src/**/__tests__/*"],
   "files": ["src/main.ts","store.js"],
   "compilerOptions": {
