@@ -18,7 +18,6 @@ export default defineComponent({
       try {
         const { error } = await supabase.auth.updateUser({
           password: form.value.password
-          // data: { hello: 'world' }
         })
 
         if (error) {

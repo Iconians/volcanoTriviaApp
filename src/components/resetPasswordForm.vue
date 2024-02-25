@@ -19,7 +19,7 @@ export default defineComponent({
 
       try {
         let { error } = await supabase.auth.resetPasswordForEmail(form.value.email, {
-          redirectTo: 'http://localhost:5173/forgotPasswordPage'
+          redirectTo: '"https://volcano-trivia-app.vercel.app/forgotPasswordPage" '
         })
 
         if (error) {
