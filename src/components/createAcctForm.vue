@@ -1,10 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { supabase } from '../../supabase.js'
+import 'vue-toast-notification/dist/theme-default.css'
+import { useToast } from 'vue-toast-notification'
 export default defineComponent({
   name: 'createAcctForm',
   emits: ['accountCreated'],
   setup(_, { emit }) {
+    const toast = useToast()
     const createAccount = async (event: Event) => {
       event.preventDefault()
 
@@ -20,8 +23,10 @@ export default defineComponent({
 
       if (error) {
         console.error('Error creating account: ', error)
+        toast.error('Error creating account')
       } else {
         console.log('Account created: ', data?.user)
+        toast.success('Account created')
       }
       if (data?.user) {
         const { error: insertError } = await supabase
@@ -30,11 +35,14 @@ export default defineComponent({
 
         if (insertError) {
           console.error('Error inserting display name: ', insertError)
+          toast.error('Error in saving account details')
         } else {
           console.log('Display name inserted: ', displayName)
+          toast.success('Account details saved')
         }
       } else {
         console.error('No user found')
+        toast.error('No user found')
       }
       emit('accountCreated', data?.user)
     }

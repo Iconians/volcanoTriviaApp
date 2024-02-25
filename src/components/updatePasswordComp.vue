@@ -7,12 +7,12 @@ const formError = ref('')
 
 const updatePassword = async (e: Event) => {
   e.preventDefault()
-  console.log(newPassword.value)
   const update = await supabase.auth.updateUser({ password: newPassword.value })
-  console.log(update)
   if (update.error) {
+    newPassword.value = ''
     formError.value = update.error.message
   } else {
+    newPassword.value = ''
     formError.value = 'Password updated'
   }
 }

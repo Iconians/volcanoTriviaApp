@@ -1,4 +1,5 @@
 import { supabase } from './supabase'
+import { useToast } from 'vue-toast-notification'
 
 type questionArray = {
   id: string
@@ -14,6 +15,8 @@ type answerArr = {
   question_foreign_key: string
 }
 
+const toast = useToast()
+
 export const findUser = async () => {
   const user = await supabase.auth.getSession()
   let userId
@@ -22,6 +25,10 @@ export const findUser = async () => {
     return userId
   } else {
     console.error('No user found')
+    toast.open({
+      message: 'No user found',
+      type: 'error'
+    })
   }
 }
 
@@ -32,6 +39,10 @@ export const findScore = async (userId: string | null) => {
     .eq('user_id', userId)
   if (fetchError) {
     console.error('Error fetching score: ', fetchError)
+    toast.open({
+      message: 'Error fetching score',
+      type: 'error'
+    })
     return
   }
   return currentScore
@@ -45,8 +56,16 @@ export const addScore = async (currentScore: any | undefined, userId: any, corre
     .update({ score: currentScore[0].score })
     .match({ user_id: userId })
   console.log('currentScore', updateError, data)
+  toast.open({
+    message: 'Score updated',
+    type: 'success'
+  })
   if (updateError) {
     console.error('Error posting score: ', updateError)
+    toast.open({
+      message: 'Error posting score',
+      type: 'error'
+    })
   }
 }
 
@@ -58,6 +77,10 @@ export const findDisplayName = async (userId: string | undefined) => {
 
   if (fetchError) {
     console.error('Error fetching score: ', fetchError)
+    toast.open({
+      message: 'Error fetching score',
+      type: 'error'
+    })
     return
   }
   return currentScore
@@ -68,6 +91,10 @@ export const updateSupabase = async (displayName: string, correctAnswers: any) =
 
   if (highScoreError) {
     console.error('Error fetching high score: ', highScoreError)
+    toast.open({
+      message: 'Error fetching high score',
+      type: 'error'
+    })
     return
   }
   const { error: updateHighScoreError } = await supabase
@@ -76,6 +103,10 @@ export const updateSupabase = async (displayName: string, correctAnswers: any) =
 
   if (updateHighScoreError) {
     console.error('Error posting high score: ', updateHighScoreError)
+    toast.open({
+      message: 'Error posting high score',
+      type: 'error'
+    })
   }
 }
 

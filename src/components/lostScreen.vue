@@ -3,6 +3,7 @@ const props = defineProps({
   correctAnswers: Number,
   wrongAnswers: Number
 })
+console.log('props: ', props)
 </script>
 
 <template>

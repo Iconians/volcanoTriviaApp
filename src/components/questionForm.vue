@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 
 type questionArray = {
   id: string
@@ -26,6 +26,8 @@ const props = defineProps({
   }
 })
 
+const selectedInput = ref('')
+
 const resetRadioBtns = () => {
   const radioBtns = document.querySelectorAll('input[type="radio"]')
   radioBtns.forEach(() => {
@@ -38,18 +40,14 @@ const resetRadioBtns = () => {
   })
 }
 
-const data = {
-  selectedInput: ''
-}
-
 const emit = defineEmits<{ (event: 'submit', answer: string): void }>()
 
 const checkAnswer = (event: Event) => {
   event.preventDefault()
-  const answer = data.selectedInput
-  emit('submit', answer)
+  const answer = selectedInput
+  emit('submit', answer.value)
   resetRadioBtns()
-  data.selectedInput = ''
+  selectedInput.value = ''
 }
 
 const getLetter = (index: number) => String.fromCharCode(97 + index)
@@ -78,7 +76,7 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
               :name="'answer-' + index"
               :id="'answer-' + index + '-' + subIndex"
               :value="answer"
-              v-model="data.selectedInput"
+              v-model="selectedInput"
             />
             <label class="text-white text-2xl" :for="'answer-' + index + '-' + subIndex">
               ({{ getLetter(subIndex).toUpperCase() }}) {{ answer }}
@@ -90,6 +88,7 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
         class="bg-brown-500 w-80 rounded-3xl m-auto h-10 formBtn text-2xl"
         type="submit"
         value="Submit Answer"
+        :disabled="selectedInput === ''"
       />
     </form>
   </div>
