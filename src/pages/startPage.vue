@@ -2,24 +2,25 @@
 import startComponent from '@/components/startComponent.vue'
 import signInForm from '@/components/signInForm.vue'
 import createAcctForm from '@/components/createAcctForm.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import resetPasswordForm from '@/components/resetPasswordForm.vue'
-// import { supabase } from '../../supabase'
+import { supabase } from '../../supabase'
+import { useRouter } from 'vue-router'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 
-// const alreadySingedIn = async () => {
-//   const user = await supabase.auth.getSession()
-//   if (user.data.session !== null) {
-//     isSignedIn.value = true
-//     console.log('user', user)
-//   } else {
-//     isSignedIn.value = false
-//     console.log('no user')
-//   }
-// }
+const alreadySingedIn = async () => {
+  const user = await supabase.auth.getSession()
+  if (user.data.session !== null) {
+    isSignedIn.value = true
+    console.log('user', user)
+  } else {
+    isSignedIn.value = false
+    console.log('no user')
+  }
+}
 const handleAccountCreated = () => {
   isCreatingAccount.value = false
   isSignedIn.value = true
@@ -50,6 +51,15 @@ const switchForms = () => {
     forgotPassword.value = false
   }
 }
+
+const router = useRouter()
+
+onMounted(() => {
+  router.beforeEach(async (to, from, next) => {
+    await alreadySingedIn()
+    next()
+  })
+})
 </script>
 
 <template>
