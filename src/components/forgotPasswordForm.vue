@@ -25,6 +25,7 @@ export default defineComponent({
           formError.value = error.message
         } else {
           toast.success('Password reset successfully')
+          console.log('running')
           router.push('/')
         }
       } catch (error) {
