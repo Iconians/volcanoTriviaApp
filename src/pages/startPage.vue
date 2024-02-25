@@ -4,22 +4,22 @@ import signInForm from '@/components/signInForm.vue'
 import createAcctForm from '@/components/createAcctForm.vue'
 import { ref } from 'vue'
 import resetPasswordForm from '@/components/resetPasswordForm.vue'
-import { supabase } from '../../supabase'
+// import { supabase } from '../../supabase'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 
-const alreadySingedIn = async () => {
-  const user = await supabase.auth.getSession()
-  if (user.data.session !== null) {
-    isSignedIn.value = true
-    console.log('user', user)
-  } else {
-    isSignedIn.value = false
-    console.log('no user')
-  }
-}
+// const alreadySingedIn = async () => {
+//   const user = await supabase.auth.getSession()
+//   if (user.data.session !== null) {
+//     isSignedIn.value = true
+//     console.log('user', user)
+//   } else {
+//     isSignedIn.value = false
+//     console.log('no user')
+//   }
+// }
 const handleAccountCreated = () => {
   isCreatingAccount.value = false
   isSignedIn.value = true
@@ -35,7 +35,7 @@ const forgotFunction = () => {
   isSignedIn.value = true
   isCreatingAccount.value = false
 }
-alreadySingedIn()
+// alreadySingedIn()
 
 const clientForgotPassword = async () => {
   forgotPassword.value = true
