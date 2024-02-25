@@ -1,36 +1,38 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { supabase } from '../../supabase.js'
+import { useToast } from 'vue-toast-notification'
+import { ref } from 'vue'
 export default defineComponent({
   name: 'signInForm',
-  data() {
-    return {
-      formError: ''
-    }
-  },
-  methods: {
-    async signIn(event: Event) {
-      event.preventDefault()
-
-      const form = event.target as HTMLFormElement
-      const email = form.email.value
-      const password = form.password.value
-
+  setup(_, { emit }) {
+    const toast = useToast()
+    const formError = ref('')
+    const form = ref({
+      password: '',
+      email: ''
+    })
+    async function signIn(e: Event) {
+      e.preventDefault()
+      console.log(form.value.email)
+      console.log(form.value.password)
       try {
         const { data, error } = await supabase.auth.signInWithPassword({
-          email,
-          password
+          email: form.value.email,
+          password: form.value.password
         })
 
         if (error) {
-          this.formError = error.message
+          formError.value = error.message
         } else {
-          this.$emit('signedIn', data.user)
+          emit('signedIn', data.user)
+          toast.success('Signed in successfully')
         }
       } catch (error) {
-        console.error('Error in signIn method: ', error)
+        toast.error('Error in signIn method')
       }
     }
+    return { formError, form, signIn }
   }
 })
 </script>
@@ -42,9 +44,21 @@ export default defineComponent({
     <div>
       <form @submit="signIn" class="flex flex-col">
         <label class="text-2xl" for="username">Email</label>
-        <input class="rounded text-black p-1" type="email" id="username" name="email" />
+        <input
+          class="rounded text-black p-1"
+          type="email"
+          id="username"
+          name="email"
+          v-model="form.email"
+        />
         <label class="mt-2 text-2xl" for="password">Password</label>
-        <input class="rounded text-black p-1" type="password" id="password" name="password" />
+        <input
+          class="rounded text-black p-1"
+          type="password"
+          id="password"
+          name="password"
+          v-model="form.password"
+        />
         <input class="rounded text-2xl mt-3 bg-brown-500 p-1" type="submit" value="submit" />
       </form>
       <div v-if="formError.length">{{ formError }}</div>

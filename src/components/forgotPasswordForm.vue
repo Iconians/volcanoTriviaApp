@@ -1,42 +1,37 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { supabase } from '../../supabase.js'
 import router from '@/router'
 import { useToast } from 'vue-toast-notification'
 export default defineComponent({
   name: 'forgotPasswordForm',
-  data() {
-    return {
-      formError: ''
-    }
-  },
+  setup() {
+    const toast = useToast()
+    const formError = ref('')
+    const form = ref({
+      password: ''
+    })
 
-  methods: {
-    async forgotPassword(event: Event) {
-      event.preventDefault()
-      const toast = useToast()
-
-      const form = event.target as HTMLFormElement
-      const password = form.password.value
+    async function forgotPassword(e: Event) {
+      e.preventDefault()
 
       try {
-        const { data, error } = await supabase.auth.updateUser({
-          password: password,
-          data: { hello: 'world' }
+        const { error } = await supabase.auth.updateUser({
+          password: form.value.password
+          // data: { hello: 'world' }
         })
 
         if (error) {
-          this.formError = error.message
+          formError.value = error.message
         } else {
-          console.log('Password reset successfully', data)
           toast.success('Password reset successfully')
           router.push('/')
         }
       } catch (error) {
-        console.error('Error in forgotPasswordForm method: ', error)
         toast.error('Error in forgotPasswordForm method')
       }
     }
+    return { toast, formError, form, forgotPassword }
   }
 })
 </script>
@@ -48,7 +43,13 @@ export default defineComponent({
     <div>
       <form @submit="forgotPassword" class="flex flex-col text-center">
         <label class="mt-2 text-2xl" for="password">Update Password</label>
-        <input class="rounded text-black p-1" type="password" id="password" name="password" />
+        <input
+          class="rounded text-black p-1"
+          type="password"
+          id="password"
+          name="password"
+          v-model="form.password"
+        />
         <input class="rounded text-2xl mt-3 bg-brown-500 p-1" type="submit" value="submit" />
       </form>
       <div v-if="formError.length">{{ formError }}</div>

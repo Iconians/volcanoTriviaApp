@@ -13,8 +13,8 @@ export default defineComponent({
       email: ''
     })
 
-    async function resetPassword(event: Event) {
-      event.preventDefault()
+    async function resetPassword(e: Event) {
+      e.preventDefault()
       console.log(form.value.email)
 
       try {
@@ -29,7 +29,6 @@ export default defineComponent({
           toast.success('Password reset email sent successfully')
         }
       } catch (error) {
-        console.error('Error in resetPasswordForm method: ', error)
         toast.error('Error in resetPasswordForm method')
       }
     }
