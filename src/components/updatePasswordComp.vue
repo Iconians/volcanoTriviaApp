@@ -16,14 +16,13 @@ const updatePassword = async (e: Event) => {
     toast.error(update.error.message)
   } else {
     newPassword.value = ''
-    formError.value = 'Password updated'
     toast.success('Password updated')
   }
 }
 </script>
 
 <template>
-  <div class="m-8">
+  <div class="m-8 mt-0 update-password-comp-wrapper">
     <div class="mb-5 text-2xl">Update Password</div>
     <form class="flex flex-col" @submit="updatePassword">
       <input
@@ -41,3 +40,11 @@ const updatePassword = async (e: Event) => {
     <div class="mt-5" v-if="formError.length">{{ formError }}</div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 635px) {
+  .update-password-comp-wrapper {
+    margin-top: 2rem;
+  }
+}
+</style>

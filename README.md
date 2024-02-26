@@ -1,46 +1,132 @@
-# volcanic-trivia-app
+# Volcano Trivia App
 
-This template should help get you started developing with Vue 3 in Vite.
+Welcome to the Volcano Trivia App! Are you smart enough to be a volcanologist? Test your knowledge with our engaging trivia questions and see how you stack up against the experts. If you're not careful, you might trigger a volcanic eruption!
 
-## Recommended IDE Setup
+## Table of Contents
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Introduction](#volcano-trivia-app)
+- [Features](#features)
+- [Pages](#pages)
+- [Technologies](#technologies)
+- [Data Model](#data-model)
+- [Getting Started](#getting-started)
+- [Future Plans](#future-plans)
+- [Contributing](#contributing-section)
 
-## Type Support for `.vue` Imports in TS
+## Features
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Log in to start the quiz.
+- Answer 5 randomly selected questions ranging from easy to hard.
+- View results to see how well you performed.
+- Explore high scores to challenge others.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Pages
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+1. **Start Page**
+   - Users log in here to start the quiz.
 
-## Customize configuration
+2. **Question Page**
+   - Users face a series of 5 random questions, testing their volcano knowledge.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+3. **Results Page**
+   - Displays the results of the quiz, highlighting correct and incorrect answers.
 
-## Project Setup
+4. **Users Page**
+   - Explore high scores and challenge others.
 
-```sh
-npm install
+## Technologies
+
+- **Vue.js:** Frontend framework for building interactive user interfaces.
+- **Tailwind CSS:** Utility-first CSS framework for styling.
+- **Supabase:** Backend platform for handling user authentication and storing quiz data.
+
+## Data Model
+
+### Answer Array
+
+```json
+[
+  {
+    "question_foreign_key": "uuid",
+    "id": "uuid",
+    "created_at": "timestamp",
+    "answers": ["answer1", "answer2", "answer3", "answer4"],
+    "correct_answer": "text"
+  }
+]
 ```
 
-### Compile and Hot-Reload for Development
+### High Score
 
-```sh
+```json
+[
+  {
+    "id": "uuid",
+    "user_name": "text",
+    "score": 5
+  }
+]
+```
+
+### Profile
+
+```json
+[
+  {
+    "id": "int8",
+    "score": [
+      {
+        "correct": 3,
+        "incorrect": 2
+      }
+    ],
+    "userId": "uuid",
+    "display_name": "text"
+  }
+]
+```
+
+### Question
+
+```json
+[
+  {
+    "id": "uuid",
+    "question": "text",
+    "created_at": "timestamp"
+  }
+]
+```
+
+### Getting Started
+
+1 Clone the repository.
+
+```bash
+git clone https://github.com/Iconians/volcanoTriviaApp.git
+```
+
+2 Install dependencies.
+
+```bash
+npm i
+```
+
+3 Set up Supabase credentials.
+
+4 Run the application.
+
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
-```sh
-npm run build
-```
+[live site](https://volcano-trivia-app.vercel.app/)
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Future Plans
+Expand the question pool to provide more variety.
+Enhance user profiles and add additional features.
+Implement real-time multiplayer mode.
+Contributing
+Contributions are welcome! If you have ideas for improvement, feel free to submit a pull request.
