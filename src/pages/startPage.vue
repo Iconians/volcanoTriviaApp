@@ -12,8 +12,8 @@ const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 
 const alreadySingedIn = async () => {
-  const user = await supabase.auth.getSession()
-  if (user.data.session !== null) {
+  const user = supabase.auth.getUser()
+  if (user !== null) {
     isSignedIn.value = true
     console.log('user', user)
   } else {
@@ -52,20 +52,17 @@ const switchForms = () => {
   }
 }
 
-const router = useRouter()
-
-onMounted(() => {
-  router.beforeEach(async (to, from, next) => {
-    await alreadySingedIn()
-    next()
-  })
-})
+// const router = useRouter()
 
 // onMounted(() => {
-//   supabase.auth.onAuthStateChange(async (event, session) => {
+//   router.beforeEach(async (to, from, next) => {
 //     await alreadySingedIn()
+//     next()
 //   })
 // })
+onMounted(async () => {
+  await alreadySingedIn()
+})
 </script>
 
 <template>
