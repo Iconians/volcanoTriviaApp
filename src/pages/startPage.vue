@@ -54,18 +54,18 @@ const switchForms = () => {
 
 const router = useRouter()
 
-// onMounted(() => {
-//   router.beforeEach(async (to, from, next) => {
-//     await alreadySingedIn()
-//     next()
-//   })
-// })
-
 onMounted(() => {
-  supabase.auth.onAuthStateChange(async (event, session) => {
+  router.beforeEach(async (to, from, next) => {
     await alreadySingedIn()
+    next()
   })
 })
+
+// onMounted(() => {
+//   supabase.auth.onAuthStateChange(async (event, session) => {
+//     await alreadySingedIn()
+//   })
+// })
 </script>
 
 <template>

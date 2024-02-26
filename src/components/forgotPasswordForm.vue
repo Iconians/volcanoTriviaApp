@@ -14,7 +14,7 @@ export default defineComponent({
 
     async function forgotPassword(e: Event) {
       e.preventDefault()
-
+      console.log(form.value.password)
       try {
         const { error } = await supabase.auth.updateUser({
           password: form.value.password
