@@ -69,16 +69,20 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
           <div
             v-for="(answer, subIndex) in answerObj.answers"
             :key="'answer-' + index + '-' + subIndex"
-            class="m-5"
+            class="m-5 cursor-pointer"
           >
             <input
+              class="cursor-pointer"
               type="radio"
               :name="'answer-' + index"
               :id="'answer-' + index + '-' + subIndex"
               :value="answer"
               v-model="selectedInput"
             />
-            <label class="text-white text-2xl" :for="'answer-' + index + '-' + subIndex">
+            <label
+              class="text-white text-2xl cursor-pointer"
+              :for="'answer-' + index + '-' + subIndex"
+            >
               ({{ getLetter(subIndex).toUpperCase() }}) {{ answer }}
             </label>
           </div>
