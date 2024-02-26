@@ -11,7 +11,7 @@ Welcome to the Volcano Trivia App! Are you smart enough to be a volcanologist? T
 - [Data Model](#data-model)
 - [Getting Started](#getting-started)
 - [Future Plans](#future-plans)
-- [Contributing](#contributing-section)
+- [Contributing](#contributing)
 
 ## Features
 
@@ -23,16 +23,21 @@ Welcome to the Volcano Trivia App! Are you smart enough to be a volcanologist? T
 ## Pages
 
 1. **Start Page**
-   - Users log in here to start the quiz.
+    - Users log in here to start the quiz.
 
 2. **Question Page**
-   - Users face a series of 5 random questions, testing their volcano knowledge.
+    - Users face a series of 5 random questions, testing their volcano knowledge.
 
 3. **Results Page**
-   - Displays the results of the quiz, highlighting correct and incorrect answers.
+    - Displays the results of the quiz, highlight how many answer you got right/wrong.
 
 4. **Users Page**
-   - Explore high scores and challenge others.
+    - Explore users scores.
+    - change password and log out
+
+5. **High Score Page**
+    - view top High scores.
+    - navigate to home or user Page
 
 ## Technologies
 
@@ -124,10 +129,11 @@ Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
 [live site](https://volcano-trivia-app.vercel.app/)
 
-Future Plans
+## Future Plans
 
 1. Expand the question pool to provide more variety.
 2. Enhance user profiles and add additional features.
 
-Contributing
+## Contributing
+
 Contributions are welcome! If you have ideas for improvement, feel free to submit a pull request.
