@@ -50,7 +50,7 @@ Welcome to the Volcano Trivia App! Are you smart enough to be a volcanologist? T
     "question_foreign_key": "uuid",
     "id": "uuid",
     "created_at": "timestamp",
-    "answers": ["answer1", "answer2", "answer3", "answer4"],
+    "answers": ["answer1", "answer2", "answer3"],
     "correct_answer": "text"
   }
 ]
@@ -125,8 +125,9 @@ Visit [http://localhost:8080](http://localhost:8080) in your browser.
 [live site](https://volcano-trivia-app.vercel.app/)
 
 Future Plans
-Expand the question pool to provide more variety.
-Enhance user profiles and add additional features.
-Implement real-time multiplayer mode.
+
+1. Expand the question pool to provide more variety.
+2. Enhance user profiles and add additional features.
+
 Contributing
 Contributions are welcome! If you have ideas for improvement, feel free to submit a pull request.
