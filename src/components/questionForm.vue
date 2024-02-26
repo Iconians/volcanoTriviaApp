@@ -85,7 +85,7 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
         </div>
       </div>
       <input
-        class="bg-brown-500 w-80 rounded-3xl m-auto h-10 formBtn text-2xl"
+        class="bg-brown-500 w-80 rounded-3xl m-auto h-10 formBtn text-2xl cursor-pointer"
         type="submit"
         value="Submit Answer"
         :disabled="selectedInput === ''"

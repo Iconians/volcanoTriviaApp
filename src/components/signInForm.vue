@@ -59,7 +59,11 @@ export default defineComponent({
           name="password"
           v-model="form.password"
         />
-        <input class="rounded text-2xl mt-3 bg-brown-500 p-1" type="submit" value="submit" />
+        <input
+          class="rounded text-2xl mt-3 bg-brown-500 p-1 cursor-pointer"
+          type="submit"
+          value="submit"
+        />
       </form>
       <div v-if="formError.length">{{ formError }}</div>
     </div>

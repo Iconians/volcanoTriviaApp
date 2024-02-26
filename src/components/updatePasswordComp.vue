@@ -33,7 +33,7 @@ const updatePassword = async (e: Event) => {
         type="password"
       />
       <input
-        class="mt-5 bg-brown-500 rounded h-10 hover:bg-red-600 text-xl"
+        class="mt-5 bg-brown-500 rounded h-10 hover:bg-red-600 text-xl cursor-pointer"
         type="submit"
         value="Change Password"
       />
