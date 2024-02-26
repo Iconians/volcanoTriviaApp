@@ -14,7 +14,7 @@ const forgotPassword = ref(false)
 const alreadySingedIn = async () => {
   const user = await supabase.auth.getUser()
   console.log(' check user', user)
-  if (user !== null) {
+  if (user.data.user !== null) {
     isSignedIn.value = true
     console.log('user', user)
   } else {
