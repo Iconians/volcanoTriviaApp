@@ -125,9 +125,9 @@ npm i
 npm run dev
 ```
 
-Visit [http://localhost:8080](http://localhost:8080) in your browser.
+5 Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
-[live site](https://volcano-trivia-app.vercel.app/)
+visit the site here [live site](https://volcano-trivia-app.vercel.app/)
 
 ## Future Plans
 
