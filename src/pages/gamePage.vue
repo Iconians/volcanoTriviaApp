@@ -4,14 +4,15 @@ import { supabase } from '../../supabase.js'
 import MainQuestionSection from '@/components/mainQuesionSection.vue'
 import lostScreen from '@/components/lostScreen.vue'
 import WinScreen from '@/components/WinScreen.vue'
+import { useToast } from 'vue-toast-notification'
 import {
   findUser,
   findScore,
-  addScore,
+  addUserScore,
   findDisplayName,
   updateHighScore,
   sortQuestions
-} from '../../gamePageUtils'
+} from '../gamePageUtils'
 
 type questionArray = {
   id: string
@@ -32,12 +33,14 @@ const answerArray = ref<answerArr[]>([])
 const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
 
+const toast = useToast()
+
 async function postScore() {
   if (questionsArray.value.length === 0 || wrongAnswers.value === 3) {
     const userId = await findUser()
     if (userId !== undefined) {
       const currentScore = await findScore(userId)
-      addScore(currentScore, userId, correctAnswers.value, wrongAnswers.value)
+      addUserScore(currentScore, userId, correctAnswers.value, wrongAnswers.value)
     }
   }
   if (correctAnswers.value >= 4) {
@@ -74,13 +77,13 @@ const checkAnswer = async (answer: string) => {
 
   if (questionsArray.value.length > 0) {
     sortQuestions(questionsArray.value, answerArray.value)
-  } else {
-    console.log('No more questions')
   }
-  await postScore()
+  if (correctAnswers.value + wrongAnswers.value === 5) {
+    await postScore()
+  }
 }
 
-const findAnswers = async () => {
+const getAnswersFromSupabase = async () => {
   if (questionsArray.value.length > 0) {
     const questionIds = questionsArray.value.map((question) => question.id)
     supabase
@@ -88,10 +91,9 @@ const findAnswers = async () => {
       .select('*')
       .in('question_foreign_key', questionIds)
       .then(({ data, error }) => {
-        if (error) console.log(error)
+        if (error) toast.error('Error in getAnswersFromSupabase method')
         else {
           const answers: answerArr[] = data
-
           if (answers.length > 0) {
             answerArray.value = answers
           }
@@ -109,7 +111,7 @@ supabase
   .from('questions')
   .select('*')
   .then(({ data: questions, error }) => {
-    if (error) console.log(error)
+    if (error) toast.error('Error in getQuestionsFromSupabase method')
     else {
       let num = 5
       while (num > 0) {
@@ -118,7 +120,7 @@ supabase
         num--
       }
     }
-    findAnswers()
+    getAnswersFromSupabase()
   })
 </script>
 
@@ -138,3 +140,4 @@ supabase
   />
   <win-screen v-else :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
 </template>
+../utils/gamePageUtils.js ../gamePageUtils.js

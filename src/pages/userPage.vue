@@ -4,6 +4,7 @@ import { supabase } from '../../supabase'
 import updatePasswordComp from '@/components/updatePasswordComp.vue'
 import ScoreHistory from '@/components/ScoreHistory.vue'
 import UserPageBtns from '@/components/userPageBtns.vue'
+import { useToast } from 'vue-toast-notification'
 
 interface Score {
   correct: number
@@ -12,12 +13,14 @@ interface Score {
 
 const userName = ref('')
 const userScore = ref<Score[]>([])
+const toast = useToast()
 
 function safeParse(jsonString: string) {
   try {
     return JSON.parse(jsonString)
   } catch (error) {
     console.error('Failed to parse JSON string:', error)
+    toast.error('Failed to parse user data')
     return null
   }
 }

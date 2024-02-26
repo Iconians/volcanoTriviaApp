@@ -25,7 +25,6 @@ export default defineComponent({
         if (error) {
           formError.value = error.message
         } else {
-          formError.value = 'Password reset email sent successfully'
           toast.success('Password reset email sent successfully')
         }
       } catch (error) {

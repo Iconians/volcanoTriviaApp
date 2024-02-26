@@ -1,5 +1,6 @@
-import { supabase } from './supabase'
+import { supabase } from '../supabase'
 import { useToast } from 'vue-toast-notification'
+// note I tried putting this file in a utils folder but it didn't work in either the src or the root directory
 
 type questionArray = {
   id: string
@@ -54,7 +55,7 @@ export const findScore = async (userId: string | null) => {
   return currentScore
 }
 
-export const addScore = async (currentScore: score[] | undefined, userId: string, correctAnswers: number, wrongAnswers: number) => {
+export const addUserScore = async (currentScore: score[] | undefined, userId: string, correctAnswers: number, wrongAnswers: number) => {
   const newScore = { correct: correctAnswers, incorrect: wrongAnswers }
   if (currentScore !== undefined) {
   currentScore[0].score.push(newScore)
