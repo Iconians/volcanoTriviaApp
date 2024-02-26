@@ -51,17 +51,15 @@ export const findScore = async (userId: string | null) => {
 export const addScore = async (currentScore: any | undefined, userId: any, correctAnswers: any, wrongAnswers: any) => {
   const newScore = { correct: correctAnswers, incorrect: wrongAnswers }
   currentScore[0].score.push(newScore)
-  const { data, error: updateError } = await supabase
+  const { error: updateError } = await supabase
     .from('profile')
     .update({ score: currentScore[0].score })
     .match({ user_id: userId })
-  console.log('currentScore', updateError, data)
   toast.open({
     message: 'Score updated',
     type: 'success'
   })
   if (updateError) {
-    console.error('Error posting score: ', updateError)
     toast.open({
       message: 'Error posting score',
       type: 'error'
@@ -76,7 +74,6 @@ export const findDisplayName = async (userId: string | undefined) => {
     .eq('user_id', userId)
 
   if (fetchError) {
-    console.error('Error fetching score: ', fetchError)
     toast.open({
       message: 'Error fetching score',
       type: 'error'
@@ -86,27 +83,12 @@ export const findDisplayName = async (userId: string | undefined) => {
   return currentScore
 }
 
-export const updateSupabase = async (displayName: string, correctAnswers: any) => {
-  const { error: highScoreError } = await supabase.from('high_score').select('*')
-
-  if (highScoreError) {
-    console.error('Error fetching high score: ', highScoreError)
-    toast.open({
-      message: 'Error fetching high score',
-      type: 'error'
-    })
-    return
-  }
-  const { error: updateHighScoreError } = await supabase
+export const updateHighScore = async (displayName: string, correctAnswers: number) => {  
+  const { error } = await supabase
     .from('high_score')
-    .insert({ score: correctAnswers.value, user_name: displayName })
-
-  if (updateHighScoreError) {
-    console.error('Error posting high score: ', updateHighScoreError)
-    toast.open({
-      message: 'Error posting high score',
-      type: 'error'
-    })
+    .insert({ score: correctAnswers, user_name: displayName })
+  if (error) {
+    console.log(error)
   }
 }
 

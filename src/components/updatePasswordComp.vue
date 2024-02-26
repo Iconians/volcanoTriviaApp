@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { supabase } from '../../supabase'
 import { ref } from 'vue'
+import { useToast } from 'vue-toast-notification'
 
 const newPassword = ref('')
 const formError = ref('')
+const toast = useToast()
 
 const updatePassword = async (e: Event) => {
   e.preventDefault()
@@ -11,9 +13,11 @@ const updatePassword = async (e: Event) => {
   if (update.error) {
     newPassword.value = ''
     formError.value = update.error.message
+    toast.error(update.error.message)
   } else {
     newPassword.value = ''
     formError.value = 'Password updated'
+    toast.success('Password updated')
   }
 }
 </script>

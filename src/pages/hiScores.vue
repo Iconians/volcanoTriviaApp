@@ -2,6 +2,9 @@
 import { supabase } from '../../supabase.js'
 import { ref } from 'vue'
 import ScoresComp from '../components/scoresComp.vue'
+import { useToast } from 'vue-toast-notification'
+
+const toast = useToast()
 
 const scores = ref<{ user_name: string; score: number }[] | null>([])
 const fetchScores = async () => {
@@ -11,7 +14,7 @@ const fetchScores = async () => {
     .order('score', { ascending: false })
     .limit(10)
   if (fetchError) {
-    console.error('Error fetching score: ', fetchError)
+    toast.error('Error fetching scores')
   }
   scores.value = score
 }

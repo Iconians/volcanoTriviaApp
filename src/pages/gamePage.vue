@@ -9,7 +9,7 @@ import {
   findScore,
   addScore,
   findDisplayName,
-  updateSupabase,
+  updateHighScore,
   sortQuestions
 } from '../../gamePageUtils'
 
@@ -45,7 +45,7 @@ async function postScore() {
     const currentScore = await findDisplayName(userId)
     if (currentScore !== undefined) {
       const displayName = currentScore[0].display_name
-      updateSupabase(displayName, correctAnswers.value)
+      updateHighScore(displayName, correctAnswers.value)
     }
   }
 }
@@ -133,7 +133,7 @@ supabase
   />
   <lost-screen
     v-else-if="wrongAnswers === 3"
-    :correctAnswer="correctAnswers"
+    :correctAnswers="correctAnswers"
     :wrongAnswers="wrongAnswers"
   />
   <win-screen v-else :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />

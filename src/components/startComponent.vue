@@ -10,7 +10,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white bg-black/50">
+  <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl">
     <div>
       <h1 class="text-3xl">Volcano Quiz</h1>
       <p class="text-2xl">Are you smart enough to be a volcanologist?</p>

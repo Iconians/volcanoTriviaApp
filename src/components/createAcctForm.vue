@@ -34,7 +34,6 @@ export default defineComponent({
           .insert([{ user_id: data.user.id, display_name: form.value.displayName, score: [] }])
 
         if (insertError) {
-          console.error('Error inserting display name: ', insertError)
           toast.error('Error in saving account details')
         } else {
           toast.success('Account details saved')
@@ -50,7 +49,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white mb-5 bg-black/50">
+  <div class="text-wrapper text-white mb-5 bg-black/50 p-12 rounded-3xl">
     <h1 class="text-3xl mb-10">Volcano Quiz</h1>
     <p class="text-2xl mb-5">
       Create an account to see if you are smart enough to be a volcanologist?
@@ -88,6 +87,9 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.text-wrapper {
+  height: 500px;
+}
 @media (max-width: 600px) {
   .text-wrapper {
     width: 80%;

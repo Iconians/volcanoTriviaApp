@@ -39,7 +39,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white bg-black/50">
+  <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl h-11">
     <h1 class="text-3xl">Volcano Quiz</h1>
     <p class="text-2xl">Please enter your Email to reset your Password</p>
     <div>
@@ -60,6 +60,9 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.text-wrapper {
+  height: 300px;
+}
 @media (max-width: 600px) {
   .text-wrapper {
     width: 80%;

@@ -14,8 +14,6 @@ export default defineComponent({
     })
     async function signIn(e: Event) {
       e.preventDefault()
-      console.log(form.value.email)
-      console.log(form.value.password)
       try {
         const { data, error } = await supabase.auth.signInWithPassword({
           email: form.value.email,
@@ -23,7 +21,9 @@ export default defineComponent({
         })
 
         if (error) {
+          form.value.password = ''
           formError.value = error.message
+          toast.error('Error signing in')
         } else {
           emit('signedIn', data.user)
           toast.success('Signed in successfully')
@@ -38,7 +38,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white bg-black/50">
+  <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl">
     <h1 class="text-3xl">Volcano Quiz</h1>
     <p class="text-2xl">Sign in to see if you are smart enough to be a Volcanologist?</p>
     <div>

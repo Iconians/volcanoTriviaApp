@@ -5,7 +5,6 @@ import createAcctForm from '@/components/createAcctForm.vue'
 import { ref, onMounted } from 'vue'
 import resetPasswordForm from '@/components/resetPasswordForm.vue'
 import { supabase } from '../../supabase'
-import { useRouter } from 'vue-router'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
@@ -13,13 +12,10 @@ const forgotPassword = ref(false)
 
 const alreadySingedIn = async () => {
   const user = await supabase.auth.getUser()
-  console.log(' check user', user)
   if (user.data.user !== null) {
     isSignedIn.value = true
-    console.log('user', user)
   } else {
     isSignedIn.value = false
-    console.log('no user')
   }
 }
 const handleAccountCreated = () => {
@@ -37,7 +33,6 @@ const forgotFunction = () => {
   isSignedIn.value = true
   isCreatingAccount.value = false
 }
-// alreadySingedIn()
 
 const clientForgotPassword = async () => {
   forgotPassword.value = true
@@ -53,14 +48,6 @@ const switchForms = () => {
   }
 }
 
-// const router = useRouter()
-
-// onMounted(() => {
-//   router.beforeEach(async (to, from, next) => {
-//     await alreadySingedIn()
-//     next()
-//   })
-// })
 onMounted(async () => {
   await alreadySingedIn()
 })
