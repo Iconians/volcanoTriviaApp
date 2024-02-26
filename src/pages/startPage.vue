@@ -12,7 +12,7 @@ const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 
 const alreadySingedIn = async () => {
-  const user = supabase.auth.getUser()
+  const user = await supabase.auth.getUser()
   console.log(' check user', user)
   if (user !== null) {
     isSignedIn.value = true
