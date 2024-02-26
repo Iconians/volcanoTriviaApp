@@ -15,6 +15,12 @@ type answerArr = {
   question_foreign_key: string
 }
 
+type score = {
+  score: {
+    correct: number
+    incorrect: number
+  }[]
+}
 const toast = useToast()
 
 export const findUser = async () => {
@@ -48,8 +54,9 @@ export const findScore = async (userId: string | null) => {
   return currentScore
 }
 
-export const addScore = async (currentScore: any | undefined, userId: any, correctAnswers: any, wrongAnswers: any) => {
+export const addScore = async (currentScore: score[] | undefined, userId: string, correctAnswers: number, wrongAnswers: number) => {
   const newScore = { correct: correctAnswers, incorrect: wrongAnswers }
+  if (currentScore !== undefined) {
   currentScore[0].score.push(newScore)
   const { error: updateError } = await supabase
     .from('profile')
@@ -65,6 +72,7 @@ export const addScore = async (currentScore: any | undefined, userId: any, corre
       type: 'error'
     })
   }
+}
 }
 
 export const findDisplayName = async (userId: string | undefined) => {
