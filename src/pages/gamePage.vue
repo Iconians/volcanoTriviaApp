@@ -5,6 +5,7 @@ import MainQuestionSection from '@/components/mainQuesionSection.vue'
 import lostScreen from '@/components/lostScreen.vue'
 import WinScreen from '@/components/WinScreen.vue'
 import { useToast } from 'vue-toast-notification'
+import LoadingComponent from '@/components/loadingComponent.vue'
 import {
   findUser,
   findScore,
@@ -32,6 +33,7 @@ const questionsArray = ref<questionArray[]>([])
 const answerArray = ref<answerArr[]>([])
 const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
+const loading = ref(true)
 
 const toast = useToast()
 
@@ -91,7 +93,7 @@ const getAnswersFromSupabase = async () => {
       .select('*')
       .in('question_foreign_key', questionIds)
       .then(({ data, error }) => {
-        if (error) toast.error('Error in getAnswersFromSupabase method')
+        if (error) toast.error('Error in api method')
         else {
           const answers: answerArr[] = data
           if (answers.length > 0) {
@@ -104,6 +106,7 @@ const getAnswersFromSupabase = async () => {
         a.answers.sort(() => Math.random() - 0.5)
       }
     })
+    loading.value = false
   }
 }
 
@@ -111,7 +114,7 @@ supabase
   .from('questions')
   .select('*')
   .then(({ data: questions, error }) => {
-    if (error) toast.error('Error in getQuestionsFromSupabase method')
+    if (error) toast.error('Error in api method')
     else {
       let num = 5
       while (num > 0) {
@@ -126,7 +129,7 @@ supabase
 
 <template>
   <main-question-section
-    v-if="questionsArray.length > 0 && wrongAnswers < 3"
+    v-if="questionsArray.length > 0 && wrongAnswers < 3 && !loading"
     :questionsArray="questionsArray"
     :answerArray="answerArray"
     :wrongAnswers="wrongAnswers"
@@ -134,10 +137,10 @@ supabase
     @submit="checkAnswer"
   />
   <lost-screen
-    v-else-if="wrongAnswers === 3"
+    v-else-if="wrongAnswers === 3 && !loading"
     :correctAnswers="correctAnswers"
     :wrongAnswers="wrongAnswers"
   />
-  <win-screen v-else :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
+  <win-screen v-else-if="!loading" :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
+  <loading-component v-if="loading" />
 </template>
-../utils/gamePageUtils.js ../gamePageUtils.js

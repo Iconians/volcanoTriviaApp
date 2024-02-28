@@ -5,17 +5,21 @@ import createAcctForm from '@/components/createAcctForm.vue'
 import { ref, onMounted } from 'vue'
 import resetPasswordForm from '@/components/resetPasswordForm.vue'
 import { supabase } from '../../supabase'
+import loadingComponent from '@/components/loadingComponent.vue'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
 const forgotPassword = ref(false)
+const loading = ref(true)
 
 const alreadySingedIn = async () => {
   const user = await supabase.auth.getUser()
   if (user.data.user !== null) {
     isSignedIn.value = true
+    loading.value = false
   } else {
     isSignedIn.value = false
+    loading.value = false
   }
 }
 const handleAccountCreated = () => {
@@ -54,7 +58,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="section bg-volcanoGif height h-full w-full text-center">
+  <section v-if="!loading" class="section bg-volcanoGif height h-full w-full text-center">
     <sign-in-form v-if="!isCreatingAccount && !isSignedIn && !forgotPassword" @signedIn="signIn" />
     <create-acct-form v-if="isCreatingAccount" @accountCreated="handleAccountCreated" />
     <start-component v-if="isSignedIn" />
@@ -80,4 +84,12 @@ onMounted(async () => {
       </button>
     </div>
   </section>
+  <loading-component v-if="loading" />
+  <!-- <section v-if="loading">
+    <div class="flex justify-center items-center h-screen">
+      <div
+        class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"
+      ></div>
+    </div>
+  </section> -->
 </template>
