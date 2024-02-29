@@ -53,7 +53,7 @@ const handleSubmit = (answer: string) => {
       />
       <heartsContainer :wrongAnswers="wrongAnswers" />
     </div>
-    <GameStatistics :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
+    <GameStatistics class="game" :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
   </section>
 </template>
 
@@ -75,6 +75,10 @@ const handleSubmit = (answer: string) => {
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 1;
+}
+
+.game {
+  margin: auto 0;
 }
 
 @media (max-width: 600px) {

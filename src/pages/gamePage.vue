@@ -75,12 +75,13 @@ const checkAnswer = async (answer: string) => {
 
   if (wrongAnswers.value === 3) {
     await postScore()
+    return
   }
 
   if (questionsArray.value.length > 0) {
     sortQuestions(questionsArray.value, answerArray.value)
   }
-  if (correctAnswers.value + wrongAnswers.value === 5) {
+  if (correctAnswers.value + wrongAnswers.value === 5 && wrongAnswers.value < 3) {
     await postScore()
   }
 }

@@ -63,10 +63,7 @@ export const addUserScore = async (currentScore: score[] | undefined, userId: st
     .from('profile')
     .update({ score: currentScore[0].score })
     .match({ user_id: userId })
-  toast.open({
-    message: 'Score updated',
-    type: 'success'
-  })
+  toast.success('Score updated')
   if (updateError) {
     toast.open({
       message: 'Error posting score',
