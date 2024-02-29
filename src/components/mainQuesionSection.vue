@@ -46,12 +46,13 @@ const handleSubmit = (answer: string) => {
     class="mt-12 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover section1"
   >
     <div class="main-content">
+      <GameStatistics class="game" :correctAnswers="correctAnswers" />
       <questionForm
         :questionsArray="props.questionsArray"
         :answerArray="props.answerArray"
         @submit="handleSubmit"
       />
-      <GameStatistics class="game" :correctAnswers="correctAnswers" />
+
       <heartsContainer :wrongAnswers="wrongAnswers" />
     </div>
   </section>
@@ -79,6 +80,11 @@ const handleSubmit = (answer: string) => {
 
 .game {
   margin: 25px 0;
+  background-color: rgba(165, 42, 42, 0.8);
+  /* background-color: rgba(255, 0, 0, 0.4); */
+  font-size: 50px;
+  padding: 25px 80px;
+  border-radius: 10px;
 }
 
 @media (max-width: 600px) {
