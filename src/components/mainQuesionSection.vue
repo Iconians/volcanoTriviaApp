@@ -51,9 +51,9 @@ const handleSubmit = (answer: string) => {
         :answerArray="props.answerArray"
         @submit="handleSubmit"
       />
+      <GameStatistics class="game" :correctAnswers="correctAnswers" />
       <heartsContainer :wrongAnswers="wrongAnswers" />
     </div>
-    <GameStatistics class="game" :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
   </section>
 </template>
 
@@ -78,7 +78,7 @@ const handleSubmit = (answer: string) => {
 }
 
 .game {
-  margin: auto 0;
+  margin: 25px 0;
 }
 
 @media (max-width: 600px) {

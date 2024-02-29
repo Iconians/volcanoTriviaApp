@@ -2,8 +2,7 @@
 import { defineProps, defineComponent } from 'vue'
 
 const props = defineProps({
-  correctAnswers: Number,
-  wrongAnswers: Number
+  correctAnswers: Number
 })
 
 defineComponent({
@@ -14,7 +13,6 @@ defineComponent({
 <template>
   <div class="h-fit mt-5 statistics z-10 text-2xl">
     <p>Correct {{ props.correctAnswers }}</p>
-    <p>Incorrect {{ props.wrongAnswers }}</p>
   </div>
 </template>
 
