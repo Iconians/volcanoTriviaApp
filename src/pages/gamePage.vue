@@ -145,3 +145,7 @@ supabase
   <win-screen v-else-if="!loading" :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
   <loading-component v-if="loading" />
 </template>
+
+<style scoped>
+/* rest of your styles */
+</style>

@@ -58,38 +58,50 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section v-if="!loading" class="section bg-volcanoGif height h-full w-full text-center">
-    <sign-in-form v-if="!isCreatingAccount && !isSignedIn && !forgotPassword" @signedIn="signIn" />
-    <create-acct-form v-if="isCreatingAccount" @accountCreated="handleAccountCreated" />
-    <start-component v-if="isSignedIn" />
-    <reset-password-form
-      v-if="forgotPassword && !isCreatingAccount && !isSignedIn"
-      @forgotPassword="forgotFunction"
-    />
-    <div>
-      <button v-if="!isSignedIn" @click="switchForms" class="text-white text-2xl">
-        {{ isCreatingAccount ? 'Sign In' : 'Create Account' }}
-      </button>
-      <br />
-      <button v-if="forgotPassword" class="text-white pt-5 text-2xl" @click="switchForms">
-        Sign In
-      </button>
-      <br />
-      <button
-        v-if="!isSignedIn && !forgotPassword"
-        @click="clientForgotPassword"
-        class="text-white pt-5 text-2xl"
-      >
-        Forgot Password
-      </button>
+  <section
+    v-if="!loading"
+    class="flowing-border section bg-volcanoGif height h-full w-full text-center bg-cover"
+  >
+    <div class="main-content">
+      <sign-in-form
+        v-if="!isCreatingAccount && !isSignedIn && !forgotPassword"
+        @signedIn="signIn"
+      />
+      <create-acct-form v-if="isCreatingAccount" @accountCreated="handleAccountCreated" />
+      <start-component v-if="isSignedIn" />
+      <reset-password-form
+        v-if="forgotPassword && !isCreatingAccount && !isSignedIn"
+        @forgotPassword="forgotFunction"
+      />
+      <div>
+        <button v-if="!isSignedIn" @click="switchForms" class="text-white text-2xl">
+          {{ isCreatingAccount ? 'Sign In' : 'Create Account' }}
+        </button>
+        <br />
+        <button v-if="forgotPassword" class="text-white pt-5 text-2xl" @click="switchForms">
+          Sign In
+        </button>
+        <br />
+        <button
+          v-if="!isSignedIn && !forgotPassword"
+          @click="clientForgotPassword"
+          class="text-white pt-5 text-2xl"
+        >
+          Forgot Password
+        </button>
+      </div>
     </div>
   </section>
   <loading-component v-if="loading" />
-  <!-- <section v-if="loading">
-    <div class="flex justify-center items-center h-screen">
-      <div
-        class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"
-      ></div>
-    </div>
-  </section> -->
 </template>
+
+<!-- <style scoped>
+.main-content {
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 20px;
+  border-radius: 5px;
+  /* background: white; */
+}
+</style> -->

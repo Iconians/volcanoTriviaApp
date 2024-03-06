@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white w-1/2 m-auto bg-black/50 p-12 rounded-3xl">
+  <div class="text-wrapper text-white m-auto bg-black/50 p-12 rounded-3xl">
     <h1 class="text-center text-3xl">Volcano Quiz</h1>
     <p class="text-center text-2xl">Please reset your Password</p>
     <div>

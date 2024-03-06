@@ -43,7 +43,7 @@ const handleSubmit = (answer: string) => {
 
 <template>
   <section
-    class="mt-12 flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover section1"
+    class="flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover section1 section"
   >
     <div class="main-content">
       <GameStatistics class="game" :correctAnswers="correctAnswers" />
@@ -59,6 +59,10 @@ const handleSubmit = (answer: string) => {
 </template>
 
 <style scoped>
+.section1 {
+  position: relative;
+}
+
 .main-content {
   display: flex;
   flex-direction: column;

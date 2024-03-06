@@ -7,7 +7,7 @@ const props = defineProps({
 
 <template>
   <section
-    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithPlume text-white height h-full w-full bg-cover background"
+    class="mt-45 flex justify-center flex-col align-middle bg-stHelensWithPlume text-white height h-full w-full bg-cover background section"
   >
     <div class="text-3xl text-center z-10">
       <p class="m-2">Correct {{ props.correctAnswers }}</p>
@@ -21,6 +21,10 @@ const props = defineProps({
 </template>
 
 <style scoped>
+.background {
+  position: relative;
+}
+
 .background::before {
   content: '';
   position: absolute;

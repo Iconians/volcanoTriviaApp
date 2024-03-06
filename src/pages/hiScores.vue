@@ -24,7 +24,7 @@ fetchScores()
 
 <template>
   <section
-    class="highScoreSection h-full w-full text-center bg-stHelensWithPlume bg-cover text-white mt-12"
+    class="highScoreSection section h-full w-full text-center bg-stHelensWithPlume bg-cover text-white"
   >
     <div class="pageWrapper flex flex-col justify-around h-full">
       <div class="">

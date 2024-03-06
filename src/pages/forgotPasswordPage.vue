@@ -3,7 +3,7 @@ import forgotPasswordForm from '@/components/forgotPasswordForm.vue'
 </script>
 
 <template>
-  <div class="text-wrapper text-white bg-black bg-volcanoGif h-full mt-12">
+  <div class="section text-wrapper text-white bg-black bg-volcanoGif bg-cover h-full">
     <div>
       <forgotPasswordForm />
     </div>
