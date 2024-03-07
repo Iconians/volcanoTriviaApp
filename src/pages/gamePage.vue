@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { supabase } from '../../supabase.js'
 import MainQuestionSection from '@/components/mainQuesionSection.vue'
 import lostScreen from '@/components/lostScreen.vue'
@@ -34,8 +34,18 @@ const answerArray = ref<answerArr[]>([])
 const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
 const loading = ref(true)
+const answerSubmitted = ref(false)
+const lastAnswerCorrect = ref(false)
 
 const toast = useToast()
+
+const answerClass = computed(() => {
+  if (answerSubmitted.value) {
+    return lastAnswerCorrect.value ? 'correct' : 'incorrect'
+  } else {
+    return ''
+  }
+})
 
 async function postScore() {
   if (questionsArray.value.length === 0 || wrongAnswers.value === 3) {
@@ -59,8 +69,12 @@ const findAnswer = (correctAnswer: answerArr[], answer: string) => {
   const getAnswer = correctAnswer[0].correct_answer
   if (answer.toString() === getAnswer) {
     correctAnswers.value++
+    answerSubmitted.value = true
+    lastAnswerCorrect.value = true
   } else {
     wrongAnswers.value++
+    answerSubmitted.value = true
+    lastAnswerCorrect.value = false
   }
 }
 
@@ -84,6 +98,9 @@ const checkAnswer = async (answer: string) => {
   if (correctAnswers.value + wrongAnswers.value === 5 && wrongAnswers.value < 3) {
     await postScore()
   }
+  setTimeout(() => {
+    answerSubmitted.value = false
+  }, 800)
 }
 
 const getAnswersFromSupabase = async () => {
@@ -135,6 +152,7 @@ supabase
     :answerArray="answerArray"
     :wrongAnswers="wrongAnswers"
     :correctAnswers="correctAnswers"
+    :class="answerClass"
     @submit="checkAnswer"
   />
   <lost-screen

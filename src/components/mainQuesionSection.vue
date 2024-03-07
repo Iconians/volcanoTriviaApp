@@ -32,7 +32,8 @@ const props = defineProps({
     required: true
   },
   correctAnswers: Number,
-  checkAnswer: Function
+  checkAnswer: Function,
+  answerClass: String
 })
 const emit = defineEmits<{ (event: 'submit', answer: string): void }>()
 
@@ -44,6 +45,7 @@ const handleSubmit = (answer: string) => {
 <template>
   <section
     class="flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover section1 section"
+    :class="props.answerClass"
   >
     <div class="main-content">
       <GameStatistics class="game" :correctAnswers="correctAnswers" />
@@ -85,7 +87,6 @@ const handleSubmit = (answer: string) => {
 .game {
   margin: 25px 0;
   background-color: rgba(165, 42, 42, 0.8);
-  /* background-color: rgba(255, 0, 0, 0.4); */
   font-size: 50px;
   padding: 25px 80px;
   border-radius: 10px;
@@ -94,6 +95,46 @@ const handleSubmit = (answer: string) => {
 @media (max-width: 600px) {
   .section1 {
     flex-direction: column-reverse;
+  }
+}
+
+.correct {
+  animation: correct 0.5s linear infinite;
+}
+
+.incorrect {
+  animation: incorrect 0.5s linear infinite;
+}
+
+@keyframes correct {
+  0%,
+  100% {
+    border-image-source: linear-gradient(0deg, green, yellow);
+  }
+  25% {
+    border-image-source: linear-gradient(90deg, green, yellow);
+  }
+  50% {
+    border-image-source: linear-gradient(180deg, green, yellow);
+  }
+  75% {
+    border-image-source: linear-gradient(270deg, green, yellow);
+  }
+}
+
+@keyframes incorrect {
+  0%,
+  100% {
+    border-image-source: linear-gradient(0deg, red, black);
+  }
+  25% {
+    border-image-source: linear-gradient(90deg, red, black);
+  }
+  50% {
+    border-image-source: linear-gradient(180deg, red, black);
+  }
+  75% {
+    border-image-source: linear-gradient(270deg, red, black);
   }
 }
 </style>
