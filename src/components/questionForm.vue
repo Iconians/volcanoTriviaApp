@@ -34,7 +34,7 @@ const checkAnswer = (answer: string) => {
 
 <template>
   <div>
-    <div class="flex flex-col justify-between w-[500px] questionForm h-[500px]">
+    <div class="flex flex-col justify-between w-[700px] questionForm h-[450px] overflow-y-auto">
       <h2 class="font-bold text-white text-center text-3xl mb-10" for="question">
         {{ props.questionsArray.length > 0 ? props.questionsArray[0].question : '' }}
       </h2>
@@ -44,7 +44,7 @@ const checkAnswer = (answer: string) => {
             (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
           )"
           :key="'answerObj-' + index"
-          class="flex"
+          class="flex flex-wrap justify-center"
         >
           <div
             v-for="(answer, subIndex) in answerObj.answers"
@@ -72,17 +72,7 @@ const checkAnswer = (answer: string) => {
   z-index: 2;
 }
 
-/* .questionInputs {
-  background-color: brown;
-  border: 2px solid white;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 50px;
-
-
-} */
-
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .questionForm {
     width: 80%;
     margin: auto;

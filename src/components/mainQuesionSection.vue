@@ -94,18 +94,19 @@ const handleSubmit = (answer: string) => {
   margin-top: 10px;
 }
 
-@media (max-width: 600px) {
-  .section1 {
-    flex-direction: column-reverse;
-  }
-}
-
 .correct {
   animation: correct 0.5s linear infinite;
 }
 
 .incorrect {
   animation: incorrect 0.5s linear infinite;
+}
+
+@media (max-width: 600px) {
+  .game {
+    font-size: 30px;
+    padding: 15px 40px;
+  }
 }
 
 @keyframes correct {

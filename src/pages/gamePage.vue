@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { supabase } from '../../supabase.js'
 import MainQuestionSection from '@/components/mainQuesionSection.vue'
 import lostScreen from '@/components/lostScreen.vue'
@@ -36,8 +36,17 @@ const correctAnswers = ref(0)
 const loading = ref(true)
 const answerSubmitted = ref(false)
 const lastAnswerCorrect = ref(false)
+const backgroundMusic = ref<HTMLAudioElement | null>(null)
+const correctSound = ref<HTMLAudioElement | null>(null)
+const incorrectSound = ref<HTMLAudioElement | null>(null)
 
 const toast = useToast()
+
+onMounted(() => {
+  if (backgroundMusic.value) {
+    backgroundMusic.value.play()
+  }
+})
 
 const answerClass = computed(() => {
   if (answerSubmitted.value) {
@@ -71,10 +80,16 @@ const findAnswer = (correctAnswer: answerArr[], answer: string) => {
     correctAnswers.value++
     answerSubmitted.value = true
     lastAnswerCorrect.value = true
+    if (correctSound.value) {
+      correctSound.value.play()
+    }
   } else {
     wrongAnswers.value++
     answerSubmitted.value = true
     lastAnswerCorrect.value = false
+    if (incorrectSound.value) {
+      incorrectSound.value.play()
+    }
   }
 }
 
@@ -162,6 +177,9 @@ supabase
   />
   <win-screen v-else-if="!loading" :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
   <loading-component v-if="loading" />
+  <audio ref="backgroundMusic" src="/guitar-and-druns.mp3" autoplay loop></audio>
+  <audio ref="correctSound" src="/correct.mp3"></audio>
+  <audio ref="incorrectSound" src="/wronganswer.mp3"></audio>
 </template>
 
 <style scoped>
