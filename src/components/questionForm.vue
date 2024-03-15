@@ -52,7 +52,7 @@ const checkAnswer = (answer: string) => {
             class="m-5 cursor-pointer"
           >
             <button
-              class="cursor-pointer questionInputs text-2xl bg-brown-500 rounded p-1 w-40 min-h-20"
+              class="cursor-pointer questionInputs text-2xl bg-brown-500 rounded p-1 min-w-40 min-h-20"
               :name="'answer-' + index"
               :id="'answer-' + index + '-' + subIndex"
               @click="checkAnswer(answer)"
