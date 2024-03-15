@@ -28,7 +28,7 @@ const updatePassword = async (e: Event) => {
       <input
         v-model="newPassword"
         class="text-black rounded h-8"
-        placeholder="Change Password"
+        placeholder="  Change Password"
         type="password"
       />
       <input
