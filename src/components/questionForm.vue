@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
 type questionArray = {
   id: string
@@ -25,76 +25,44 @@ const props = defineProps({
     required: true
   }
 })
-
-const selectedInput = ref('')
-
-const resetRadioBtns = () => {
-  const radioBtns = document.querySelectorAll('input[type="radio"]')
-  radioBtns.forEach(() => {
-    const radioBtns = document.querySelectorAll(
-      'input[type="radio"]'
-    ) as NodeListOf<HTMLInputElement>
-    radioBtns.forEach((btn) => {
-      btn.checked = false
-    })
-  })
-}
-
 const emit = defineEmits<{ (event: 'submit', answer: string): void }>()
 
-const checkAnswer = (event: Event) => {
-  event.preventDefault()
-  const answer = selectedInput
-  emit('submit', answer.value)
-  resetRadioBtns()
-  selectedInput.value = ''
+const checkAnswer = (answer: string) => {
+  emit('submit', answer)
 }
-
-const getLetter = (index: number) => String.fromCharCode(97 + index)
 </script>
 
 <template>
   <div>
-    <form class="flex flex-col justify-around w-[500px] questionForm" @submit.prevent="checkAnswer">
-      <label class="font-bold text-white text-center text-3xl" for="question">{{
-        props.questionsArray.length > 0 ? props.questionsArray[0].question : ''
-      }}</label>
+    <div class="flex flex-col justify-between w-[500px] questionForm h-[500px]">
+      <h2 class="font-bold text-white text-center text-3xl mb-10" for="question">
+        {{ props.questionsArray.length > 0 ? props.questionsArray[0].question : '' }}
+      </h2>
       <div class="m-auto">
         <div
           v-for="(answerObj, index) in props.answerArray.filter(
             (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
           )"
           :key="'answerObj-' + index"
+          class="flex"
         >
           <div
             v-for="(answer, subIndex) in answerObj.answers"
             :key="'answer-' + index + '-' + subIndex"
             class="m-5 cursor-pointer"
           >
-            <input
-              class="cursor-pointer"
-              type="radio"
+            <button
+              class="cursor-pointer questionInputs text-2xl bg-brown-500 rounded p-1 w-40 min-h-20"
               :name="'answer-' + index"
               :id="'answer-' + index + '-' + subIndex"
-              :value="answer"
-              v-model="selectedInput"
-            />
-            <label
-              class="text-white text-2xl cursor-pointer"
-              :for="'answer-' + index + '-' + subIndex"
+              @click="checkAnswer(answer)"
             >
-              ({{ getLetter(subIndex).toUpperCase() }}) {{ answer }}
-            </label>
+              {{ answer }}
+            </button>
           </div>
         </div>
       </div>
-      <input
-        class="bg-brown-500 w-80 rounded-3xl m-auto h-10 formBtn text-2xl cursor-pointer"
-        type="submit"
-        value="Submit Answer"
-        :disabled="selectedInput === ''"
-      />
-    </form>
+    </div>
   </div>
 </template>
 
@@ -103,6 +71,17 @@ const getLetter = (index: number) => String.fromCharCode(97 + index)
   position: relative;
   z-index: 2;
 }
+
+/* .questionInputs {
+  background-color: brown;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 50px;
+
+
+} */
+
 @media (max-width: 600px) {
   .questionForm {
     width: 80%;

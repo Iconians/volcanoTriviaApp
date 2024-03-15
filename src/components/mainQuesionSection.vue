@@ -44,11 +44,11 @@ const handleSubmit = (answer: string) => {
 
 <template>
   <section
-    class="flex justify-center bg-stHelensWithtop text-white height h-full w-full bg-cover section1 section"
+    class="flex justify-between bg-stHelensWithtop text-white height h-full w-full bg-cover section1 section"
     :class="props.answerClass"
   >
-    <div class="main-content">
-      <GameStatistics class="game" :correctAnswers="correctAnswers" />
+    <GameStatistics class="game" :correctAnswers="correctAnswers" />
+    <div class="main-content mb-16">
       <questionForm
         :questionsArray="props.questionsArray"
         :answerArray="props.answerArray"
@@ -90,6 +90,8 @@ const handleSubmit = (answer: string) => {
   font-size: 50px;
   padding: 25px 80px;
   border-radius: 10px;
+  margin: 10px auto;
+  margin-top: 10px;
 }
 
 @media (max-width: 600px) {
