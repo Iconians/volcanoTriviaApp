@@ -6,11 +6,15 @@ import { ref, onMounted } from 'vue'
 import resetPasswordForm from '@/components/resetPasswordForm.vue'
 import { supabase } from '../../supabase'
 import loadingComponent from '@/components/loadingComponent.vue'
+import { useToast } from 'vue-toast-notification'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 const loading = ref(true)
+const volcanoBackground = ref<HTMLAudioElement | null>(null)
+
+const toast = useToast()
 
 const alreadySingedIn = async () => {
   const user = await supabase.auth.getUser()
@@ -52,8 +56,26 @@ const switchForms = () => {
   }
 }
 
+// onMounted(async () => {
+//   await alreadySingedIn()
+//   if (volcanoBackground.value && isSignedIn.value === true) {
+//     volcanoBackground.value.play()
+//   }
+// })
 onMounted(async () => {
   await alreadySingedIn()
+
+  if (!loading.value) {
+    toast.open({
+      message: 'Click here to allow sound',
+      type: 'info',
+      onClick: () => {
+        if (volcanoBackground.value) {
+          volcanoBackground.value.play()
+        }
+      }
+    })
+  }
 })
 </script>
 
@@ -93,6 +115,7 @@ onMounted(async () => {
     </div>
   </section>
   <loading-component v-if="loading" />
+  <audio ref="volcanoBackground" src="/mount-yasur-tanna-island.wav" autoplay loop></audio>
 </template>
 
 <!-- <style scoped>
