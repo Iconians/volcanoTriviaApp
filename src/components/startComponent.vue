@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-</script>
+import { defineEmits } from 'vue'
+// import { emit } from 'process'
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'startComponent'
-})
+const emit = defineEmits(['click'])
+
+const listenForAudioClick = () => {
+  emit('click')
+}
 </script>
 
 <template>
@@ -18,5 +19,6 @@ export default defineComponent({
     <RouterLink class="text-2xl text-center" to="/gamePage">Start Game</RouterLink>
     <RouterLink class="text-2xl text-center" to="/userPage">Profile</RouterLink>
     <RouterLink class="text-2xl text-center" to="/totals">High Scores</RouterLink>
+    <button class="mt-4" @click="listenForAudioClick">click to allow sound</button>
   </div>
 </template>

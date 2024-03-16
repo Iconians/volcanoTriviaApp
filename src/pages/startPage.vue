@@ -6,15 +6,13 @@ import { ref, onMounted } from 'vue'
 import resetPasswordForm from '@/components/resetPasswordForm.vue'
 import { supabase } from '../../supabase'
 import loadingComponent from '@/components/loadingComponent.vue'
-import { useToast } from 'vue-toast-notification'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 const loading = ref(true)
 const volcanoBackground = ref<HTMLAudioElement | null>(null)
-
-const toast = useToast()
+let isPlaying = false
 
 const alreadySingedIn = async () => {
   const user = await supabase.auth.getUser()
@@ -56,26 +54,20 @@ const switchForms = () => {
   }
 }
 
-// onMounted(async () => {
-//   await alreadySingedIn()
-//   if (volcanoBackground.value && isSignedIn.value === true) {
-//     volcanoBackground.value.play()
-//   }
-// })
+const toggleVolcanoBackgroundMusic = () => {
+  if (!volcanoBackground.value) return
+
+  if (isPlaying) {
+    volcanoBackground.value.pause()
+  } else {
+    volcanoBackground.value.play()
+  }
+
+  isPlaying = !isPlaying
+}
+
 onMounted(async () => {
   await alreadySingedIn()
-
-  if (!loading.value) {
-    toast.open({
-      message: 'Click here to allow sound',
-      type: 'info',
-      onClick: () => {
-        if (volcanoBackground.value) {
-          volcanoBackground.value.play()
-        }
-      }
-    })
-  }
 })
 </script>
 
@@ -90,7 +82,7 @@ onMounted(async () => {
         @signedIn="signIn"
       />
       <create-acct-form v-if="isCreatingAccount" @accountCreated="handleAccountCreated" />
-      <start-component v-if="isSignedIn" />
+      <start-component v-if="isSignedIn" @click="toggleVolcanoBackgroundMusic" />
       <reset-password-form
         v-if="forgotPassword && !isCreatingAccount && !isSignedIn"
         @forgotPassword="forgotFunction"
@@ -110,6 +102,10 @@ onMounted(async () => {
           class="text-white pt-5 text-2xl"
         >
           Forgot Password
+        </button>
+        <br />
+        <button v-if="!isSignedIn" class="mt-4 text-white" @click="toggleVolcanoBackgroundMusic">
+          click to allow audio
         </button>
       </div>
     </div>
