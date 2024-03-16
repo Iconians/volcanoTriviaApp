@@ -53,7 +53,7 @@ findUser()
     </div>
     <user-page-btns />
   </section>
-  <audio src="/public/lava-loop-3.wav" autoplay loop></audio>
+  <audio src="/lava-loop-3.wav" autoplay loop></audio>
 </template>
 
 <style scoped>
