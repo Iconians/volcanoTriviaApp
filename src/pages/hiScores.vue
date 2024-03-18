@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { supabase } from '../../supabase.js'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import ScoresComp from '../components/scoresComp.vue'
 import { useToast } from 'vue-toast-notification'
 
 const toast = useToast()
 
 const scores = ref<{ user_name: string; score: number }[] | null>([])
+const backgroundMusic = ref<HTMLAudioElement | null>(null)
+
+onMounted(() => {
+  if (backgroundMusic.value) {
+    backgroundMusic.value.play()
+  }
+})
+
 const fetchScores = async () => {
   const { data: score, error: fetchError } = await supabase
     .from('high_score')
@@ -37,7 +45,7 @@ fetchScores()
       </div>
     </div>
   </section>
-  <audio src="/public/lava-loop-3.wav" autoplay loop></audio>
+  <audio ref="backgroundMusic" src="/lava-loop-3.wav" autoplay loop></audio>
 </template>
 
 <style scoped>
