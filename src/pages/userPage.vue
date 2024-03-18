@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { supabase } from '../../supabase'
 import updatePasswordComp from '@/components/updatePasswordComp.vue'
 import ScoreHistory from '@/components/ScoreHistory.vue'
@@ -13,7 +13,14 @@ interface Score {
 
 const userName = ref('')
 const userScore = ref<Score[]>([])
+const backgroundMusic = ref<HTMLAudioElement | null>(null)
 const toast = useToast()
+
+onMounted(() => {
+  if (backgroundMusic.value) {
+    backgroundMusic.value.play()
+  }
+})
 
 function safeParse(jsonString: string) {
   try {
@@ -53,7 +60,7 @@ findUser()
     </div>
     <user-page-btns />
   </section>
-  <audio src="/lava-loop-3.wav" autoplay loop></audio>
+  <audio ref="backgroundMusic" src="/lava-loop-3.wav" autoplay loop></audio>
 </template>
 
 <style scoped>
