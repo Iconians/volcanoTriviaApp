@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { supabase } from '../../supabase.js'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import ScoresComp from '../components/scoresComp.vue'
 import { useToast } from 'vue-toast-notification'
 
@@ -9,11 +9,11 @@ const toast = useToast()
 const scores = ref<{ user_name: string; score: number }[] | null>([])
 const backgroundMusic = ref<HTMLAudioElement | null>(null)
 
-onMounted(() => {
+const playBackgroundMusic = () => {
   if (backgroundMusic.value) {
     backgroundMusic.value.play()
   }
-})
+}
 
 const fetchScores = async () => {
   const { data: score, error: fetchError } = await supabase
@@ -28,6 +28,7 @@ const fetchScores = async () => {
 }
 
 fetchScores()
+playBackgroundMusic()
 </script>
 
 <template>

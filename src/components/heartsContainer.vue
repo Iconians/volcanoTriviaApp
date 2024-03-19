@@ -32,7 +32,7 @@ defineComponent({
 .heart::after {
   content: '';
   position: absolute;
-  top: 40px;
+  top: 0;
   width: 52px;
   height: 80px;
   border-radius: 50px 50px 0 0;

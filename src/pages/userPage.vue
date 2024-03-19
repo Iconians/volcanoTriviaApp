@@ -16,11 +16,11 @@ const userScore = ref<Score[]>([])
 const backgroundMusic = ref<HTMLAudioElement | null>(null)
 const toast = useToast()
 
-onMounted(() => {
+const playBackgroundMusic = () => {
   if (backgroundMusic.value) {
     backgroundMusic.value.play()
   }
-})
+}
 
 function safeParse(jsonString: string) {
   try {
@@ -49,6 +49,7 @@ const findUser = async () => {
 }
 
 findUser()
+playBackgroundMusic()
 </script>
 
 <template>

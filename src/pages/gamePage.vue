@@ -42,11 +42,11 @@ const incorrectSound = ref<HTMLAudioElement | null>(null)
 
 const toast = useToast()
 
-onMounted(() => {
+const playBackgroundMusic = () => {
   if (backgroundMusic.value) {
     backgroundMusic.value.play()
   }
-})
+}
 
 const answerClass = computed(() => {
   if (answerSubmitted.value) {
@@ -158,6 +158,8 @@ supabase
     }
     getAnswersFromSupabase()
   })
+
+onMounted(playBackgroundMusic)
 </script>
 
 <template>

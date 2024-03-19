@@ -44,17 +44,17 @@ const handleSubmit = (answer: string) => {
 
 <template>
   <section
-    class="flex justify-between bg-stHelensWithtop text-white height h-full w-full bg-cover section1 section"
+    class="flex justify-between bg-stHelensWithtop text-white height h-full w-full bg-cover section1 section overflow-y-auto"
     :class="props.answerClass"
   >
     <GameStatistics class="game" :correctAnswers="correctAnswers" />
-    <div class="main-content mb-16">
+    <!-- mb-16 -->
+    <div class="main-content">
       <questionForm
         :questionsArray="props.questionsArray"
         :answerArray="props.answerArray"
         @submit="handleSubmit"
       />
-
       <heartsContainer :wrongAnswers="wrongAnswers" />
     </div>
   </section>
@@ -65,23 +65,24 @@ const handleSubmit = (answer: string) => {
   position: relative;
 }
 
+.section1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
 .main-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   align-self: center;
-}
-
-.main-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
 }
 
 .game {

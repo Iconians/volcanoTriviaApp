@@ -34,11 +34,12 @@ const checkAnswer = (answer: string) => {
 
 <template>
   <div>
-    <div class="flex flex-col justify-between w-[700px] questionForm h-[450px] overflow-y-auto">
+    <!--  -->
+    <div class="flex flex-col justify-around w-[700px] h-[450px] questionForm overflow-y-auto">
       <h2 class="font-bold text-white text-center text-3xl mb-10" for="question">
         {{ props.questionsArray.length > 0 ? props.questionsArray[0].question : '' }}
       </h2>
-      <div class="m-auto">
+      <div>
         <div
           v-for="(answerObj, index) in props.answerArray.filter(
             (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
