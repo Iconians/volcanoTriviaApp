@@ -42,6 +42,7 @@ export default defineComponent({
         toast.error('No user found')
       }
       emit('accountCreated', data?.user)
+      localStorage.setItem('user', JSON.stringify(data.user))
     }
     return { createAccount, formError, form }
   }
@@ -63,6 +64,7 @@ export default defineComponent({
           id="username"
           name="userName"
           v-model="form.displayName"
+          maxlength="3"
         />
         <label class="text-2xl" for="email">Email</label>
         <input

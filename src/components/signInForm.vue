@@ -27,6 +27,7 @@ export default defineComponent({
         } else {
           emit('signedIn', data.user)
           toast.success('Signed in successfully')
+          localStorage.setItem('user', JSON.stringify(data.user))
         }
       } catch (error) {
         toast.error('Error in signIn method')

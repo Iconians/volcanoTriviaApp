@@ -3,38 +3,52 @@ import { supabase } from '../../supabase'
 import { ref } from 'vue'
 import { useToast } from 'vue-toast-notification'
 
-const newPassword = ref('')
+const newUserName = ref('')
 const formError = ref('')
 const toast = useToast()
 
-const updatePassword = async (e: Event) => {
+const emit = defineEmits<{ (event: 'updateUsername', answer: string): void }>()
+const handleSubmit = (answer: string) => {
+  emit('updateUsername', answer)
+}
+
+const updateUsername = async (e: Event) => {
   e.preventDefault()
-  const update = await supabase.auth.updateUser({ password: newPassword.value })
-  if (update.error) {
-    newPassword.value = ''
-    formError.value = update.error.message
-    toast.error(update.error.message)
-  } else {
-    newPassword.value = ''
-    toast.success('Password updated')
+  const user = localStorage.getItem('user')
+  const userObj = user ? JSON.parse(user) : null
+  if (user) {
+    const update = await supabase
+      .from('profile')
+      .update({ display_name: newUserName.value })
+      .match({ user_id: userObj.id })
+    if (update.error) {
+      newUserName.value = ''
+      formError.value = update.error.message
+      toast.error(update.error.message)
+    } else {
+      handleSubmit(newUserName.value)
+      newUserName.value = ''
+      toast.success('Username updated')
+    }
   }
 }
 </script>
 
 <template>
   <div class="m-8 mt-0 update-password-comp-wrapper">
-    <div class="mb-5 text-2xl">Update Password</div>
-    <form class="flex flex-col" @submit="updatePassword">
+    <div class="mb-5 text-2xl">Update Username</div>
+    <form class="flex flex-col" @submit="updateUsername">
       <input
-        v-model="newPassword"
+        v-model="newUserName"
         class="text-black rounded h-8"
-        placeholder="  Change Password"
-        type="password"
+        placeholder="  Change UserName"
+        type="text"
+        maxlength="3"
       />
       <input
         class="mt-5 bg-brown-500 rounded h-10 hover:bg-red-600 text-xl cursor-pointer"
         type="submit"
-        value="Change Password"
+        value="Change UserName"
       />
     </form>
     <div class="mt-5" v-if="formError.length">{{ formError }}</div>

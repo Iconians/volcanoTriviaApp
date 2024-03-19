@@ -48,6 +48,10 @@ const findUser = async () => {
   }
 }
 
+const updateUsername = (newUserName: string) => {
+  userName.value = newUserName
+}
+
 findUser()
 playBackgroundMusic()
 </script>
@@ -57,7 +61,7 @@ playBackgroundMusic()
     <div class="text-3xl">{{ userName }}'s Profile</div>
     <div class="flex flex-wrap m-8 justify-around w-3/4">
       <score-history :userScore="userScore" />
-      <update-password-comp />
+      <update-password-comp @updateUsername="updateUsername" />
     </div>
     <user-page-btns />
   </section>
