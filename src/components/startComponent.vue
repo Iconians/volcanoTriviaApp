@@ -19,6 +19,6 @@ const listenForAudioClick = () => {
     <RouterLink class="text-2xl text-center" to="/gamePage">Start Game</RouterLink>
     <RouterLink class="text-2xl text-center" to="/userPage">Profile</RouterLink>
     <RouterLink class="text-2xl text-center" to="/totals">High Scores</RouterLink>
-    <button class="mt-4" @click="listenForAudioClick">click to allow sound</button>
+    <button class="mt-4" @click="listenForAudioClick">click for sound</button>
   </div>
 </template>
