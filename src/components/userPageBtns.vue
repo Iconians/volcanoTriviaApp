@@ -15,7 +15,7 @@ const signOut = async () => {
   <div class="flex flex-col mt-5 mb-5">
     <div class="flex justify-center">
       <router-link
-        class="flex items-center justify-center bg-brown-500 rounded h-10 mb-5 w-32 hover:bg-red-600 text-xl"
+        class="flex items-center justify-center bg-brown-500 rounded h-14 mb-5 w-32 hover:bg-red-600 text-xl"
         to="/"
         >Back to Start</router-link
       >
