@@ -35,7 +35,7 @@ const checkAnswer = (answer: string) => {
 <template>
   <div>
     <!--  -->
-    <div class="flex flex-col justify-around w-[700px] h-[450px] questionForm overflow-y-auto">
+    <div class="flex flex-col justify-around w-[700px] h-[450px] questionForm">
       <h2 class="font-bold text-white text-center text-3xl mb-10" for="question">
         {{ props.questionsArray.length > 0 ? props.questionsArray[0].question : '' }}
       </h2>
@@ -73,9 +73,10 @@ const checkAnswer = (answer: string) => {
   z-index: 2;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .questionForm {
     width: 80%;
+    height: 100%;
     margin: auto;
   }
 }
