@@ -105,7 +105,7 @@ onMounted(async () => {
         </button>
         <br />
         <button v-if="!isSignedIn" class="mt-4 text-white" @click="toggleVolcanoBackgroundMusic">
-          click to allow audio
+          click for sound
         </button>
       </div>
     </div>
