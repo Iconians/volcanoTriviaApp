@@ -56,6 +56,12 @@ const updateUsername = async (e: Event) => {
 </template>
 
 <style scoped>
+@media (max-width: 1115px) {
+  .update-password-comp-wrapper {
+    margin-top: 2rem;
+    overflow: auto;
+  }
+}
 @media (max-width: 635px) {
   .update-password-comp-wrapper {
     margin-top: 2rem;
