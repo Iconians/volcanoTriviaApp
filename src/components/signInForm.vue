@@ -43,7 +43,7 @@ export default defineComponent({
     <h1 class="text-3xl">Volcano Quiz</h1>
     <p class="text-2xl">Sign in to see if you are smart enough to be a Volcanologist?</p>
     <div>
-      <form @submit="signIn" class="flex flex-col">
+      <form @submit="signIn" class="flex flex-col mt-5">
         <label class="text-2xl" for="username">Email</label>
         <input
           class="rounded text-black p-1"
@@ -52,7 +52,7 @@ export default defineComponent({
           name="email"
           v-model="form.email"
         />
-        <label class="mt-2 text-2xl" for="password">Password</label>
+        <label class="mt-2 text-2xl" for="password mt-5">Password</label>
         <input
           class="rounded text-black p-1"
           type="password"
@@ -61,7 +61,7 @@ export default defineComponent({
           v-model="form.password"
         />
         <input
-          class="rounded text-2xl mt-3 bg-brown-500 p-1 cursor-pointer"
+          class="rounded text-2xl mt-5 bg-brown-500 p-1 cursor-pointer mb-5"
           type="submit"
           value="submit"
         />

@@ -57,7 +57,7 @@ export default defineComponent({
     </p>
     <div>
       <form @submit="createAccount" class="flex flex-col mb-5">
-        <label class="text-2xl" for="username">Username</label>
+        <label class="text-2xl mt-5" for="username">Username</label>
         <input
           class="rounded text-black p-1"
           type="text"
@@ -66,7 +66,7 @@ export default defineComponent({
           v-model="form.displayName"
           maxlength="3"
         />
-        <label class="text-2xl" for="email">Email</label>
+        <label class="text-2xl mt-5" for="email">Email</label>
         <input
           class="rounded text-black p-1"
           type="email"
@@ -74,7 +74,7 @@ export default defineComponent({
           name="email"
           v-model="form.email"
         />
-        <label class="mt-2 text-2xl" for="password">Password</label>
+        <label class="text-2xl mt-5" for="password">Password</label>
         <input
           class="rounded text-black p-1"
           type="password"
@@ -83,7 +83,7 @@ export default defineComponent({
           v-model="form.password"
         />
         <input
-          class="rounded text-2xl mt-3 mb-10 bg-brown-500 p-1 cursor-pointer"
+          class="rounded text-2xl mt-5 mb-10 bg-brown-500 p-1 cursor-pointer"
           type="submit"
           value="submit"
         />

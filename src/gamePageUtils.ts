@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { supabase } from '../supabase'
 import { useToast } from 'vue-toast-notification'
 // note I tried putting this file in a utils folder but it didn't work in either the src or the root directory
@@ -56,7 +57,7 @@ export const findScore = async (userId: string | null) => {
 }
 
 export const addUserScore = async (currentScore: score[] | undefined, userId: string, correctAnswers: number, wrongAnswers: number) => {
-  const newScore = { correct: correctAnswers, incorrect: wrongAnswers }
+  const newScore = { correct: correctAnswers, incorrect: wrongAnswers, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a')}
   if (currentScore !== undefined) {
   currentScore[0].score.push(newScore)
   const { error: updateError } = await supabase
@@ -65,6 +66,7 @@ export const addUserScore = async (currentScore: score[] | undefined, userId: st
     .match({ user_id: userId })
   toast.success('Score updated')
   if (updateError) {
+    console.error(updateError)
     toast.open({
       message: 'Error posting score',
       type: 'error'

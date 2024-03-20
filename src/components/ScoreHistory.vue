@@ -4,6 +4,7 @@ import { defineProps } from 'vue'
 interface Score {
   correct: number
   incorrect: number
+  timeStamp: string | null | undefined
 }
 
 const props = defineProps({
@@ -18,9 +19,17 @@ const props = defineProps({
   <div>
     <div class="text-2xl">Score History</div>
     <div class="h-52 overflow-y-auto scroll">
-      <div v-for="score in props.userScore" :key="score.correct" class="flex">
-        <div v-if="props.userScore.length" class="m-2 text-xl">Correct: {{ score.correct }}</div>
-        <div v-if="props.userScore.length" class="m-2 text-xl">
+      <div v-for="score in props.userScore" :key="score.correct" class="flex flex-col">
+        <div
+          v-if="props.userScore.length && score.timeStamp !== undefined"
+          class="m-2 text-xl text-start"
+        >
+          Recorded: {{ score.timeStamp }}
+        </div>
+        <div v-if="props.userScore.length" class="m-2 text-xl text-start">
+          Correct: {{ score.correct }}
+        </div>
+        <div v-if="props.userScore.length" class="m-2 text-xl text-start">
           Incorrect: {{ score.incorrect }}
         </div>
       </div>

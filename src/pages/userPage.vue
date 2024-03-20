@@ -9,6 +9,7 @@ import { useToast } from 'vue-toast-notification'
 interface Score {
   correct: number
   incorrect: number
+  timeStamp: string | null | undefined
 }
 
 const userName = ref('')

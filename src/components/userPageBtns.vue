@@ -6,6 +6,7 @@ import router from '@/router'
 const signOut = async () => {
   let { error } = await supabase.auth.signOut()
   if (!error) {
+    localStorage.removeItem('user')
     router.push('/')
   }
 }
