@@ -26,10 +26,8 @@ const props = defineProps({
         >
           Recorded: {{ score.timeStamp }}
         </div>
-        <div v-if="props.userScore.length" class="m-2 text-xl text-start">
-          Correct: {{ score.correct }}
-        </div>
-        <div v-if="props.userScore.length" class="m-2 text-xl text-start">
+        <div v-if="props.userScore.length" class="m-2 text-xl">Correct: {{ score.correct }}</div>
+        <div v-if="props.userScore.length" class="m-2 text-xl">
           Incorrect: {{ score.incorrect }}
         </div>
       </div>
