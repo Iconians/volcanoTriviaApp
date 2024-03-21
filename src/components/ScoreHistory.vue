@@ -22,7 +22,7 @@ const props = defineProps({
       <div
         v-for="score in props.userScore"
         :key="score.correct"
-        class="flex flex-col outline outline-dashed m-5"
+        class="flex flex-col outline-dashed m-5"
       >
         <div
           v-if="props.userScore.length && score.timeStamp !== undefined"
