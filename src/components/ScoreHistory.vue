@@ -19,16 +19,22 @@ const props = defineProps({
   <div>
     <div class="text-2xl">Score History</div>
     <div class="h-52 overflow-y-auto scroll">
-      <div v-for="score in props.userScore" :key="score.correct" class="flex flex-col">
+      <div
+        v-for="score in props.userScore"
+        :key="score.correct"
+        class="flex flex-col outline outline-dashed m-5"
+      >
         <div
           v-if="props.userScore.length && score.timeStamp !== undefined"
           class="m-2 text-xl text-start"
         >
-          Recorded: {{ score.timeStamp }}
+          {{ score.timeStamp }}
         </div>
-        <div v-if="props.userScore.length" class="m-2 text-xl">Correct: {{ score.correct }}</div>
-        <div v-if="props.userScore.length" class="m-2 text-xl">
-          Incorrect: {{ score.incorrect }}
+        <div class="flex justify-center">
+          <div v-if="props.userScore.length" class="m-2 text-xl">Correct: {{ score.correct }}</div>
+          <div v-if="props.userScore.length" class="m-2 text-xl">
+            Incorrect: {{ score.incorrect }}
+          </div>
         </div>
       </div>
       <div v-if="!props.userScore.length" class="m-2 text-xl w-32">
