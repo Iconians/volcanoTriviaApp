@@ -21,11 +21,23 @@ const updateUsername = async (e: Event) => {
       .from('profile')
       .update({ display_name: newUserName.value })
       .match({ user_id: userObj.id })
-    if (update.error) {
+    const updateHiScore = await supabase
+      .from('high_score')
+      .update({ user_name: newUserName.value })
+      .match({ user_name: userObj.display_name })
+    if (update.error || updateHiScore.error) {
       newUserName.value = ''
-      formError.value = update.error.message
-      toast.error(update.error.message)
+      if (update.error) {
+        console.log(update)
+        formError.value = update.error.message
+        toast.error(update.error.message)
+      } else if (updateHiScore.error) {
+        console.log(updateHiScore)
+        formError.value = updateHiScore.error.message
+        toast.error(updateHiScore.error.message)
+      }
     } else {
+      localStorage.setItem('user', JSON.stringify({ ...userObj, display_name: newUserName.value }))
       handleSubmit(newUserName.value)
       newUserName.value = ''
       toast.success('Username updated')
