@@ -87,7 +87,6 @@ onBeforeUnmount(() => {
     ref="section1"
   >
     <GameStatistics class="game" :correctAnswers="correctAnswers" />
-    <!-- mb-16 -->
     <div class="main-content">
       <questionForm
         :questionsArray="props.questionsArray"

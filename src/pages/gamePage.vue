@@ -183,7 +183,3 @@ onMounted(playBackgroundMusic)
   <audio ref="correctSound" src="/correct.mp3"></audio>
   <audio ref="incorrectSound" src="/wronganswer.mp3"></audio>
 </template>
-
-<style scoped>
-/* rest of your styles */
-</style>
