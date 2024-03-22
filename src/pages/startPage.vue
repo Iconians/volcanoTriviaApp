@@ -7,13 +7,15 @@ import resetPasswordForm from '@/components/resetPasswordForm.vue'
 import { supabase } from '../../supabase'
 import loadingComponent from '@/components/loadingComponent.vue'
 import forgotPasswordSplashComponent from '@/components/forgotPasswordSplashComponent.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
 const forgotPassword = ref(false)
 const loading = ref(true)
 const volcanoBackground = ref<HTMLAudioElement | null>(null)
-let isPlaying = false
+const isPlaying = ref(false)
 const resetPasswordFilledOut = ref(false)
 
 const alreadySingedIn = async () => {
@@ -63,13 +65,13 @@ const switchForms = () => {
 const toggleVolcanoBackgroundMusic = () => {
   if (!volcanoBackground.value) return
 
-  if (isPlaying) {
+  if (isPlaying.value) {
     volcanoBackground.value.pause()
   } else {
     volcanoBackground.value.play()
   }
 
-  isPlaying = !isPlaying
+  isPlaying.value = !isPlaying.value
 }
 
 onMounted(async () => {
@@ -94,6 +96,7 @@ onMounted(async () => {
       <start-component
         v-if="isSignedIn && !resetPasswordFilledOut"
         @click="toggleVolcanoBackgroundMusic"
+        :playing="isPlaying"
       />
       <reset-password-form
         v-if="forgotPassword && !isCreatingAccount && !isSignedIn && !resetPasswordFilledOut"
@@ -126,13 +129,18 @@ onMounted(async () => {
           Forgot Password
         </button>
         <br />
-        <button
-          v-if="!isSignedIn && !resetPasswordFilledOut"
-          class="mt-4 text-white"
+        <FontAwesomeIcon
+          v-if="!isPlaying && !isSignedIn"
+          :icon="faVolumeHigh"
+          class="text-white cursor-pointer"
           @click="toggleVolcanoBackgroundMusic"
-        >
-          click for sound
-        </button>
+        />
+        <FontAwesomeIcon
+          v-if="isPlaying && !isSignedIn"
+          :icon="faVolumeXmark"
+          class="text-white cursor-pointer"
+          @click="toggleVolcanoBackgroundMusic"
+        />
       </div>
     </div>
   </section>

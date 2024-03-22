@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { defineEmits } from 'vue'
-// import { emit } from 'process'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons'
 
 const emit = defineEmits(['click'])
 
 const listenForAudioClick = () => {
   emit('click')
 }
+
+const props = defineProps({
+  playing: Boolean
+})
+console.log(props.playing)
+const isPlaying = () => props.playing && props.playing === true
 </script>
 
 <template>
@@ -19,6 +26,17 @@ const listenForAudioClick = () => {
     <RouterLink class="text-2xl text-center m-2" to="/gamePage">Start Game</RouterLink>
     <RouterLink class="text-2xl text-center m-2" to="/userPage">Profile</RouterLink>
     <RouterLink class="text-2xl text-center m-2" to="/totals">High Scores</RouterLink>
-    <button class="mt-4" @click="listenForAudioClick">click for sound</button>
+    <FontAwesomeIcon
+      v-if="!isPlaying()"
+      :icon="faVolumeHigh"
+      class="text-white cursor-pointer"
+      @click="listenForAudioClick"
+    />
+    <FontAwesomeIcon
+      v-if="isPlaying()"
+      :icon="faVolumeXmark"
+      class="text-white cursor-pointer"
+      @click="listenForAudioClick"
+    />
   </div>
 </template>
