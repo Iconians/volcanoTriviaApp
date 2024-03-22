@@ -21,15 +21,15 @@ const updateUsername = async (e: Event) => {
       .from('profile')
       .update({ display_name: newUserName.value })
       .match({ user_id: userObj.id })
+
     const updateHiScore = await supabase
       .from('high_score')
       .update({ user_name: newUserName.value })
-      .eq('profile_id', 13)
-    console.log(updateHiScore)
+      .eq('user_name', userObj.display_name)
+
     if (update.error || updateHiScore.error) {
       newUserName.value = ''
       if (update.error) {
-        console.log(update)
         formError.value = update.error.message
         toast.error(update.error.message)
       } else if (updateHiScore.error) {
