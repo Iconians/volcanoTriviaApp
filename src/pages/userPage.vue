@@ -59,17 +59,27 @@ playBackgroundMusic()
 
 <template>
   <section class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover">
-    <div class="userName text-3xl">{{ userName }}'s Profile</div>
-    <div class="flex flex-wrap m-8 justify-around w-3/4">
-      <score-history :userScore="userScore" />
-      <update-password-comp @updateUsername="updateUsername" />
+    <div class="overflow-y-auto scroll w-full">
+      <div class="userName text-3xl">{{ userName }}'s Profile</div>
+      <div class="flex flex-wrap justify-around w-full m-auto mt-5">
+        <score-history :userScore="userScore" />
+        <update-password-comp @updateUsername="updateUsername" />
+      </div>
+      <user-page-btns />
     </div>
-    <user-page-btns />
   </section>
   <audio ref="backgroundMusic" src="/lava-loop-3.wav" autoplay loop></audio>
 </template>
 
 <style scoped>
+.scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: none;
+}
+
 @media (max-width: 1115px) {
   .section {
     overflow: auto;

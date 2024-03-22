@@ -16,29 +16,33 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
+  <div class="mb-[30px]">
     <div class="text-2xl">Score History</div>
-    <div class="h-[500px] overflow-y-auto scroll">
-      <div
-        v-for="score in props.userScore"
-        :key="score.correct"
-        class="flex flex-col outline-dashed m-5"
-      >
+    <div>
+      <div class="h-[500px] overflow-y-auto scroll w-[650px] flex flex-wrap">
         <div
-          v-if="props.userScore.length && score.timeStamp !== undefined"
-          class="m-2 text-xl text-start"
+          v-for="score in props.userScore"
+          :key="score.correct"
+          class="flex flex-col outline-dashed m-5 w-[300px]"
         >
-          {{ score.timeStamp }}
-        </div>
-        <div class="flex justify-center">
-          <div v-if="props.userScore.length" class="m-2 text-xl">Correct: {{ score.correct }}</div>
-          <div v-if="props.userScore.length" class="m-2 text-xl">
-            Incorrect: {{ score.incorrect }}
+          <div
+            v-if="props.userScore.length && score.timeStamp !== undefined"
+            class="m-2 text-xl text-start"
+          >
+            {{ score.timeStamp }}
+          </div>
+          <div>
+            <div v-if="props.userScore.length" class="m-2 text-xl">
+              Correct: {{ score.correct }}
+            </div>
+            <div v-if="props.userScore.length" class="m-2 text-xl">
+              Incorrect: {{ score.incorrect }}
+            </div>
           </div>
         </div>
-      </div>
-      <div v-if="!props.userScore.length" class="m-2 text-xl w-32">
-        no score to show go play a few rounds to see results
+        <div v-if="!props.userScore.length" class="m-2 text-xl w-32">
+          no score to show go play a few rounds to see results
+        </div>
       </div>
     </div>
   </div>

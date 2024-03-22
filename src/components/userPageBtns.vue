@@ -13,7 +13,7 @@ const signOut = async () => {
 </script>
 
 <template>
-  <div class="flex w-[500px] justify-around mt-5 mb-5">
+  <div class="flex w-[500px] justify-around my-5 mx-auto">
     <div class="flex justify-around">
       <router-link
         class="flex items-center justify-center bg-brown-500 rounded h-12 w-[200px] hover:bg-red-600 text-xl"

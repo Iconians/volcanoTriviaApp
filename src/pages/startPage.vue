@@ -76,6 +76,7 @@ const toggleVolcanoBackgroundMusic = () => {
 
 onMounted(async () => {
   await alreadySingedIn()
+  isPlaying.value = false
 })
 </script>
 
@@ -145,16 +146,5 @@ onMounted(async () => {
     </div>
   </section>
   <loading-component v-if="loading" />
-  <audio ref="volcanoBackground" src="/mount-yasur-tanna-island.wav" autoplay loop></audio>
+  <audio ref="volcanoBackground" src="/mount-yasur-tanna-island.wav" loop></audio>
 </template>
-
-<!-- <style scoped>
-.main-content {
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.19),
-    0 6px 6px rgba(0, 0, 0, 0.23);
-  padding: 20px;
-  border-radius: 5px;
-  /* background: white; */
-}
-</style> -->

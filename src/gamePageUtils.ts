@@ -57,7 +57,7 @@ export const findScore = async (userId: string | null) => {
 }
 
 export const addUserScore = async (currentScore: score[] | undefined, userId: string, correctAnswers: number, wrongAnswers: number) => {
-  const newScore = { correct: correctAnswers, incorrect: wrongAnswers, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a')}
+  const newScore = { correct: correctAnswers, incorrect: wrongAnswers, timeStamp: moment().format("MMM Do YY")}
   if (currentScore !== undefined) {
   currentScore[0].score.push(newScore)
   const { error: updateError } = await supabase
