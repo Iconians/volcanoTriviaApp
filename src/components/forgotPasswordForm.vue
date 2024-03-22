@@ -16,15 +16,8 @@ export default defineComponent({
 
     async function forgotPassword(e: Event) {
       e.preventDefault()
+
       try {
-        const urlParams = new URLSearchParams(window.location.search)
-        const accessToken = urlParams.get('access_token')
-
-        if (!accessToken) {
-          formError.value = 'Invalid access token'
-          return
-        }
-
         const { error } = await supabase.auth.updateUser({
           password: form.value.password
         })
@@ -40,22 +33,6 @@ export default defineComponent({
         toast.error('Error in forgotPasswordForm method')
       }
     }
-    //   try {
-    //     const { error } = await supabase.auth.updateUser({
-    //       password: form.value.password
-    //     })
-
-    //     if (error) {
-    //       formError.value = error.message
-    //       console.log('error')
-    //     } else {
-    //       toast.success('Password reset successfully')
-    //       router.push('/')
-    //     }
-    //   } catch (error) {
-    //     toast.error('Error in forgotPasswordForm method')
-    //   }
-    // }
     return { toast, formError, form, forgotPassword }
   }
 })
