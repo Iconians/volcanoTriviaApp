@@ -6,7 +6,7 @@ import { supabase } from '../../supabase.js'
 
 export default defineComponent({
   name: 'resetPasswordForm',
-  setup() {
+  setup(_, { emit }) {
     const toast = useToast()
     const formError = ref('')
     const form = ref({
@@ -15,7 +15,6 @@ export default defineComponent({
 
     async function resetPassword(e: Event) {
       e.preventDefault()
-      console.log(form.value.email)
 
       try {
         let { error } = await supabase.auth.resetPasswordForEmail(form.value.email, {
@@ -26,6 +25,7 @@ export default defineComponent({
           formError.value = error.message
         } else {
           toast.success('Password reset email sent successfully')
+          emit('submittedForgotPasswordForm')
         }
       } catch (error) {
         toast.error('Error in resetPasswordForm method')

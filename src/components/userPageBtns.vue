@@ -13,16 +13,16 @@ const signOut = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col mt-5 mb-5">
-    <div class="flex justify-center">
+  <div class="flex w-[500px] justify-around mt-5 mb-5">
+    <div class="flex justify-around">
       <router-link
-        class="flex items-center justify-center bg-brown-500 rounded h-14 mb-5 w-32 hover:bg-red-600 text-xl"
+        class="flex items-center justify-center bg-brown-500 rounded h-12 w-[200px] hover:bg-red-600 text-xl"
         to="/"
         >Back to Start</router-link
       >
     </div>
     <div class="flex flex-wrap btns">
-      <button class="bg-brown-500 rounded h-10 mt-5 w-32 hover:bg-red-600 text-xl" @click="signOut">
+      <button class="bg-brown-500 rounded h-12 w-32 hover:bg-red-600 text-xl" @click="signOut">
         Sign Out
       </button>
     </div>

@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { supabase } from '../../supabase.js'
-import router from '@/router'
 import { useToast } from 'vue-toast-notification'
 export default defineComponent({
   name: 'forgotPasswordForm',
@@ -21,9 +20,9 @@ export default defineComponent({
 
         if (error) {
           formError.value = error.message
+          console.log('error')
         } else {
           toast.success('Password reset successfully')
-          router.push('/')
         }
       } catch (error) {
         toast.error('Error in forgotPasswordForm method')

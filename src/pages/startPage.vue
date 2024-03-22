@@ -6,6 +6,7 @@ import { ref, onMounted } from 'vue'
 import resetPasswordForm from '@/components/resetPasswordForm.vue'
 import { supabase } from '../../supabase'
 import loadingComponent from '@/components/loadingComponent.vue'
+import forgotPasswordSplashComponent from '@/components/forgotPasswordSplashComponent.vue'
 
 const isCreatingAccount = ref(false)
 const isSignedIn = ref(false)
@@ -13,6 +14,7 @@ const forgotPassword = ref(false)
 const loading = ref(true)
 const volcanoBackground = ref<HTMLAudioElement | null>(null)
 let isPlaying = false
+const resetPasswordFilledOut = ref(false)
 
 const alreadySingedIn = async () => {
   const user = await supabase.auth.getUser()
@@ -44,6 +46,10 @@ const clientForgotPassword = async () => {
   forgotPassword.value = true
   isSignedIn.value = false
   isCreatingAccount.value = false
+}
+
+const submittedForgotPasswordForm = () => {
+  resetPasswordFilledOut.value = true
 }
 
 const switchForms = () => {
@@ -78,33 +84,53 @@ onMounted(async () => {
   >
     <div class="main-content">
       <sign-in-form
-        v-if="!isCreatingAccount && !isSignedIn && !forgotPassword"
+        v-if="!isCreatingAccount && !isSignedIn && !forgotPassword && !resetPasswordFilledOut"
         @signedIn="signIn"
       />
-      <create-acct-form v-if="isCreatingAccount" @accountCreated="handleAccountCreated" />
-      <start-component v-if="isSignedIn" @click="toggleVolcanoBackgroundMusic" />
-      <reset-password-form
-        v-if="forgotPassword && !isCreatingAccount && !isSignedIn"
-        @forgotPassword="forgotFunction"
+      <create-acct-form
+        v-if="isCreatingAccount && !resetPasswordFilledOut"
+        @accountCreated="handleAccountCreated"
       />
+      <start-component
+        v-if="isSignedIn && !resetPasswordFilledOut"
+        @click="toggleVolcanoBackgroundMusic"
+      />
+      <reset-password-form
+        v-if="forgotPassword && !isCreatingAccount && !isSignedIn && !resetPasswordFilledOut"
+        @forgotPassword="forgotFunction"
+        @submittedForgotPasswordForm="submittedForgotPasswordForm()"
+      />
+      <forgot-password-splash-component v-if="resetPasswordFilledOut" />
       <div>
-        <button v-if="!isSignedIn" @click="switchForms" class="text-white text-2xl">
+        <button
+          v-if="!isSignedIn && !resetPasswordFilledOut"
+          @click="switchForms"
+          class="text-white text-2xl"
+        >
           {{ isCreatingAccount ? 'Sign In' : 'Create Account' }}
         </button>
         <br />
-        <button v-if="forgotPassword" class="text-white pt-5 text-2xl" @click="switchForms">
+        <button
+          v-if="forgotPassword && !resetPasswordFilledOut"
+          class="text-white pt-5 text-2xl"
+          @click="switchForms"
+        >
           Sign In
         </button>
         <br />
         <button
-          v-if="!isSignedIn && !forgotPassword"
+          v-if="!isSignedIn && !forgotPassword && !resetPasswordFilledOut"
           @click="clientForgotPassword"
           class="text-white pt-5 text-2xl"
         >
           Forgot Password
         </button>
         <br />
-        <button v-if="!isSignedIn" class="mt-4 text-white" @click="toggleVolcanoBackgroundMusic">
+        <button
+          v-if="!isSignedIn && !resetPasswordFilledOut"
+          class="mt-4 text-white"
+          @click="toggleVolcanoBackgroundMusic"
+        >
           click for sound
         </button>
       </div>

@@ -41,7 +41,7 @@ export default defineComponent({
 <template>
   <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl">
     <h1 class="text-3xl">Volcano Quiz</h1>
-    <p class="text-2xl">Sign in to see if you are smart enough to be a Volcanologist?</p>
+    <p class="text-2xl font-thin">Sign in to see if you are smart enough to be a Volcanologist?</p>
     <div>
       <form @submit="signIn" class="flex flex-col mt-5">
         <label class="text-2xl" for="username">Email</label>

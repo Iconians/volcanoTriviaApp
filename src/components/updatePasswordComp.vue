@@ -24,7 +24,8 @@ const updateUsername = async (e: Event) => {
     const updateHiScore = await supabase
       .from('high_score')
       .update({ user_name: newUserName.value })
-      .match({ user_name: userObj.display_name })
+      .eq('profile_id', 13)
+    console.log(updateHiScore)
     if (update.error || updateHiScore.error) {
       newUserName.value = ''
       if (update.error) {
@@ -47,7 +48,7 @@ const updateUsername = async (e: Event) => {
 </script>
 
 <template>
-  <div class="m-8 mt-0 update-password-comp-wrapper">
+  <div class="my-[auto] update-password-comp-wrapper">
     <div class="mb-5 text-2xl">Update Username</div>
     <form class="flex flex-col" @submit="updateUsername">
       <input

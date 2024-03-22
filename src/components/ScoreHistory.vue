@@ -18,7 +18,7 @@ const props = defineProps({
 <template>
   <div>
     <div class="text-2xl">Score History</div>
-    <div class="h-52 overflow-y-auto scroll">
+    <div class="h-[500px] overflow-y-auto scroll">
       <div
         v-for="score in props.userScore"
         :key="score.correct"

@@ -51,13 +51,13 @@ export default defineComponent({
 
 <template>
   <div class="text-wrapper text-white mb-5 bg-black/50 p-12 rounded-3xl">
-    <h1 class="text-3xl mb-10">Volcano Quiz</h1>
-    <p class="text-2xl mb-5">
+    <h1 class="text-3xl">Volcano Quiz</h1>
+    <p class="text-2xl mb-5 font-thin">
       Create an account to see if you are smart enough to be a volcanologist?
     </p>
     <div>
       <form @submit="createAccount" class="flex flex-col mb-5">
-        <label class="text-2xl mt-5" for="username">Username</label>
+        <label class="text-2xl mt-1" for="username">Username</label>
         <input
           class="rounded text-black p-1"
           type="text"
