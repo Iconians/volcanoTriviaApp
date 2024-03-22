@@ -2,6 +2,7 @@
 import { defineComponent, ref } from 'vue'
 import { supabase } from '../../supabase.js'
 import { useToast } from 'vue-toast-notification'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   name: 'forgotPasswordForm',
   setup() {
@@ -11,9 +12,19 @@ export default defineComponent({
       password: ''
     })
 
+    const router = useRouter()
+
     async function forgotPassword(e: Event) {
       e.preventDefault()
       try {
+        const urlParams = new URLSearchParams(window.location.search)
+        const accessToken = urlParams.get('access_token')
+
+        if (!accessToken) {
+          formError.value = 'Invalid access token'
+          return
+        }
+
         const { error } = await supabase.auth.updateUser({
           password: form.value.password
         })
@@ -23,11 +34,28 @@ export default defineComponent({
           console.log('error')
         } else {
           toast.success('Password reset successfully')
+          router.push('/')
         }
       } catch (error) {
         toast.error('Error in forgotPasswordForm method')
       }
     }
+    //   try {
+    //     const { error } = await supabase.auth.updateUser({
+    //       password: form.value.password
+    //     })
+
+    //     if (error) {
+    //       formError.value = error.message
+    //       console.log('error')
+    //     } else {
+    //       toast.success('Password reset successfully')
+    //       router.push('/')
+    //     }
+    //   } catch (error) {
+    //     toast.error('Error in forgotPasswordForm method')
+    //   }
+    // }
     return { toast, formError, form, forgotPassword }
   }
 })
