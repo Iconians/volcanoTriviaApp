@@ -26,6 +26,7 @@ const isPlaying = () => props.playing && props.playing === true
     <RouterLink class="text-2xl text-center m-2" to="/gamePage">Start Game</RouterLink>
     <RouterLink class="text-2xl text-center m-2" to="/userPage">Profile</RouterLink>
     <RouterLink class="text-2xl text-center m-2" to="/totals">High Scores</RouterLink>
+    <RouterLink class="text-2xl text-center m-2" to="/godModeGamePage">God Mode</RouterLink>
     <FontAwesomeIcon
       v-if="!isPlaying()"
       :icon="faVolumeHigh"

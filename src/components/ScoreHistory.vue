@@ -19,7 +19,7 @@ const props = defineProps({
   <div class="mb-[30px]">
     <div class="text-2xl">Score History</div>
     <div>
-      <div class="h-[500px] overflow-y-auto scroll w-[650px] flex flex-wrap">
+      <div class="h-[500px] overflow-y-auto scroll w-[700px] flex flex-wrap">
         <div
           v-for="score in props.userScore"
           :key="score.correct"
