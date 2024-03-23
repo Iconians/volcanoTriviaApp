@@ -23,7 +23,8 @@ const isPlaying = () => props.playing && props.playing === true
       <h1 class="text-3xl">Volcano Quiz</h1>
       <p class="text-2xl font-thin">Are you smart enough to be a volcanologist?</p>
     </div>
-    <RouterLink class="text-2xl text-center m-2" to="/gamePage">Start Game</RouterLink>
+    <RouterLink class="text-2xl text-center m-2" to="/gamePage">Normal Game</RouterLink>
+    <RouterLink class="text-2xl text-center m-2" to="/godModeGamePage">Master Game</RouterLink>
     <RouterLink class="text-2xl text-center m-2" to="/userPage">Profile</RouterLink>
     <RouterLink class="text-2xl text-center m-2" to="/totals">High Scores</RouterLink>
     <FontAwesomeIcon

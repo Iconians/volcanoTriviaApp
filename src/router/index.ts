@@ -4,6 +4,7 @@ import gamePage from '../pages/gamePage.vue'
 import hiScores from '../pages/hiScores.vue'
 import userPage from '../pages/userPage.vue'
 import forgotPasswordPageVue from '@/pages/forgotPasswordPage.vue'
+import GodModeGamePage from '@/pages/godModeGamePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: "/forgotPasswordPage",
       name: "forgotPasswordPage",
       component: forgotPasswordPageVue
+    },
+    {
+      path: "/godModeGamePage",
+      name: "godModeGamePage",
+      component: GodModeGamePage
     }
   ]
 })
