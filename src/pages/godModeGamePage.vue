@@ -31,7 +31,7 @@ type answerArr = {
 
 const questionsArray = ref<questionArray[]>([])
 const answerArray = ref<answerArr[]>([])
-const wrongAnswers = ref(1)
+const wrongAnswers = ref(0)
 const correctAnswers = ref(0)
 const loading = ref(true)
 const answerSubmitted = ref(false)

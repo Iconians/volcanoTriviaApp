@@ -34,7 +34,7 @@ const checkAnswer = (answer: string) => {
 
 <template>
   <div>
-    <div class="flex flex-col justify-around w-[700px] h-[450px] questionForm">
+    <div class="flex flex-col justify-around w-[1200px] h-[450px] questionForm">
       <h2 class="font-bold text-white text-center text-3xl mb-10" for="question">
         {{ props.questionsArray.length > 0 ? props.questionsArray[0].question : '' }}
       </h2>
