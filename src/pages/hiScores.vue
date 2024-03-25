@@ -41,8 +41,8 @@ playBackgroundMusic()
       </div>
       <scores-comp :scores="scores" />
       <div>
-        <router-link class="mr-8 text-2xl" to="/">Back to Home</router-link>
-        <router-link class="text-2xl" to="/userPage">Profile</router-link>
+        <router-link class="mr-8 text-2xl color-change" to="/">Back to Home</router-link>
+        <router-link class="text-2xl color-change" to="/userPage">Profile</router-link>
       </div>
     </div>
   </section>
@@ -75,5 +75,42 @@ playBackgroundMusic()
 
 .scroll::-webkit-scrollbar-track {
   background: none;
+}
+
+.color-change {
+  animation: colorChange 3s infinite;
+}
+
+.color-change:hover {
+  animation: hoverColorChange 2s infinite;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: red;
+  }
+}
+
+@keyframes hoverColorChange {
+  0% {
+    background-color: red;
+    color: black;
+  }
+  50% {
+    background-color: yellow;
+    color: red;
+  }
+  100% {
+    background-color: red;
+    color: black;
+  }
 }
 </style>
