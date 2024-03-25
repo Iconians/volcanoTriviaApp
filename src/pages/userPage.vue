@@ -59,7 +59,7 @@ playBackgroundMusic()
 
 <template>
   <section class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover">
-    <div class="overflow-y-auto scroll w-full">
+    <div class="overflow-y-auto scroll w-full bg-black/40 rounded-[50px] pt-[20px]">
       <div class="userName text-3xl">{{ userName }}'s Profile</div>
       <div class="flex flex-wrap justify-around w-full m-auto mt-5">
         <score-history :userScore="userScore" />
@@ -88,6 +88,18 @@ playBackgroundMusic()
 @media (max-width: 400px) {
   .section {
     height: unset;
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: red;
   }
 }
 </style>

@@ -86,14 +86,16 @@ onBeforeUnmount(() => {
     :class="props.answerClass"
     ref="section1"
   >
-    <GameStatistics class="game" :correctAnswers="correctAnswers" />
+    <div class="flex justify-around w-full">
+      <GameStatistics class="game" :correctAnswers="correctAnswers" />
+      <godModeheartsContainer :wrongAnswers="wrongAnswers" />
+    </div>
     <div class="main-content">
       <questionForm
         :questionsArray="props.questionsArray"
         :answerArray="props.answerArray"
         @submit="handleSubmit"
       />
-      <godModeheartsContainer :wrongAnswers="wrongAnswers" />
     </div>
   </section>
 </template>

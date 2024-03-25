@@ -18,7 +18,7 @@ const logNoOfHearts = (noOfHearts: number) => {
 </script>
 
 <template>
-  <div class="flex z-10">
+  <div class="flex z-10 w-[550px] flex-wrap mt-5">
     <div
       v-for="noOfHearts in 10"
       :key="noOfHearts"

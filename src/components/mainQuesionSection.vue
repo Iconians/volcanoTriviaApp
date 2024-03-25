@@ -86,14 +86,16 @@ onBeforeUnmount(() => {
     :class="props.answerClass"
     ref="section1"
   >
-    <GameStatistics class="game" :correctAnswers="correctAnswers" />
+    <div class="flex justify-around w-full">
+      <GameStatistics class="game" :correctAnswers="correctAnswers" />
+      <heartsContainer :wrongAnswers="wrongAnswers" />
+    </div>
     <div class="main-content">
       <questionForm
         :questionsArray="props.questionsArray"
         :answerArray="props.answerArray"
         @submit="handleSubmit"
       />
-      <heartsContainer :wrongAnswers="wrongAnswers" />
     </div>
   </section>
 </template>
@@ -133,7 +135,7 @@ onBeforeUnmount(() => {
   font-size: 50px;
   padding: 25px 80px;
   border-radius: 10px;
-  margin: 10px auto;
+  /* margin: 10px auto; */
   margin-top: 10px;
 }
 

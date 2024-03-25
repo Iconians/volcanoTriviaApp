@@ -59,7 +59,7 @@ const updateUsername = async (e: Event) => {
         maxlength="3"
       />
       <input
-        class="mt-5 bg-brown-500 rounded h-10 hover:bg-red-600 text-xl cursor-pointer"
+        class="mt-5 bg-brown-500 rounded h-10 btnOnHover text-xl cursor-pointer"
         type="submit"
         value="Change UserName"
       />
@@ -78,6 +78,25 @@ const updateUsername = async (e: Event) => {
 @media (max-width: 635px) {
   .update-password-comp-wrapper {
     margin-top: 2rem;
+  }
+}
+
+.btnOnHover:hover {
+  animation: colorChange 3s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: red;
+    color: black;
+  }
+  50% {
+    background-color: yellow;
+    color: red;
+  }
+  100% {
+    background-color: red;
+    color: black;
   }
 }
 </style>

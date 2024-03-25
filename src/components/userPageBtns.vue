@@ -16,13 +16,13 @@ const signOut = async () => {
   <div class="flex w-[500px] justify-around my-5 mx-auto">
     <div class="flex justify-around">
       <router-link
-        class="flex items-center justify-center bg-brown-500 rounded h-12 w-[200px] hover:bg-red-600 text-xl"
+        class="flex items-center justify-center bg-brown-500 rounded h-12 w-[200px] btnOnHover text-xl"
         to="/"
         >Back to Start</router-link
       >
     </div>
     <div class="flex flex-wrap btns">
-      <button class="bg-brown-500 rounded h-12 w-32 hover:bg-red-600 text-xl" @click="signOut">
+      <button class="bg-brown-500 rounded h-12 w-32 text-xl btnOnHover" @click="signOut">
         Sign Out
       </button>
     </div>
@@ -35,6 +35,25 @@ const signOut = async () => {
     width: 320px;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+.btnOnHover:hover {
+  animation: colorChange 3s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: red;
+    color: black;
+  }
+  50% {
+    background-color: yellow;
+    color: red;
+  }
+  100% {
+    background-color: red;
+    color: black;
   }
 }
 </style>

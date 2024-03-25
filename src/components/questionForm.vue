@@ -34,31 +34,29 @@ const checkAnswer = (answer: string) => {
 
 <template>
   <div>
-    <div class="flex flex-col justify-around w-[1200px] h-[450px] questionForm">
-      <h2 class="font-bold text-white text-center text-3xl mb-10" for="question">
-        {{ props.questionsArray.length > 0 ? props.questionsArray[0].question : '' }}
-      </h2>
-      <div>
-        <div
-          v-for="(answerObj, index) in props.answerArray.filter(
-            (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
-          )"
-          :key="'answerObj-' + index"
-          class="flex flex-wrap justify-center"
-        >
+    <div>
+      <div
+        v-for="(answerObj, index) in props.answerArray.filter(
+          (a) => questionsArray.length > 0 && a.question_foreign_key === questionsArray[0].id
+        )"
+        :key="'answerObj-' + index"
+        class="flex flex-col justify-around w-[1200px] h-[450px] questionForm"
+      >
+        <h2 class="text-2xl mb-4 w-3/4 mx-auto text-center">{{ questionsArray[0].question }}</h2>
+
+        <div class="flex justify-around">
           <div
             v-for="(answer, subIndex) in answerObj.answers"
             :key="'answer-' + index + '-' + subIndex"
-            class="m-5 cursor-pointer"
+            class="m-5 cursor-pointer flex flex-col items-center"
           >
+            <p class="mb-2 text-lg text-center">{{ answer }}</p>
             <button
-              class="cursor-pointer questionInputs text-2xl bg-brown-500 rounded p-1 min-w-40 min-h-20"
+              class="cursor-pointer questionInputs text-2xl rounded p-1 min-w-20 min-h-20 max-w-20 background-color-1"
               :name="'answer-' + index"
               :id="'answer-' + index + '-' + subIndex"
               @click="checkAnswer(answer)"
-            >
-              {{ answer }}
-            </button>
+            ></button>
           </div>
         </div>
       </div>
@@ -70,6 +68,20 @@ const checkAnswer = (answer: string) => {
 .questionForm {
   position: relative;
   z-index: 2;
+}
+
+.background-color-1 {
+  animation: colorChange 3s infinite;
+  border-radius: 50%;
+  position: relative;
+  border-radius: 50%;
+  box-shadow: 0 10px #660000;
+  transition: all 0.2s linear;
+}
+
+.background-color-1:hover {
+  box-shadow: 0 2px #660000;
+  transform: translateY(3px);
 }
 
 @media (max-width: 900px) {
@@ -84,6 +96,18 @@ const checkAnswer = (answer: string) => {
   .formBtn {
     width: 80%;
     margin: auto;
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: red;
   }
 }
 </style>

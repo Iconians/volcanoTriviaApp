@@ -14,7 +14,7 @@ defineComponent({
 </script>
 
 <template>
-  <div class="flex z-10">
+  <div class="flex z-10 mt-6">
     <div v-if="props.wrongAnswers === 0" class="heart"></div>
     <div v-if="props.wrongAnswers <= 1" class="heart"></div>
     <div v-if="props.wrongAnswers <= 2" class="heart"></div>
