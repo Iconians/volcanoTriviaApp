@@ -44,7 +44,7 @@ const checkAnswer = (answer: string) => {
       >
         <h2 class="text-2xl mb-4 w-3/4 mx-auto text-center">{{ questionsArray[0].question }}</h2>
 
-        <div class="flex justify-around">
+        <div class="flex justify-around dashboard">
           <div
             v-for="(answer, subIndex) in answerObj.answers"
             :key="'answer-' + index + '-' + subIndex"
@@ -68,6 +68,14 @@ const checkAnswer = (answer: string) => {
 .questionForm {
   position: relative;
   z-index: 2;
+}
+
+.dashboard {
+  background: radial-gradient(circle, #2d2d2d, #2d2d2d 2px, #1d1d1d 1px, #1d1d1d 2px, #1d1d1d 2px);
+  background-size: 28px 28px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .background-color-1 {
