@@ -21,13 +21,13 @@ console.log(props.isModalOpen)
   <section class="parent">
     <div :class="{ isModalOpen: props.isModalOpen, modal: true }">
       <div class="modal-content">
-        <h4 class="text-2xl">Warning</h4>
+        <h4 class="text-2xl header-color-change">Warning</h4>
         <FontAwesomeIcon class="times" :icon="faTimes" @click="onClick" />
       </div>
       <div class="w-3/4 m-auto">
-        <p class="text-xl pb-5">Play the Master Game at your own risk</p>
+        <p class="text-xl pb-5 color-change">Play the Master Game at your own risk</p>
         <p class="text-base">
-          there are 100 questions to answer so if you think you can prove your as smart as a
+          There are 100 questions to answer so if you think you can prove your as smart as a
           Volcanologist give it a shot
         </p>
       </div>
@@ -69,5 +69,37 @@ console.log(props.isModalOpen)
   right: 25px;
   top: 10px;
   cursor: pointer;
+}
+
+.header-color-change {
+  animation: headerColorChange 2s infinite;
+}
+
+.color-change {
+  animation: colorChange 2s infinite;
+}
+
+@keyframes headerColorChange {
+  0% {
+    color: yellow;
+  }
+  50% {
+    color: red;
+  }
+  100% {
+    color: yellow;
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: red;
+  }
 }
 </style>
