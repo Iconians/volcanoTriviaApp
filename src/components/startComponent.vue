@@ -53,6 +53,28 @@ const isPlaying = () => props.playing && props.playing === true
       class="text-white cursor-pointer"
       @click="listenForAudioClick"
     />
-    <button @click="openModal" class="">WARNING</button>
+    <button @click="openModal" class="mt-[20px] color-change">WARNING</button>
   </div>
 </template>
+
+<style scoped>
+.text-wrapper {
+  height: 350px;
+}
+
+.color-change {
+  animation: colorChange 2s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: red;
+  }
+}
+</style>

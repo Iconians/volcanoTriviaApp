@@ -21,12 +21,12 @@ console.log(props.isModalOpen)
   <section class="parent">
     <div :class="{ isModalOpen: props.isModalOpen, modal: true }">
       <div class="modal-content">
-        <h4>Warning</h4>
-        <FontAwesomeIcon :icon="faTimes" @click="onClick" />
+        <h4 class="text-2xl">Warning</h4>
+        <FontAwesomeIcon class="times" :icon="faTimes" @click="onClick" />
       </div>
-      <div>
-        <p>Play the Master Game at your own risk</p>
-        <p>
+      <div class="w-3/4 m-auto">
+        <p class="text-xl pb-5">Play the Master Game at your own risk</p>
+        <p class="text-base">
           there are 100 questions to answer so if you think you can prove your as smart as a
           Volcanologist give it a shot
         </p>
@@ -36,27 +36,38 @@ console.log(props.isModalOpen)
 </template>
 
 <style scoped>
+.parent {
+  position: relative;
+}
+
 .parent .isModalOpen {
   display: block;
 }
 
 .modal {
+  border-radius: 30px;
+  position: relative;
   display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  z-index: 100;
+  left: -50px;
+  top: -100px;
+  right: -50px;
+  bottom: 0px;
+  height: 370px;
+  background-color: rgba(0, 0, 0, 1);
 }
+
 .modal-content {
-  /* background-color: #fefefe; */
-  margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  width: 100%;
+}
+
+.times {
+  position: absolute;
+  font-size: 30px;
+  right: 25px;
+  top: 10px;
+  cursor: pointer;
 }
 </style>
