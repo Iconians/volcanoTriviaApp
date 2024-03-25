@@ -13,8 +13,6 @@ const onClick = () => {
   props.closeModal?.()
   emit('click')
 }
-
-console.log(props.isModalOpen)
 </script>
 
 <template>

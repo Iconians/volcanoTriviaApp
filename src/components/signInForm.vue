@@ -60,8 +60,9 @@ export default defineComponent({
           name="password"
           v-model="form.password"
         />
+
         <input
-          class="rounded text-2xl mt-5 bg-brown-500 p-1 cursor-pointer mb-5"
+          class="rounded text-2xl mt-5 p-1 cursor-pointer mb-5 color"
           type="submit"
           value="submit"
         />
@@ -76,6 +77,22 @@ export default defineComponent({
   .text-wrapper {
     width: 80%;
     margin-bottom: 20px;
+  }
+}
+
+.color {
+  animation: colorChange 2s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: red;
   }
 }
 </style>

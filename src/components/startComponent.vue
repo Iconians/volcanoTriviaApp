@@ -9,15 +9,11 @@ const emit = defineEmits(['click'])
 const isModalOpen = ref(false)
 
 const openModal = () => {
-  console.log(isModalOpen.value)
   isModalOpen.value = true
-  console.log(isModalOpen.value)
 }
 
 const closeModal = () => {
-  console.log(isModalOpen.value)
   isModalOpen.value = false
-  console.log(isModalOpen.value)
 }
 
 const listenForAudioClick = () => {
@@ -37,20 +33,22 @@ const isPlaying = () => props.playing && props.playing === true
       <p class="text-2xl font-thin">Are you smart enough to be a volcanologist?</p>
     </div>
     <warningModal :isModalOpen="isModalOpen" :closeModal="closeModal" />
-    <RouterLink class="text-2xl text-center m-2" to="/gamePage">Normal Game</RouterLink>
-    <RouterLink class="text-2xl text-center m-2" to="/godModeGamePage">Master Game</RouterLink>
-    <RouterLink class="text-2xl text-center m-2" to="/userPage">Profile</RouterLink>
-    <RouterLink class="text-2xl text-center m-2" to="/totals">High Scores</RouterLink>
+    <RouterLink class="text-2xl text-center m-2 onHover" to="/gamePage">Normal Game</RouterLink>
+    <RouterLink class="text-2xl text-center m-2 onHover" to="/godModeGamePage"
+      >Master Game</RouterLink
+    >
+    <RouterLink class="text-2xl text-center m-2 onHover" to="/userPage">Profile</RouterLink>
+    <RouterLink class="text-2xl text-center m-2 onHover" to="/totals">High Scores</RouterLink>
     <FontAwesomeIcon
       v-if="!isPlaying()"
       :icon="faVolumeHigh"
-      class="text-white cursor-pointer"
+      class="text-white cursor-pointer onHover"
       @click="listenForAudioClick"
     />
     <FontAwesomeIcon
       v-if="isPlaying()"
       :icon="faVolumeXmark"
-      class="text-white cursor-pointer"
+      class="text-white cursor-pointer onHover"
       @click="listenForAudioClick"
     />
     <button @click="openModal" class="mt-[20px] color-change">WARNING</button>
@@ -62,8 +60,12 @@ const isPlaying = () => props.playing && props.playing === true
   height: 350px;
 }
 
-.color-change {
+.onHover:hover {
   animation: colorChange 2s infinite;
+}
+
+.color-change {
+  animation: colorChange 1s infinite;
 }
 
 @keyframes colorChange {

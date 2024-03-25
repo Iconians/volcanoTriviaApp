@@ -109,14 +109,14 @@ onMounted(async () => {
         <button
           v-if="!isSignedIn && !resetPasswordFilledOut"
           @click="switchForms"
-          class="text-white text-2xl"
+          class="text-white text-2xl onHover mt-5"
         >
           {{ isCreatingAccount ? 'Sign In' : 'Create Account' }}
         </button>
         <br />
         <button
           v-if="forgotPassword && !resetPasswordFilledOut"
-          class="text-white pt-5 text-2xl"
+          class="text-white pt-5 text-2xl onHover"
           @click="switchForms"
         >
           Sign In
@@ -125,7 +125,7 @@ onMounted(async () => {
         <button
           v-if="!isSignedIn && !forgotPassword && !resetPasswordFilledOut"
           @click="clientForgotPassword"
-          class="text-white pt-5 text-2xl"
+          class="text-white pt-5 text-2xl onHover"
         >
           Forgot Password
         </button>
@@ -133,13 +133,13 @@ onMounted(async () => {
         <FontAwesomeIcon
           v-if="!isPlaying && !isSignedIn"
           :icon="faVolumeHigh"
-          class="text-white cursor-pointer"
+          class="text-white cursor-pointer onHover"
           @click="toggleVolcanoBackgroundMusic"
         />
         <FontAwesomeIcon
           v-if="isPlaying && !isSignedIn"
           :icon="faVolumeXmark"
-          class="text-white cursor-pointer"
+          class="text-white cursor-pointer onHover"
           @click="toggleVolcanoBackgroundMusic"
         />
       </div>
@@ -148,3 +148,21 @@ onMounted(async () => {
   <loading-component v-if="loading" />
   <audio ref="volcanoBackground" src="/mount-yasur-tanna-island.wav" loop></audio>
 </template>
+
+<style scoped>
+.onHover:hover {
+  animation: colorChange 2s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: red;
+  }
+}
+</style>
