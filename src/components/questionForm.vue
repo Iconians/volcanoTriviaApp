@@ -52,7 +52,7 @@ const checkAnswer = (answer: string) => {
           >
             <p class="mb-2 text-lg text-center">{{ answer }}</p>
             <button
-              class="cursor-pointer questionInputs text-2xl rounded p-1 min-w-20 min-h-20 max-w-20 background-color-1"
+              class="cursor-pointer questionInputs text-2xl rounded p-1 min-w-20 min-h-20 max-w-20 background-color"
               :name="'answer-' + index"
               :id="'answer-' + index + '-' + subIndex"
               @click="checkAnswer(answer)"
@@ -78,7 +78,7 @@ const checkAnswer = (answer: string) => {
   border-radius: 10px;
 }
 
-.background-color-1 {
+.background-color {
   animation: colorChange 3s infinite;
   border-radius: 50%;
   position: relative;
@@ -87,9 +87,10 @@ const checkAnswer = (answer: string) => {
   transition: all 0.2s linear;
 }
 
-.background-color-1:hover {
-  box-shadow: 0 2px #660000;
-  transform: translateY(3px);
+.background-color:hover {
+  box-shadow: 0 5px #660000;
+  transform: translateY(5px);
+  background: radial-gradient(circle at 50% 50%, transparent 20%, #ff0000 20%);
 }
 
 @media (max-width: 900px) {
