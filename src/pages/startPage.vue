@@ -85,7 +85,7 @@ onMounted(async () => {
     v-if="!loading"
     class="flowing-border section bg-volcanoGif height h-full w-full text-center bg-cover"
   >
-    <div class="main-content">
+    <div class="main-content overflow-y-auto scroll">
       <sign-in-form
         v-if="!isCreatingAccount && !isSignedIn && !forgotPassword && !resetPasswordFilledOut"
         @signedIn="signIn"
@@ -152,6 +152,14 @@ onMounted(async () => {
 <style scoped>
 .onHover:hover {
   animation: colorChange 2s infinite;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: none;
 }
 
 @keyframes colorChange {
