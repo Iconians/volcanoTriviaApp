@@ -26,7 +26,6 @@ const props = defineProps({
 const isPlaying = () => props.playing && props.playing === true
 </script>
 
-<!-- @click="openModal" -->
 <template>
   <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl relative">
     <div>
@@ -60,7 +59,6 @@ const isPlaying = () => props.playing && props.playing === true
       class="text-white cursor-pointer onHover"
       @click="listenForAudioClick"
     />
-    <!-- <button  class="mt-[20px] ">WARNING</button> -->
   </div>
 </template>
 

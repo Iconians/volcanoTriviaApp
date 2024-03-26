@@ -1,18 +1,8 @@
 <script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-
 const props = defineProps({
   isModalOpen: Boolean,
   closeModal: Function
 })
-
-const emit = defineEmits(['click'])
-
-const onClick = () => {
-  props.closeModal?.()
-  emit('click')
-}
 </script>
 
 <template>
@@ -20,7 +10,6 @@ const onClick = () => {
     <div :class="{ isModalOpen: props.isModalOpen, modal: true }">
       <div class="modal-content">
         <h4 class="text-2xl header-color-change">Warning</h4>
-        <!-- <FontAwesomeIcon class="times" :icon="faTimes" @click="onClick" /> -->
       </div>
       <div class="w-3/4 m-auto">
         <p class="text-xl pb-5 color-change">Play the Master Game at your own risk</p>
