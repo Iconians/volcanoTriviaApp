@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 import { defineEmits, ref } from 'vue'
 import warningModal from '@/components/warningModal.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons'
+import { faVolumeHigh, faVolumeXmark, faWarning } from '@fortawesome/free-solid-svg-icons'
 
 const emit = defineEmits(['click'])
 const isModalOpen = ref(false)
@@ -26,6 +26,7 @@ const props = defineProps({
 const isPlaying = () => props.playing && props.playing === true
 </script>
 
+<!-- @click="openModal" -->
 <template>
   <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl relative">
     <div>
@@ -34,9 +35,17 @@ const isPlaying = () => props.playing && props.playing === true
     </div>
     <warningModal :isModalOpen="isModalOpen" :closeModal="closeModal" />
     <RouterLink class="text-2xl text-center m-2 onHover" to="/gamePage">Normal Game</RouterLink>
-    <RouterLink class="text-2xl text-center m-2 onHover" to="/godModeGamePage"
-      >Master Game</RouterLink
-    >
+    <div>
+      <RouterLink class="text-2xl text-center m-2 onHover" to="/godModeGamePage"
+        >Master Game
+      </RouterLink>
+      <FontAwesomeIcon
+        class="text-2xl color-change cursor-pointer"
+        :icon="faWarning"
+        @mouseover="openModal"
+        @mouseout="closeModal"
+      />
+    </div>
     <RouterLink class="text-2xl text-center m-2 onHover" to="/userPage">Profile</RouterLink>
     <RouterLink class="text-2xl text-center m-2 onHover" to="/totals">High Scores</RouterLink>
     <FontAwesomeIcon
@@ -51,7 +60,7 @@ const isPlaying = () => props.playing && props.playing === true
       class="text-white cursor-pointer onHover"
       @click="listenForAudioClick"
     />
-    <button @click="openModal" class="mt-[20px] color-change">WARNING</button>
+    <!-- <button  class="mt-[20px] ">WARNING</button> -->
   </div>
 </template>
 

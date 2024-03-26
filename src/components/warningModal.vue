@@ -20,7 +20,7 @@ const onClick = () => {
     <div :class="{ isModalOpen: props.isModalOpen, modal: true }">
       <div class="modal-content">
         <h4 class="text-2xl header-color-change">Warning</h4>
-        <FontAwesomeIcon class="times" :icon="faTimes" @click="onClick" />
+        <!-- <FontAwesomeIcon class="times" :icon="faTimes" @click="onClick" /> -->
       </div>
       <div class="w-3/4 m-auto">
         <p class="text-xl pb-5 color-change">Play the Master Game at your own risk</p>
@@ -49,10 +49,11 @@ const onClick = () => {
   position: absolute;
   z-index: 100;
   left: -50px;
-  top: -100px;
+  /* top: -100px; */
+  top: 90px;
   right: -50px;
   bottom: 0px;
-  height: 370px;
+  height: 200px;
   background-color: rgba(0, 0, 0, 1);
 }
 
