@@ -185,7 +185,7 @@ onMounted(playBackgroundMusic)
   />
   <win-screen v-else-if="!loading" :correctAnswers="correctAnswers" :wrongAnswers="wrongAnswers" />
   <loading-component v-if="loading" />
-  <audio ref="backgroundMusic" src="/guitar-and-druns.mp3" autoplay loop></audio>
+  <audio ref="backgroundMusic" src="lava-loop-3.wav" autoplay loop></audio>
   <audio ref="correctSound" src="/correct.mp3"></audio>
   <audio ref="incorrectSound" src="/wronganswer.mp3"></audio>
 </template>
