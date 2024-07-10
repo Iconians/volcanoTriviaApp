@@ -19,11 +19,11 @@ const props = defineProps({
   <div class="mb-[30px]">
     <div class="text-2xl">Score History</div>
     <div>
-      <div class="h-[500px] overflow-y-auto scroll w-[700px] flex flex-wrap">
+      <div class="h-[500px] overflow-y-auto scroll w-[700px] flex flex-wrap score-wrapper">
         <div
           v-for="score in props.userScore"
           :key="score.correct"
-          class="flex flex-col outline-dashed m-5 w-[300px]"
+          class="flex flex-col outline-dashed m-5 w-[300px] card"
         >
           <div
             v-if="props.userScore.length && score.timeStamp !== undefined"
@@ -55,5 +55,21 @@ const props = defineProps({
 
 .scroll::-webkit-scrollbar-track {
   background: none;
+}
+
+@media (max-width: 920px) {
+  .score-wrapper {
+    width: auto;
+    margin: auto;
+  }
+  .card {
+    margin: 1.25rem auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 200px;
+  }
 }
 </style>

@@ -50,8 +50,16 @@ body {
   flex-direction: column;
 }
 
+@media (max-width: 600px) {
+  .userPageSection {
+    border: 50px solid;
+    border-image-source: linear-gradient(45deg, red, yellow);
+    border-image-slice: 1;
+  }
+}
+
 @media (max-width: 500px) {
-  .section {
+  .section, .userPageSection {
     border: 50px solid;
     border-image-source: linear-gradient(45deg, red, yellow);
     border-image-slice: 1;

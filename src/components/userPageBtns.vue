@@ -13,7 +13,7 @@ const signOut = async () => {
 </script>
 
 <template>
-  <div class="flex w-[500px] justify-around my-5 mx-auto">
+  <div class="flex w-[500px] justify-around my-5 mx-auto btnWrapper">
     <div class="flex justify-around">
       <router-link
         class="flex items-center justify-center bg-brown-500 rounded h-12 w-[200px] btnOnHover text-xl"
@@ -40,6 +40,18 @@ const signOut = async () => {
 
 .btnOnHover:hover {
   animation: colorChange 3s infinite;
+}
+
+@media (max-width: 700px) {
+  .btnWrapper {
+    width: auto;
+    flex-direction: column;
+  }
+
+  .btns {
+    justify-content: center;
+    margin: 15px;
+  }
 }
 
 @keyframes colorChange {

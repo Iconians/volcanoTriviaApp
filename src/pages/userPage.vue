@@ -58,7 +58,9 @@ playBackgroundMusic()
 </script>
 
 <template>
-  <section class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover">
+  <section
+    class="section height h-full w-full text-center text-white bg-activeVolcano bg-cover userPageSection"
+  >
     <div class="overflow-y-auto scroll w-full bg-black/40 rounded-[50px] pt-[20px]">
       <div class="userName text-3xl">{{ userName }}'s Profile</div>
       <div class="flex flex-wrap justify-around w-full m-auto mt-5">
