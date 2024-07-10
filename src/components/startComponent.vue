@@ -75,6 +75,13 @@ const isPlaying = () => props.playing && props.playing === true
   animation: colorChange 1s infinite;
 }
 
+@media (max-width: 600px) {
+  .text-wrapper {
+    margin: auto;
+    height: auto;
+  }
+}
+
 @keyframes colorChange {
   0% {
     color: red;

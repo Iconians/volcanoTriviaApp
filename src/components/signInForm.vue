@@ -39,7 +39,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl">
+  <div class="text-wrapper text-white bg-black/50 p-12 rounded-3xl signFormWrapper">
     <h1 class="text-3xl">Volcano Quiz</h1>
     <p class="text-2xl font-thin">Sign in to see if you are smart enough to be a Volcanologist?</p>
     <div>
@@ -73,10 +73,20 @@ export default defineComponent({
 </template>
 
 <style scoped>
+@media (max-width: 1260px) {
+  .signFormWrapper {
+    height: 435px;
+  }
+}
+
 @media (max-width: 600px) {
   .text-wrapper {
     width: 80%;
     margin-bottom: 20px;
+  }
+  .signFormWrapper {
+    margin: auto;
+    height: auto;
   }
 }
 

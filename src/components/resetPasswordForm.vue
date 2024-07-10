@@ -70,6 +70,8 @@ export default defineComponent({
   .text-wrapper {
     width: 80%;
     margin-bottom: 20px;
+    margin: auto;
+    height: auto;
   }
 }
 </style>

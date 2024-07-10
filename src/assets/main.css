@@ -50,6 +50,14 @@ body {
   flex-direction: column;
 }
 
+@media (max-width: 500px) {
+  .section {
+    border: 50px solid;
+    border-image-source: linear-gradient(45deg, red, yellow);
+    border-image-slice: 1;
+  }
+}
+
 @keyframes flow {
   0%, 100% {
     border-image-source: linear-gradient(0deg, red, yellow);

@@ -50,7 +50,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-wrapper text-white mb-5 bg-black/50 p-12 rounded-3xl">
+  <div class="text-wrapper text-white mb-5 bg-black/50 p-12 rounded-3xl createFormWrapper">
     <h1 class="text-3xl">Volcano Quiz</h1>
     <p class="text-2xl mb-5 font-thin">
       Create an account to see if you are smart enough to be a volcanologist?
@@ -101,6 +101,11 @@ export default defineComponent({
   .text-wrapper {
     width: 80%;
     margin-bottom: 20px;
+  }
+
+  .createFormWrapper {
+    margin: auto;
+    height: auto;
   }
 }
 
