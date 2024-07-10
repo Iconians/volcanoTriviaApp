@@ -33,7 +33,7 @@ playBackgroundMusic()
 
 <template>
   <section
-    class="highScoreSection section h-full w-full text-center bg-stHelensWithPlume bg-cover text-white"
+    class="highScoreSection section h-full w-full text-center bg-stHelensWithPlume bg-cover bg-center text-white"
   >
     <div class="pageWrapper flex flex-col justify-around h-full">
       <div class="">
