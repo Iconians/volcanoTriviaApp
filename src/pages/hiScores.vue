@@ -41,7 +41,7 @@ playBackgroundMusic()
       </div>
       <scores-comp :scores="scores" />
       <div>
-        <router-link class="mr-8 text-2xl color-change" to="/">Back to Home</router-link>
+        <router-link class="mr-8 text-2xl color-change" to="/">Home</router-link>
         <router-link class="text-2xl color-change" to="/userPage">Profile</router-link>
       </div>
     </div>
