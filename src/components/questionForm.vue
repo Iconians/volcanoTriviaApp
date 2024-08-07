@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
+// in ths component I am making mobile responsive
 
 type questionArray = {
   id: string
